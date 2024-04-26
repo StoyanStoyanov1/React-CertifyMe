@@ -73,10 +73,3 @@ nav a:hover {
 #welcomePage img {
     width: 40%
 }
-
-nav > img {
-    width: 90px;
-    height: 80px;
-    margin-left: 0.2em;
-    margin-right: 0.2em;
-}
