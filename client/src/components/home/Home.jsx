@@ -5,8 +5,8 @@ export default function Home() {
 				<h1>Welcome to CertifyMe</h1>
 			</div>
 
-			<div class="certifikate-img">
-				<img src="./images/certifikate-icons.jpg"/>
+			<div className="certifikate-img">
+				<img src="./images/certifikate-icons.jpg" alt='certifikate'/>
 			</div>
 		</section>
 	)

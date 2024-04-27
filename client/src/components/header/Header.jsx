@@ -8,7 +8,7 @@ export default function Header() {
 				<ul>
 					<li><a href="#">Мy certificates</a></li>
 					<li><a href={Path.Login}>Login</a></li>
-					<li><a href="#">Register</a></li>
+					<li><a href={Path.Register}>Register</a></li>
 					<li><a href="#">Add certificate</a></li>
 					<li><a href="#">Logout</a></li>
 				</ul>

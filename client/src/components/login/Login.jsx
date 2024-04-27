@@ -1,3 +1,5 @@
+import Path from "../../paths.js";
+
 export default function Login() {
 	return (
 		<section id="loginPage">
@@ -14,7 +16,7 @@ export default function Login() {
 					<button type="submit" className="login">Login</button>
 
 					<p className="field">
-						<span>If you don't have profile click <a href="#">here</a></span>
+						<span>If you don't have profile click <a href={Path.Register}>here</a></span>
 					</p>
 				</fieldset>
 			</form>
