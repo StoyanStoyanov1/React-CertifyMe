@@ -6,7 +6,7 @@ export default function Header() {
 			<nav>
 				<a href={Path.Home}>CertifyMe</a>
 				<ul>
-					<li><a href="#">Мy certificates</a></li>
+					<li><a href={Path.MyCertificates}>Мy certificates</a></li>
 					<li><a href={Path.Login}>Login</a></li>
 					<li><a href={Path.Register}>Register</a></li>
 					<li><a href={Path.AddCertificate}>Add certificate</a></li>

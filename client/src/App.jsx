@@ -6,6 +6,7 @@ import Home from "./components/home/Home.jsx";
 import Login from "./components/login/Login.jsx";
 import Register from "./components/register/Register.jsx";
 import AddCertificate from "./components/addCertificate/AddCertificate.jsx";
+import MyCertificates from "./components/myCerificates/MyCertificates.jsx";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
 				<Route path={Path.Login} element={<Login/>}/>
 				<Route path={Path.Register} element={<Register />}/>
 				<Route path={Path.AddCertificate} element={<AddCertificate />}/>
+				<Route path={Path.MyCertificates} element={<MyCertificates />}/>
 			</Routes>
 
 		</div>
