@@ -3,58 +3,60 @@
     width: 1000px;
     margin: 30px auto;
     border-radius: 7px 7px 7px 7px;
-    box-shadow: 0px 0px 1.5px 3px gray;
+    box-shadow: 0px 0px 1.5px 3px #ffffff;
     margin-bottom: 200px;
+    background: #d9d9d9;
 }
 
-.albumCover {
+.certificateCover {
     float: left;
     height: 100%;
     width: auto;
     margin-right: 20px;
 }
 
-.albumCover img {
+.certificateCover img {
     border-radius: 12px 0 0 7px;
     height: 100%;
+    max-width: 24em;
 }
 
-.albumText {
+.certificateText {
     padding-left: 10px;
     padding-top: 20px;
 }
 
-.albumText h1 {
-    color:gainsboro;
+.certificateText h1 {
+    color: #000000;
     font-weight: bolder;
     font-size: 28px;
 }
 
-.albumText h3 {
+.certificateText h3 {
     margin: 8px 0 47px 18px;
     font-size: 18px;
-    color: gray;
+    color: #000000;
     letter-spacing: 0.2em;
     margin-bottom: 0;
 }
 
-.albumText h4 {
+.certificateText h4 {
     margin: 8px 0 10px 18px;
     font-size: 16px;
-    color: #9F9991;
+    color: #000000;
     letter-spacing: 0.2em;
 }
 
-.albumText h5 {
+.certificateText h5 {
     margin: 8px 0 10px 14px;
     font-size: 16px;
-    color: white;
+    color: #000000;
 }
 
-.albumText > p {
+.certificateText > p {
     height: auto;
     width: 100%;
-    color: #9F9991;
+    color: #000000;
     line-height: 1.6em;
     font-size: 18px;
     font-weight: bold;
