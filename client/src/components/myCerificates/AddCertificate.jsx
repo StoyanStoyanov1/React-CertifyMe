@@ -3,7 +3,6 @@ export default function AddCertificate() {
 		<section className="createPage">
 			<form>
 				<fieldset>
-					<legend>Add Certificate</legend>
 
 					<div className="container">
 						<label htmlFor="title" className="vhide">Title</label>

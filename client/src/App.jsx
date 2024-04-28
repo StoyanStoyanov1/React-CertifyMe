@@ -5,9 +5,10 @@ import Path from "./paths.js";
 import Home from "./components/home/Home.jsx";
 import Login from "./components/login/Login.jsx";
 import Register from "./components/register/Register.jsx";
-import AddCertificate from "./components/addCertificate/AddCertificate.jsx";
+import AddCertificate from "./components/myCerificates/AddCertificate.jsx";
 import MyCertificates from "./components/myCerificates/MyCertificates.jsx";
 import CertificateDetails from "./components/myCerificates/CertificateDetails.jsx";
+import EditCertificate from "./components/myCerificates/EditCertificate.jsx";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
 				<Route path={Path.AddCertificate} element={<AddCertificate />}/>
 				<Route path={Path.MyCertificates} element={<MyCertificates />}/>
 				<Route path={Path.CertificateDetail} element={<CertificateDetails />} />
+				<Route path={Path.EditCertificate} element={<EditCertificate />} />
 			</Routes>
 
 		</div>

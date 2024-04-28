@@ -1,3 +1,5 @@
+import Path from "../../paths.js";
+
 export default function CertificateDetails() {
 	return (
 		<section id="detailsPage">
@@ -21,7 +23,7 @@ export default function CertificateDetails() {
 					</div>
 
 					<div className="actionBtn">
-						<a href="#" className="edit">Edit</a>
+						<a href={Path.EditCertificate} className="edit">Edit</a>
 						<a href="#" className="remove">Delete</a>
 					</div>
 				</div>
