@@ -9,6 +9,7 @@ import AddCertificate from "./components/myCerificates/AddCertificate.jsx";
 import MyCertificates from "./components/myCerificates/MyCertificates.jsx";
 import CertificateDetails from "./components/myCerificates/CertificateDetails.jsx";
 import EditCertificate from "./components/myCerificates/EditCertificate.jsx";
+import Footer from "./components/footer/Footer.jsx";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
 				<Route path={Path.CertificateDetail} element={<CertificateDetails />} />
 				<Route path={Path.EditCertificate} element={<EditCertificate />} />
 			</Routes>
+			<Footer></Footer>
 
 		</div>
 	)
