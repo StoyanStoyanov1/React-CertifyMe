@@ -1,5 +1,4 @@
 import Path from "../../paths.js";
-import {Link} from "react-router-dom";
 
 export default function CertificateDetails() {
 	return (
@@ -24,8 +23,8 @@ export default function CertificateDetails() {
 					</div>
 
 					<div className="actionBtn">
-						<Link to={Path.EditCertificate} className="edit">Edit </Link>
-						<Link to={'#'} className="remove">Delete</Link>
+						<a href={Path.EditCertificate} className="edit">Edit</a>
+						<a href="#" className="remove">Delete</a>
 					</div>
 				</div>
 			</div>

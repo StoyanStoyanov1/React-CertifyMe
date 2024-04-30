@@ -1,5 +1,7 @@
 import paths from "../../paths.js";
 import {Link} from "react-router-dom";
+import Path from "../../paths.js";
+import CertificateDetails from "../certificateDetails/CertificateDetails.jsx";
 
 export default function CertificateItem({
 											id,
@@ -24,9 +26,11 @@ export default function CertificateItem({
 					<p className="university">University: {university}</p>
 				</div>
 				<div className="btn-group">
-					<Link to={'#'} id="details">Details</Link>
+					<Link to={CertificateDetails} id="details">Detail</Link>
 				</div>
+
 			</div>
+
 		</div>
 
 	)
