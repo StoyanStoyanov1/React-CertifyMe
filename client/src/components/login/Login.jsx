@@ -1,4 +1,5 @@
 import Path from "../../paths.js";
+import {Link} from "react-router-dom";
 
 export default function Login() {
 	return (
@@ -16,7 +17,7 @@ export default function Login() {
 					<button type="submit" className="login">Login</button>
 
 					<p className="field">
-						<span>If you don't have profile click <a href={Path.Register}>here</a></span>
+						<span>If you don't have profile click <Link to={Path.Register}>here</Link></span>
 					</p>
 				</fieldset>
 			</form>

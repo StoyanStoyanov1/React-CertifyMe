@@ -1,16 +1,18 @@
 import Path from "../../paths.js";
+import {Link} from "react-router-dom";
+import Login from "../login/Login.jsx";
 
 export default function Header() {
 	return(
 		<header>
 			<nav>
-				<a href={Path.Home}>CertifyMe</a>
+				<Link to={Path.Home}>CertifyMe</Link>
 				<ul>
-					<li><a href={Path.MyCertificates}>Мy certificates</a></li>
-					<li><a href={Path.Login}>Login</a></li>
-					<li><a href={Path.Register}>Register</a></li>
-					<li><a href={Path.AddCertificate}>Add certificate</a></li>
-					<li><a href="#">Logout</a></li>
+					<li><Link to={Path.MyCertificates}>Мy certificates</Link></li>
+					<li><Link to={Path.Login}>Login</Link></li>
+					<li><Link to={Path.Register}>Register</Link></li>
+					<li><Link to={Path.AddCertificate}>Add certificate</Link></li>
+					<li><Link to={'#'}>Logout</Link></li>
 				</ul>
 			</nav>
 		</header>
