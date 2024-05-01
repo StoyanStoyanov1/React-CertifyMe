@@ -9,6 +9,7 @@ export default function AddCertificate() {
 
 		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
 
+
 		try {
 			await certificateService.create(certificateData);
 			navigate('/my-certificates')

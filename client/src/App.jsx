@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 
 import AuthContext from "./context/authContext.js";
 import * as authService from "./services/authService.js";
@@ -51,7 +51,7 @@ function App() {
 		registerSubmitHandler,
 		loginSubmitHandler,
 		logoutHandler,
-		username: auth.FirstName || auth.email,
+		firstName: auth.firstName || auth.email,
 		email: auth.email,
 		isAuthenticated: !!auth.email,
 	};
