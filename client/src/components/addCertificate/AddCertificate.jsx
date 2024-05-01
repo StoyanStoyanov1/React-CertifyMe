@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import * as certificateService from '../../services/sertificateService.js'
+import * as certificateService from '../../services/certificateService.js'
 
 export default function AddCertificate() {
 	const navigate = useNavigate();

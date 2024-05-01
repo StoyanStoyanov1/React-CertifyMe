@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import Path from "../../paths.js";
+import paths from "../../paths.js";
 
 export default function CertificateItem({
 											_id,
@@ -11,7 +11,6 @@ export default function CertificateItem({
 											description,
 										}) {
 
-	sessionStorage.setItem('certificateDetails', JSON.stringify({ title, start, end, university, imageUrl, description }));
 
 	return (
 
@@ -27,7 +26,7 @@ export default function CertificateItem({
 					<p className="university">University: {university}</p>
 				</div>
 				<div className="btn-group">
-					<Link to={Path.CertificateDetail} id="details">Detail</Link>
+					<Link to={`${paths.MyCertificates}/${_id}`} id="details">Detail</Link>
 						</div>
 						</div>
 						</div>

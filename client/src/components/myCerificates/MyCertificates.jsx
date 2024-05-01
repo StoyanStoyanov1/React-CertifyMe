@@ -1,6 +1,5 @@
-import paths from "../../paths.js";
 import {useEffect, useState} from "react";
-import * as certificateServer from '../../services/sertificateService.js'
+import * as certificateServer from '../../services/certificateService.js'
 import CertificateItem from "./CertificateItem.jsx";
 import {Link} from "react-router-dom";
 import Path from "../../paths.js";

@@ -13,3 +13,9 @@ export const create = async (data) => {
 
 	return result;
 }
+
+export const getOne = async (cerId) => {
+	const result = await request('GET', `${baseUrl}/${cerId}`);
+
+	return result
+}

@@ -22,7 +22,7 @@ function App() {
 				<Route path={Path.Register} element={<Register />}/>
 				<Route path={Path.AddCertificate} element={<AddCertificate />}/>
 				<Route path={Path.MyCertificates} element={<MyCertificates />}/>
-				<Route path={Path.CertificateDetail} element={<CertificateDetails />} />
+				<Route path={`${Path.MyCertificates}/:certificateId`} element={<CertificateDetails />} />
 				<Route path={Path.EditCertificate} element={<EditCertificate />} />
 			</Routes>
 			<Footer/>
