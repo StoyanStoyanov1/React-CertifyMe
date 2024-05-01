@@ -1,7 +1,8 @@
 import {useState} from 'react';
+import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
 
-import {BrowserRouter, Route, Routes} from "react-router-dom";
 import AuthContext from "./context/authContext.js";
+import * as authService from "./services/authService.js";
 
 
 import Header from "./components/header/Header.jsx";
@@ -16,10 +17,25 @@ import EditCertificate from "./components/editCertificate/EditCertificate.jsx";
 import Footer from "./components/footer/Footer.jsx";
 
 function App() {
+	const navigate = useNavigate();
+
+	const [auth, setAuth] = useState(() => {
+		localStorage.removeItem('accessToken');
+
+		return {}
+	});
+
+	const registerSubmitHandler = async (values) => {
+		const result = await authService.register(values.email, values.password, values.firstName, values.lastName);
+		setAuth(result);
+		localStorage.setItem('accessToken', result.accessToken);
+		navigate(Path.Home)
+	}
 
 	const values = {};
 
 	return (
+		<AuthContext.Provider value={values}>
 			<div id='box'>
 				<Header/>
 				<Routes>
@@ -32,8 +48,8 @@ function App() {
 					<Route path={Path.EditCertificate} element={<EditCertificate />} />
 				</Routes>
 				<Footer/>
-
 			</div>
+		</AuthContext.Provider>
 	)
 }
 
