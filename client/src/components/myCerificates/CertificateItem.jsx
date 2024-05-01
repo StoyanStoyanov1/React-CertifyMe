@@ -8,7 +8,6 @@ export default function CertificateItem({
 											end,
 											university,
 											imageUrl,
-											description,
 										}) {
 
 

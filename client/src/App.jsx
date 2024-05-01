@@ -1,5 +1,9 @@
-import {useState} from 'react'
+import {useState} from 'react';
+
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import AuthContext from "./context/authContext.js";
+
+
 import Header from "./components/header/Header.jsx";
 import Path from "./paths.js";
 import Home from "./components/home/Home.jsx";
@@ -10,14 +14,12 @@ import MyCertificates from "./components/myCerificates/MyCertificates.jsx";
 import CertificateDetails from "./components/certificateDetails/CertificateDetails.jsx";
 import EditCertificate from "./components/editCertificate/EditCertificate.jsx";
 import Footer from "./components/footer/Footer.jsx";
-import AuthContext from "./context/authContext.js";
 
 function App() {
 
 	const values = {};
 
 	return (
-		<AuthContext value={values}>
 			<div id='box'>
 				<Header/>
 				<Routes>
@@ -32,7 +34,6 @@ function App() {
 				<Footer/>
 
 			</div>
-		</AuthContext>
 	)
 }
 
