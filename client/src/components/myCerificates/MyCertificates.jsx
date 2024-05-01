@@ -21,10 +21,7 @@ export default function MyCertificates() {
 				<CertificateItem key={cer._id} {...cer}/>
 			))}
 
-			{certificates.length !== 0 && <p>No found certificates!</p>}
-
-
-
+			{certificates.length === 0 && (<p>No found certificates!</p>)}
 
 		</section>
 	)

@@ -1,10 +1,8 @@
-import paths from "../../paths.js";
 import {Link} from "react-router-dom";
 import Path from "../../paths.js";
-import CertificateDetails from "../certificateDetails/CertificateDetails.jsx";
 
 export default function CertificateItem({
-											id,
+											_id,
 											title,
 											start,
 											end,
@@ -12,7 +10,10 @@ export default function CertificateItem({
 											imageUrl,
 											description,
 										}) {
-	return(
+
+	sessionStorage.setItem('certificateDetails', JSON.stringify({ title, start, end, university, imageUrl, description }));
+
+	return (
 
 		<div className="card-box">
 			<img src={imageUrl}
@@ -26,12 +27,10 @@ export default function CertificateItem({
 					<p className="university">University: {university}</p>
 				</div>
 				<div className="btn-group">
-					<Link to={CertificateDetails} id="details">Detail</Link>
-				</div>
+					<Link to={Path.CertificateDetail} id="details">Detail</Link>
+						</div>
+						</div>
+						</div>
 
-			</div>
-
-		</div>
-
-	)
-}
+						)
+					}
