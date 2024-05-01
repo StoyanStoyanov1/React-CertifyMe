@@ -27,7 +27,7 @@ export default function Login() {
 					<input
 						id="email"
 						className="email"
-						name="email"
+						name={loginForm.Email}
 						type="text"
 						placeholder="Email"
 						onChange={onChange}
@@ -38,11 +38,11 @@ export default function Login() {
 					<input
 						id="password"
 						className="password"
-						name="password"
+						name={loginForm.Password}
 						type="password"
 						placeholder="Password"
 						onChange={onChange}
-						value={values[loginForm.Email]}
+						value={values[loginForm.Password]}
 					/>
 
 					<button type="submit" className="login">Login</button>

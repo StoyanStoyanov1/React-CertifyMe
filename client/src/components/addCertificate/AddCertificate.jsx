@@ -27,6 +27,8 @@ export default function AddCertificate() {
 						<label htmlFor="title" className="vhide">Title</label>
 						<input id="title" name="title" className="title" type="text" placeholder="Title"/>
 
+						<label htmlFor="name" className="vhide">Name</label>
+						<input id="name" name="name" className="name" type="text" placeholder="Name"/>
 
 						<label htmlFor="start" className="vhide">Start</label>
 						<input id="start" name="start" className="start" type="text" placeholder="Start"/>

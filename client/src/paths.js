@@ -6,6 +6,7 @@ const Path = {
 	MyCertificates: '/my-certificates',
 	CertificateDetail: '/certificate-detail',
 	EditCertificate: '/edit-certificate',
+	Logout: '/logout',
 }
 
 export default Path

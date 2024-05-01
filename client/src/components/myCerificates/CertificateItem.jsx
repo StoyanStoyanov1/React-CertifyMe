@@ -4,22 +4,23 @@ import paths from "../../paths.js";
 export default function CertificateItem({
 											_id,
 											title,
+											name,
 											start,
 											end,
 											university,
-											imageUrl,
+											imgUrl,
 										}) {
 
 
 	return (
 
 		<div className="card-box">
-			<img src={imageUrl}
+			<img src={imgUrl}
 				 alt='Python OOP`'/>
 
 			<div>
 				<div className="text-center">
-					<p className="name">Name: Kiril Madzharov</p>
+					<p className="name">Name: {name}</p>
 					<p className="title">Title: {title}</p>
 					<p className="date">Date: {start} - {end}</p>
 					<p className="university">University: {university}</p>

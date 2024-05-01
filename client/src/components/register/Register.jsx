@@ -6,7 +6,7 @@ import useForm from "../../hooks/useForm.js";
 const registerFormKeys = {
 	Email: 'email',
 	Password: 'password',
-	ConfirmPassword: 'confirm-password',
+	ConfirmPassword: 'conf-pass',
 	FirstName: 'firstName',
 	LastName: 'lastName',
 }

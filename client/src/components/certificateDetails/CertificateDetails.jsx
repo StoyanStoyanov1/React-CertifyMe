@@ -10,24 +10,26 @@ export default function CertificateDetails() {
 
 	useEffect(() => {
 		CertificateServer.getOne(certificateId)
-			.then(data => setCer(data))
+			.then(data =>
+			{setCer(data)
+			console.log(data)
+			})
 			.catch(error => console.log(error));
 	}, [certificateId]);
 	return (
 		<section id="detailsPage">
 			<div className="wrapper">
 				<div className="certificateCover">
-					<img src={cer.imageUrl} alt={cer.title}
-						 />
+					<img src={cer.imgUrl} alt={cer.title}/>
 				</div>
 				<div className="certificateInfo">
 					<div className="certificateText">
 
-						<h1>Kiril Madzhanov</h1>
+						<h1>{cer.name}</h1>
 						<h3>{cer.start} - {cer.end}</h3>
 						<h4>{cer.title}</h4>
 						<h4>University: {cer.university}</h4>
-						<p>${cer.description}</p>
+						<p>{cer.description}</p>
 					</div>
 
 					<div className="actionBtn">
