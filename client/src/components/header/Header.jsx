@@ -2,15 +2,15 @@ import Path from "../../paths.js";
 import {Link} from "react-router-dom";
 import Login from "../login/Login.jsx";
 import {useContext} from "react";
-import authContext from "../../context/authContext.js";
+import authContext from "../../context/authContext.jsx";
 
 export default function Header() {
 	const {
 		isAuthenticated,
 		firstName,
+		lastName,
 	} = useContext(authContext)
 
-	console.log(firstName)
 	return(
 		<header>
 			<nav>
@@ -20,7 +20,7 @@ export default function Header() {
 						<li><Link to={Path.MyCertificates}>Мy certificates</Link></li>
 						<li><Link to={Path.AddCertificate}>Add certificate</Link></li>
 						<li><Link to={Path.Logout}>Logout</Link></li>
-						<span>{firstName}</span>
+						<span>Account:{firstName}</span>
 					</ul>
 					)}
 

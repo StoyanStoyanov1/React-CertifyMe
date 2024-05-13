@@ -1,9 +1,7 @@
 import {useState} from 'react';
 import {Route, Routes, useNavigate} from "react-router-dom";
 
-import AuthContext from "./context/authContext.js";
-import * as authService from "./services/authService.js";
-
+import {AuthProvider} from "./context/authContext.jsx";
 
 import Header from "./components/header/Header.jsx";
 import Path from "./paths.js";
@@ -18,46 +16,10 @@ import Footer from "./components/footer/Footer.jsx";
 import Logout from "./components/logout/Logout.jsx";
 
 function App() {
-	const navigate = useNavigate();
-
-	const [auth, setAuth] = useState(() => {
-		localStorage.removeItem('accessToken');
-
-		return {}
-	});
-
-	const registerSubmitHandler = async (values) => {
-		const result = await authService.register(values.email, values.password, values.firstName, values.lastName);
-		setAuth(result);
-		localStorage.setItem('accessToken', result.accessToken);
-		navigate(Path.Home)
-	}
-
-	const loginSubmitHandler = async values => {
-		const result = await authService.login(values.email, values.password);
-
-		setAuth(result);
-		localStorage.setItem('accessToken', result.accessToken);
-		navigate(Path.Home)
-	};
-
-	const logoutHandler = () => {
-		setAuth({});
-		localStorage.removeItem('accessToken');
-		navigate(Path.Home);
-	}
-
-	const values = {
-		registerSubmitHandler,
-		loginSubmitHandler,
-		logoutHandler,
-		firstName: auth.firstName || auth.email,
-		email: auth.email,
-		isAuthenticated: !!auth.email,
-	};
 
 	return (
-		<AuthContext.Provider value={values}>
+
+		<AuthProvider>
 			<div id='box'>
 				<Header/>
 
@@ -68,13 +30,13 @@ function App() {
 					<Route path={Path.AddCertificate} element={<AddCertificate />}/>
 					<Route path={Path.MyCertificates} element={<MyCertificates />}/>
 					<Route path={`${Path.MyCertificates}/:certificateId`} element={<CertificateDetails />} />
-					<Route path={Path.EditCertificate} element={<EditCertificate />} />
+					<Route path={`${Path.EditCertificate}/:certificateId`} element={<EditCertificate />} />
 					<Route path={Path.Logout} element={<Logout />} />
 				</Routes>
 
 				<Footer/>
 			</div>
-		</AuthContext.Provider>
+		</AuthProvider>
 	)
 }
 

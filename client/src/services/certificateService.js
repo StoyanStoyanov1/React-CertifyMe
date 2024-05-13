@@ -19,3 +19,7 @@ export const getOne = async (cerId) => {
 
 	return result
 }
+
+export const edit = async (cerId, data) => {
+	const result = await request('PUT', `${baseUrl}/${cerId}`, data);
+}

@@ -12,7 +12,6 @@ export default function CertificateDetails() {
 		CertificateServer.getOne(certificateId)
 			.then(data =>
 			{setCer(data)
-			console.log(data)
 			})
 			.catch(error => console.log(error));
 	}, [certificateId]);
@@ -33,7 +32,7 @@ export default function CertificateDetails() {
 					</div>
 
 					<div className="actionBtn">
-						<Link to={Path.EditCertificate} className="edit">Edit</Link>
+						<Link to={`${Path.EditCertificate}/${certificateId}`} className="edit">Edit</Link>
 						<Link to={Path.MyCertificates} className="remove">Delete</Link>
 					</div>
 				</div>
