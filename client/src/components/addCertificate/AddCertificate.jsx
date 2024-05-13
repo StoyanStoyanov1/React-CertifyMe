@@ -1,18 +1,23 @@
 import {useNavigate} from "react-router-dom";
 import * as certificateService from '../../services/certificateService.js'
+import {useContext} from "react";
+import authContext from "../../context/authContext.jsx";
 
 export default function AddCertificate() {
 	const navigate = useNavigate();
+	const {firstName, lastName} = useContext(authContext);
 
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
 
 		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
-
+		const {firstName, lastName} = useContext(authContext);
 
 		try {
-			await certificateService.create(certificateData);
-			navigate('/my-certificates')
+			await certificateService.create({...certificateData,
+			firstName,
+			lastName});
+			navigate('/my-certificates');
 		} catch (err) {
 			console.log(err);
 		}
@@ -27,9 +32,6 @@ export default function AddCertificate() {
 					<div className="container" >
 						<label htmlFor="title" className="vhide">Title</label>
 						<input id="title" name="title" className="title" type="text" placeholder="Title"/>
-
-						<label htmlFor="name" className="vhide">Name</label>
-						<input id="name" name="name" className="name" type="text" placeholder="Name"/>
 
 						<label htmlFor="start" className="vhide">Start</label>
 						<input id="start" name="start" className="start" type="text" placeholder="Start"/>

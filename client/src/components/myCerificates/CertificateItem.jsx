@@ -5,6 +5,8 @@ export default function CertificateItem({
 											_id,
 											title,
 											name,
+											firstName,
+											lastName,
 											start,
 											end,
 											university,
@@ -20,16 +22,16 @@ export default function CertificateItem({
 
 			<div>
 				<div className="text-center">
-					<p className="name">Name: {name}</p>
+					<p className="name">{firstName} - {lastName}</p>
 					<p className="title">Title: {title}</p>
 					<p className="date">Date: {start} - {end}</p>
 					<p className="university">University: {university}</p>
 				</div>
 				<div className="btn-group">
 					<Link to={`${paths.MyCertificates}/${_id}`} id="details">Detail</Link>
-						</div>
-						</div>
-						</div>
+				</div>
+			</div>
+		</div>
 
-						)
-					}
+	)
+}

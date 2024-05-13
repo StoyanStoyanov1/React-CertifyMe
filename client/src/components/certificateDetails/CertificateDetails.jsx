@@ -24,7 +24,7 @@ export default function CertificateDetails() {
 				<div className="certificateInfo">
 					<div className="certificateText">
 
-						<h1>{cer.name}</h1>
+						<h1>{cer.firstName} - {cer.lastName}</h1>
 						<h3>{cer.start} - {cer.end}</h3>
 						<h4>{cer.title}</h4>
 						<h4>University: {cer.university}</h4>

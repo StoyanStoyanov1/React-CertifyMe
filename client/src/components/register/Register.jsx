@@ -14,10 +14,11 @@ export default function Register() {
 	const {registerSubmitHandler} = useContext(authContext);
 	const {values, onChange, onSubmit} = useForm(registerSubmitHandler, {
 		[registerFormKeys.Email]: '',
-		[registerFormKeys.Password]: '',
-		[registerFormKeys.ConfirmPassword]: '',
 		[registerFormKeys.FirstName]: '',
 		[registerFormKeys.LastName]: '',
+		[registerFormKeys.Password]: '',
+		[registerFormKeys.ConfirmPassword]: '',
+
 	})
 
 	return (
@@ -37,7 +38,7 @@ export default function Register() {
 						value={values[registerFormKeys.Email]}
 					/>
 
-					<label htmlFor="firstName" className="vhide">Email</label>
+					<label htmlFor="firstName" className="vhide">First Name</label>
 					<input
 						id="firstName"
 						className="firstName"
@@ -48,7 +49,7 @@ export default function Register() {
 						value={values[registerFormKeys.FirstName]}
 					/>
 
-					<label htmlFor="lastName" className="vhide">Email</label>
+					<label htmlFor="lastName" className="vhide">Last Name</label>
 					<input
 						id="lastName"
 						className="lastName"
@@ -73,7 +74,7 @@ export default function Register() {
 					<label htmlFor="conf-pass" className="vhide">Confirm Password:</label>
 					<input
 						id="conf-pass"
-						className="conf-pass"
+						className="confPass"
 						name="conf-pass"
 						type="password"
 						placeholder="Confirm Password"
