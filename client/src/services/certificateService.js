@@ -22,4 +22,8 @@ export const getOne = async (cerId) => {
 
 export const edit = async (cerId, data) => {
 	const result = await request('PUT', `${baseUrl}/${cerId}`, data);
+};
+
+export const remove = async (cerId) => {
+	const result = await request('DELETE', `${baseUrl}/${cerId}`);
 }

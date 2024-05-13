@@ -7,6 +7,7 @@ const Path = {
 	CertificateDetail: '/certificate-detail',
 	EditCertificate: '/edit-certificate',
 	Logout: '/logout',
+	Remove: '/remove',
 }
 
 export default Path

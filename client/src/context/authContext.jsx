@@ -35,7 +35,6 @@ export const AuthProvider = ({children}) => {
 		localStorage.removeItem('accessToken');
 		navigate(Path.Home);
 	}
-	console.log(auth)
 
 	const values = {
 		registerSubmitHandler,

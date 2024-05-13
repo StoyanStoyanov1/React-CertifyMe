@@ -15,6 +15,7 @@ export default function CertificateDetails() {
 			})
 			.catch(error => console.log(error));
 	}, [certificateId]);
+
 	return (
 		<section id="detailsPage">
 			<div className="wrapper">
@@ -33,7 +34,7 @@ export default function CertificateDetails() {
 
 					<div className="actionBtn">
 						<Link to={`${Path.EditCertificate}/${certificateId}`} className="edit">Edit</Link>
-						<Link to={Path.MyCertificates} className="remove">Delete</Link>
+						<Link to={`${Path.Remove}/${certificateId}`} className="remove">Delete</Link>
 					</div>
 				</div>
 			</div>
