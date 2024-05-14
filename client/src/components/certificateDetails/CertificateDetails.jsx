@@ -1,12 +1,14 @@
 import Path from "../../paths.js";
 import {Link, useLocation, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import * as CertificateServer from "../../services/certificateService.js"
+import * as ProfilServer from '../../services/profilService.js'
+import authContext from "../../context/authContext.jsx";
 
 export default function CertificateDetails() {
+		const {_id} = useContext(authContext);
 		const [cer, setCer] = useState({});
 		const {certificateId} = useParams();
-
 
 	useEffect(() => {
 		CertificateServer.getOne(certificateId)
@@ -14,7 +16,10 @@ export default function CertificateDetails() {
 			{setCer(data)
 			})
 			.catch(error => console.log(error));
+
+
 	}, [certificateId]);
+
 
 	return (
 		<section id="detailsPage">
@@ -25,7 +30,7 @@ export default function CertificateDetails() {
 				<div className="certificateInfo">
 					<div className="certificateText">
 
-						<h1>{cer.firstName} - {cer.lastName}</h1>
+						<h1>{cer.fullName}</h1>
 						<h3>{cer.start} - {cer.end}</h3>
 						<h4>{cer.title}</h4>
 						<h4>University: {cer.university}</h4>

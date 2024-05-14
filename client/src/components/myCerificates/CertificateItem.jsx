@@ -4,13 +4,11 @@ import paths from "../../paths.js";
 export default function CertificateItem({
 											_id,
 											title,
-											name,
-											firstName,
-											lastName,
 											start,
 											end,
 											university,
 											imgUrl,
+											fullName
 										}) {
 
 
@@ -22,7 +20,7 @@ export default function CertificateItem({
 
 			<div>
 				<div className="text-center">
-					<p className="name">{firstName} - {lastName}</p>
+					<p className="name">{fullName}</p>
 					<p className="title">Title: {title}</p>
 					<p className="date">Date: {start} - {end}</p>
 					<p className="university">University: {university}</p>

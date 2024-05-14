@@ -1,21 +1,33 @@
 import { useNavigate } from "react-router-dom";
 import * as certificateService from '../../services/certificateService.js'
-import { useContext } from "react";
+import {useContext, useEffect, useState} from "react";
 import authContext from "../../context/authContext.jsx";
+import * as profilService from '../../services/profilService.js'
 
 export default function AddCertificate() {
 	const navigate = useNavigate();
-	const { firstName, lastName } = useContext(authContext); // Use the context values here
+	const { _id } = useContext(authContext); // Use the context values here
+	const [profiles, setProfiles] = useState([]);
 
+	useEffect(() => {
+		profilService.getAll().then(result => setProfiles(result))
+	}, [_id]
+	);
+
+	const profil = profiles.filter(profil => profil._ownerId === _id)[0];
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
+
+		const fullName = profil.fullName
+
+		console.log(fullName)
 
 		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
 		try {
 			await certificateService.create({
 				...certificateData,
-				firstName,
-				lastName
+				fullName,
+
 			});
 			navigate('/my-certificates');
 		} catch (err) {
