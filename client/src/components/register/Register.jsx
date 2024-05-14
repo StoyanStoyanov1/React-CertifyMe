@@ -2,12 +2,16 @@ import Path from "../../paths.js";
 import {useContext} from "react";
 import authContext from "../../context/authContext.jsx";
 import useForm from "../../hooks/useForm.js";
+import * as profilService from '../../services/profilService.js'
 
 const registerFormKeys = {
 	Email: 'email',
 	Password: 'password',
 	ConfirmPassword: 'conf-pass',
-	AccName: 'accName'
+	AccName: 'accName',
+	ImgUrl: 'imgUrl',
+	FullName: 'fullName',
+	Description: 'description',
 }
 export default function Register() {
 	const {registerSubmitHandler} = useContext(authContext);
@@ -16,8 +20,11 @@ export default function Register() {
 		[registerFormKeys.Password]: '',
 		[registerFormKeys.ConfirmPassword]: '',
 		[registerFormKeys.AccName]: '',
-
+		[registerFormKeys.FullName]: '',
+		[registerFormKeys.ImgUrl]: '',
+		[registerFormKeys.Description]: '',
 	})
+
 
 	return (
 		<section id="registerPage">
@@ -68,9 +75,38 @@ export default function Register() {
 						value={values[registerFormKeys.AccName]}
 					/>
 
+					<label htmlFor="fullName" className="vhide">Account Name</label>
+					<input
+						id="fullName"
+						className="fullName"
+						name="fullName"
+						type="text"
+						placeholder="Full Name"
+						onChange={onChange}
+						value={values[registerFormKeys.FullName]}
+					/>
 
+					<label htmlFor="imgUrl" className="vhide">Account Name</label>
+					<input
+						id="imgUrl"
+						className="imgUrl"
+						name="imgUrl"
+						type="text"
+						placeholder="Image Url"
+						onChange={onChange}
+						value={values[registerFormKeys.ImgUrl]}
+					/>
 
-
+					<label htmlFor="description" className="vhide">Account Name</label>
+					<textarea
+						id="description"
+						className="description"
+						name="description"
+						type="text"
+						placeholder="Description"
+						onChange={onChange}
+						value={values[registerFormKeys.Description]}
+					/>
 
 
 					<button type="submit" className="register">Register</button>
