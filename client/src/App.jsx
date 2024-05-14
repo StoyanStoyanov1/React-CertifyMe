@@ -15,6 +15,7 @@ import EditCertificate from "./components/editCertificate/EditCertificate.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Logout from "./components/logout/Logout.jsx";
 import RemoveCertificate from "./components/removeCertificate/RemoveCertificate.jsx";
+import AllCertificate from "./components/myCerificates/AllCertificate.jsx";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
 					<Route path={Path.Register} element={<Register />}/>
 					<Route path={Path.AddCertificate} element={<AddCertificate />}/>
 					<Route path={Path.MyCertificates} element={<MyCertificates />}/>
+					<Route path={Path.AllCertificate} element={<AllCertificate/>}/>
 					<Route path={`${Path.MyCertificates}/:certificateId`} element={<CertificateDetails />} />
 					<Route path={`${Path.EditCertificate}/:certificateId`} element={<EditCertificate />} />
 					<Route path={Path.Logout} element={<Logout />} />

@@ -3,23 +3,21 @@ import * as certificateServer from '../../services/certificateService.js'
 import CertificateItem from "./CertificateItem.jsx";
 import AuthContext from "../../context/authContext.jsx";
 
-export default function MyCertificates() {
+export default function AllCertificate() {
 	const [certificates, setCertificates] = useState([]);
-	const {_id} = useContext(AuthContext);
 
 	useEffect(() => {
 		certificateServer.getAll()
 			.then(result => setCertificates(result))
 	}, []);
 
-	const myCertificates = certificates.filter(cer => cer._ownerId === _id);
 
 	return (
 		<section id="catalogPage">
-			<h1>My certificates</h1>
+			<h1>AllCertificate</h1>
 
-			{myCertificates.length === 0 ? (
-				<p>No found certificates!</p>) : myCertificates.map(cer => (<CertificateItem key={cer._id} {...cer}/>
+			{certificates.length === 0 ? (
+				<p>No found certificates!</p>) : certificates.map(cer => (<CertificateItem key={cer._id} {...cer}/>
 			))}
 
 		</section>
