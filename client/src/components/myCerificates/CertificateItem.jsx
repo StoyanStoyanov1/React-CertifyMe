@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import paths from "../../paths.js";
+import noCertificate from '../../../public/images/noCertificate.jpg'
 
 export default function CertificateItem({
 											_id,
@@ -15,7 +16,7 @@ export default function CertificateItem({
 	return (
 
 		<div className="card-box">
-			<img src={imgUrl}
+			<img src={imgUrl || noCertificate}
 				 alt='img`'/>
 
 			<div>

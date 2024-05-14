@@ -2,8 +2,8 @@ import Path from "../../paths.js";
 import {Link, useLocation, useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import * as CertificateServer from "../../services/certificateService.js"
-import * as ProfilServer from '../../services/profilService.js'
 import authContext from "../../context/authContext.jsx";
+import noCertificate from "../../../public/images/noCertificate.jpg"
 
 export default function CertificateDetails() {
 		const {_id} = useContext(authContext);
@@ -25,7 +25,7 @@ export default function CertificateDetails() {
 		<section id="detailsPage">
 			<div className="wrapper">
 				<div className="certificateCover">
-					<img src={cer.imgUrl} alt={cer.title}/>
+					<img src={cer.imgUrl || noCertificate} alt={cer.title}/>
 				</div>
 				<div className="certificateInfo">
 					<div className="certificateText">
