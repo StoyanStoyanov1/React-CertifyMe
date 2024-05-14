@@ -1,5 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import * as profilService from '../../services/profilService.js';
+import ItemsProfile from "./ItemsProfile.jsx";
+
 
 export default function AllProfiles() {
 	const [profiles, setProfiles] = useState([]);
@@ -12,7 +14,7 @@ export default function AllProfiles() {
 		<section id='catalogPage'>
 			<h1>All Profiles</h1>
 
-			{profiles.length === 0 ? <p>No found Profiles!</p>: <p></p>}
+			{profiles.length === 0 ? <p>No found Profiles!</p>: profiles.map(profil => <ItemsProfile key={profil._id} {...profil}/>)}
 		</section>
 	)
 

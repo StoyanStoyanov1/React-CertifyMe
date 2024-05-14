@@ -8,7 +8,9 @@ const Path = {
 	EditCertificate: '/edit-certificate',
 	Logout: '/logout',
 	Remove: '/remove',
-	AllCertificate: 'all-certificate',
+	AllCertificate: '/all-certificate',
+	AllProfiles: '/all-profiles',
+	Profil: '/profil',
 }
 
 export default Path

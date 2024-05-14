@@ -16,6 +16,8 @@ import Footer from "./components/footer/Footer.jsx";
 import Logout from "./components/logout/Logout.jsx";
 import RemoveCertificate from "./components/removeCertificate/RemoveCertificate.jsx";
 import AllCertificate from "./components/myCerificates/AllCertificate.jsx";
+import AllProfiles from "./components/allProfiles/AllProfiles.jsx";
+import DetailProfil from "./components/allProfiles/DetailProfil.jsx";
 
 function App() {
 
@@ -36,6 +38,8 @@ function App() {
 					<Route path={`${Path.EditCertificate}/:certificateId`} element={<EditCertificate />} />
 					<Route path={Path.Logout} element={<Logout />} />
 					<Route path={`${Path.Remove}/:certificateId`} element={<RemoveCertificate />}/>
+					<Route path={Path.AllProfiles} element={<AllProfiles/>} />
+					<Route path={`${Path.Profil}/:profilId`} element={<DetailProfil/>}/>
 				</Routes>
 
 				<Footer/>

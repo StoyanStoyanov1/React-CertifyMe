@@ -11,5 +11,5 @@ export const getAll = async () => {
 }
 
 export const getOne = async (profilId) => {
-	return await request('GIT', `${baseUrl}/${profilId}`);
+	return await request('GET', `${baseUrl}/${profilId}`);
 }

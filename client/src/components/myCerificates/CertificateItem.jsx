@@ -16,7 +16,7 @@ export default function CertificateItem({
 
 		<div className="card-box">
 			<img src={imgUrl}
-				 alt='Python OOP`'/>
+				 alt='img`'/>
 
 			<div>
 				<div className="text-center">

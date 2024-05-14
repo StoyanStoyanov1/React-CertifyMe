@@ -16,7 +16,7 @@ export default function AllCertificate() {
 
 	return (
 		<section id="catalogPage">
-			<h1>AllCertificate</h1>
+			<h1>All Certificate</h1>
 
 			{certificates.length === 0 ? (
 				<p>No found certificates!</p>) : certificates.map(cer => (<CertificateItem key={cer._id} {...cer}/>

@@ -15,6 +15,7 @@ export default function Header() {
 			<nav>
 				<Link to={Path.Home}>CertifyMe</Link>
 				<Link to={Path.AllCertificate}>All Certificate</Link>
+				<Link to={Path.AllProfiles}>All profiles</Link>
 				{isAuthenticated && (<ul>
 						<li><Link to={Path.MyCertificates}>Мy certificates</Link></li>
 						<li><Link to={Path.AddCertificate}>Add certificate</Link></li>
