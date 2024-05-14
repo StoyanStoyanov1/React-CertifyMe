@@ -7,8 +7,7 @@ import authContext from "../../context/authContext.jsx";
 export default function Header() {
 	const {
 		isAuthenticated,
-		firstName,
-		lastName,
+		accName,
 	} = useContext(authContext)
 
 	return(
@@ -20,7 +19,7 @@ export default function Header() {
 						<li><Link to={Path.MyCertificates}>Мy certificates</Link></li>
 						<li><Link to={Path.AddCertificate}>Add certificate</Link></li>
 						<li><Link to={Path.Logout}>Logout</Link></li>
-						<span>Account:{firstName}</span>
+						<span>Account:{accName}</span>
 					</ul>
 					)}
 

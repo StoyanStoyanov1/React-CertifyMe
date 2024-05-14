@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
 	});
 
 	const registerSubmitHandler = async (values) => {
-		const result = await authService.register(values.email, values.firstName, values.lastName, values.password);
+		const result = await authService.register(values.email, values.password, values.accName);
 		setAuth(result);
 		localStorage.setItem('accessToken', result.accessToken);
 		navigate(Path.Home)
@@ -40,8 +40,7 @@ export const AuthProvider = ({children}) => {
 		registerSubmitHandler,
 		loginSubmitHandler,
 		logoutHandler,
-		firstName: auth.firstName,
-		lastName: auth.lastName,
+		accName: auth.accName,
 		email: auth.email,
 		_id: auth._id,
 		isAuthenticated: !!auth.email,

@@ -7,17 +7,15 @@ const registerFormKeys = {
 	Email: 'email',
 	Password: 'password',
 	ConfirmPassword: 'conf-pass',
-	FirstName: 'firstName',
-	LastName: 'lastName',
+	AccName: 'accName'
 }
 export default function Register() {
 	const {registerSubmitHandler} = useContext(authContext);
 	const {values, onChange, onSubmit} = useForm(registerSubmitHandler, {
 		[registerFormKeys.Email]: '',
-		[registerFormKeys.FirstName]: '',
-		[registerFormKeys.LastName]: '',
 		[registerFormKeys.Password]: '',
 		[registerFormKeys.ConfirmPassword]: '',
+		[registerFormKeys.AccName]: '',
 
 	})
 
@@ -36,28 +34,6 @@ export default function Register() {
 						placeholder="Email"
 						onChange={onChange}
 						value={values[registerFormKeys.Email]}
-					/>
-
-					<label htmlFor="firstName" className="vhide">First Name</label>
-					<input
-						id="firstName"
-						className="firstName"
-						name="firstName"
-						type="text"
-						placeholder="First Name"
-						onChange={onChange}
-						value={values[registerFormKeys.FirstName]}
-					/>
-
-					<label htmlFor="lastName" className="vhide">Last Name</label>
-					<input
-						id="lastName"
-						className="lastName"
-						name="lastName"
-						type="text"
-						placeholder="Last Name"
-						onChange={onChange}
-						value={values[registerFormKeys.LastName]}
 					/>
 
 					<label htmlFor="password" className="vhide">Password</label>
@@ -81,6 +57,21 @@ export default function Register() {
 						onChange={onChange}
 						value={values[registerFormKeys.ConfirmPassword]}
 					/>
+					<label htmlFor="accName" className="vhide">Account Name</label>
+					<input
+						id="accName"
+						className="accName"
+						name="accName"
+						type="text"
+						placeholder="Account Name"
+						onChange={onChange}
+						value={values[registerFormKeys.AccName]}
+					/>
+
+
+
+
+
 
 					<button type="submit" className="register">Register</button>
 
