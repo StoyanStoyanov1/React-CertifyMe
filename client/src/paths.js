@@ -11,6 +11,8 @@ const Path = {
 	AllCertificate: '/all-certificate',
 	AllProfiles: '/all-profiles',
 	Profil: '/profil',
+	EditProfile: '/editProfile',
+	MyProfil: 'my-profil',
 }
 
 export default Path

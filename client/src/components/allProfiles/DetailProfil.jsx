@@ -1,10 +1,12 @@
 import {Link, useParams} from "react-router-dom";
 import Path from "../../paths.js";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import * as profilService from '../../services/profilService.js';
 import profilImg from '../../../public/images/profilImg.jpg'
+import authContext from "../../context/authContext.jsx";
 
 export default function DetailProfil() {
+	const {_id} = useContext(authContext);
 	const [profil, setProfil] = useState({});
 	const {profilId} = useParams();
 
@@ -13,7 +15,6 @@ export default function DetailProfil() {
 			.then(result => setProfil(result));
 	}, [profilId]);
 
-	console.log(profilId)
 	return (
 		<section id="detailsPage">
 			<div className="wrapper">
@@ -28,7 +29,8 @@ export default function DetailProfil() {
 					</div>
 
 					<div className="actionBtn">
-						<Link to={`${Path.Home}`} className="edit">Edit</Link>
+						{profil._ownerId === _id && <Link to={`${Path.EditProfile}/${profilId}`} className="edit">Edit</Link>}
+
 					</div>
 				</div>
 			</div>

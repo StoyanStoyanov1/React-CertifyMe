@@ -115,7 +115,7 @@ export default function EditCertificate() {
 
 						</textarea>
 
-						<button className="edit-album" type="submit">Edit Album</button>
+						<button className="edit-album" type="submit">Edit Certificate</button>
 					</div>
 				</fieldset>
 			</form>

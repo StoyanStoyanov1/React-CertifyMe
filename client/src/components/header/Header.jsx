@@ -20,7 +20,7 @@ export default function Header() {
 						<li><Link to={Path.MyCertificates}>Мy certificates</Link></li>
 						<li><Link to={Path.AddCertificate}>Add certificate</Link></li>
 						<li><Link to={Path.Logout}>Logout</Link></li>
-						<span>Account:{accName}</span>
+						<li><Link to={Path.MyProfil}>{accName}</Link></li>
 					</ul>
 					)}
 

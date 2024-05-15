@@ -18,6 +18,8 @@ import RemoveCertificate from "./components/removeCertificate/RemoveCertificate.
 import AllCertificate from "./components/myCerificates/AllCertificate.jsx";
 import AllProfiles from "./components/allProfiles/AllProfiles.jsx";
 import DetailProfil from "./components/allProfiles/DetailProfil.jsx";
+import EditProfile from "./components/allProfiles/EditProfile.jsx";
+import MyProfil from "./components/allProfiles/MyProfil.jsx";
 
 function App() {
 
@@ -40,6 +42,8 @@ function App() {
 					<Route path={`${Path.Remove}/:certificateId`} element={<RemoveCertificate />}/>
 					<Route path={Path.AllProfiles} element={<AllProfiles/>} />
 					<Route path={`${Path.Profil}/:profilId`} element={<DetailProfil/>}/>
+					<Route path={`${Path.EditProfile}/:profilId`} element={<EditProfile/>}/>
+					<Route path={Path.MyProfil} element={<MyProfil/>}/>
 				</Routes>
 
 				<Footer/>

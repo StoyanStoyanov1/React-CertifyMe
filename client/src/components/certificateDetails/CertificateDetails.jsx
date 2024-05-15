@@ -37,10 +37,12 @@ export default function CertificateDetails() {
 						<p>{cer.description}</p>
 					</div>
 
+					{cer._ownerId === _id &&
 					<div className="actionBtn">
 						<Link to={`${Path.EditCertificate}/${certificateId}`} className="edit">Edit</Link>
 						<Link to={`${Path.Remove}/${certificateId}`} className="remove">Delete</Link>
 					</div>
+					}
 				</div>
 			</div>
 		</section>
