@@ -1200,7 +1200,7 @@
         const rules = Object.assign({
             '*': {
                 '.create': ['User'],
-                '.update': ['Owner'],
+                '.update': ['User'],
                 '.delete': ['Owner']
             }
         }, settings.rules);

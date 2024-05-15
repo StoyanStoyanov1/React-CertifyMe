@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import * as authService from "../services/authService.js";
 import Path from "../paths.js";
 import * as profilService from '..//services/profilService.js'
+import usePersistedState from "../hooks/usePersistedState.js";
 
 const AuthContext = createContext();
 AuthContext.displayName = 'AuthContext';
@@ -10,11 +11,7 @@ AuthContext.displayName = 'AuthContext';
 export const AuthProvider = ({children}) => {
 	const navigate = useNavigate();
 
-	const [auth, setAuth] = useState(() => {
-		localStorage.removeItem('accessToken');
-
-		return {}
-	});
+	const [auth, setAuth] = usePersistedState('auth', {});
 
 	const registerSubmitHandler = async (values) => {
 		const result = await authService.register(values.email, values.password, values.accName);

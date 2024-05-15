@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import Path from "../../paths.js";
+import profilImg from "../../../public/images/profilImg.jpg"
 
 export default function ItemsProfile({
 											_id,
@@ -11,7 +12,7 @@ export default function ItemsProfile({
 
 	return (
 		<div className="card-box">
-			<img src={imgUrl}
+			<img src={imgUrl || profilImg}
 				 alt='img`'/>
 
 			<div>
