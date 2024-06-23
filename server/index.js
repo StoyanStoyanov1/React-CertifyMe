@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const User = require('./models/User');
 const cors = require('cors');
+const router = require('./router');
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -17,15 +18,6 @@ mongoose.connection.on('connected', () => console.log('DB is connected'));
 mongoose.connection.on('disconnected', () => console.log('DB is disconnected'));
 mongoose.connection.on('error', (err) => console.log(err))
 
-app.post('/users/register', async (req, res) => {
-	try {
-		const {email, username, password} = req.body;
-		const user = new User ({email, username, password});
-		await user.save();
-		res.status(201).json(user);
-	} catch (error) {
-		res.status(500).json({message: error.message})
-	}
-})
+app.use(router);
 
 app.listen(3030, () => console.log('Server started in port 3030'));
