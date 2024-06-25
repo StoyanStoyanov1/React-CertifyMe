@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
 			if (result.accessToken) {
 				setAuth(result.user);
 				localStorage.setItem('accessToken', result.accessToken);
-				console.log('Token saved to localStorage:', result.accessToken); // Проверете дали токенът се записва правилно
 				navigate(Path.Home);
 			} else {
 				console.error('No access token returned');

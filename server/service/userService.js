@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { SECRET } = require('../config');
+const bcrypt = require('bcrypt')
 
 exports.register = async (userData) => {
 	const existingUser = await User.findOne({ email: userData.email });
@@ -14,6 +15,23 @@ exports.register = async (userData) => {
 	return { accessToken: token, user: createdUser };
 }
 
+exports.login = async ({email, password}) => {
+	const user = await User.findOne({email});
+
+	if (!user) {
+		throw new Error ('User does not exist');
+	}
+
+	const isValid = await bcrypt.compare(password, user.password);
+
+	if (!isValid) {
+		throw new Error ('Invalid password');
+	}
+
+	const token = await generateToken(user);
+
+	return {accessToken: token, user: user};
+}
 
 async function generateToken(user) {
 	const payload = {
