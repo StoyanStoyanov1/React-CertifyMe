@@ -6,17 +6,24 @@ import * as profilService from '../../services/profilService.js'
 
 export default function AddCertificate() {
 	const navigate = useNavigate();
-	const { _id } = useContext(authContext); // Use the context values here
-	const [profiles, setProfiles] = useState([]);
+	const { _id } = useContext(authContext);
+	const [profil, setProfiles] = useState(null);
 
 	useEffect(() => {
-		profilService.getAll().then(result => setProfiles(result))
-	}, [_id]
-	);
+		const fetchData = async () => {
+			try {
+				const result = await profilService.getByUserId(_id);
+				setProfiles(result);
+			} catch (error) {
+				console.error('Error fetching user profile:', error);
+			}
+		};
 
-	const profil = profiles.filter(profil => profil._ownerId === _id)[0];
+		fetchData();
+	}, [_id]);
 
 	console.log(profil)
+
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
 
@@ -29,7 +36,6 @@ export default function AddCertificate() {
 			await certificateService.create({
 				...certificateData,
 				fullName,
-
 			});
 			navigate('/my-certificates');
 		} catch (err) {

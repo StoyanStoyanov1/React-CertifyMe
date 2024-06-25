@@ -1,6 +1,6 @@
 import request from "../lib/request.js";
 
-const baseUrl = 'http://localhost:3030/data/certificates';
+const baseUrl = 'http://localhost:3030/certificates';
 
 export const getAll = async () => {
 	const result = await request('GET', baseUrl);
@@ -9,7 +9,7 @@ export const getAll = async () => {
 }
 
 export const create = async (data) => {
-	const result = await request('POST', baseUrl, {...data
+	const result = await request('POST', `${baseUrl}/add-certificate`, {...data
 	});
 
 	return result;

@@ -1,13 +1,11 @@
 const Certificate = require('../models/Certificate');
 
-exports.create = async (data) => {
-	const existingCertificate = Certificate.findOne({title: data.title});
+exports.create = async (data) => await Certificate.create(data);
 
-	if (existingCertificate) {
-		throw new Error('Certificate already exists');
+exports.getCertificateByUserId = async (userId) => {
+
+		const certificate = await Certificate.findById({userId}).lean();
+
+		return certificate;
+
 	}
-
-	const createdCertificate = await Certificate.create(data)
-
-	return createdCertificate;
-}

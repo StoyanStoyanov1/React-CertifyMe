@@ -17,3 +17,7 @@ export const getOne = async (profilId) => {
 export const edit = async (profilId, data) => {
 	return await request('PUT', `${baseUrl}/${profilId}`, data);
 }
+
+export const getByUserId = async (userId) => {
+	return await request('GET', `${baseUrl}/${userId}`)
+}
