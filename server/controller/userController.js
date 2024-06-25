@@ -20,7 +20,8 @@ router.post('/register', async (req, res) => {
 
 
 router.get('/logout', async (req, res) => {
-
+	res.clearCookie('auth');
+	res.status(204).end();
 
 })
 
