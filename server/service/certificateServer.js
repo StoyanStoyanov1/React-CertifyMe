@@ -8,4 +8,6 @@ exports.getCertificateByUserId = async (userId) => {
 
 		return certificate;
 
-	}
+};
+
+exports.getAll = async () => await Certificate.find();

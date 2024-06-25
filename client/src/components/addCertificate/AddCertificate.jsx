@@ -37,7 +37,7 @@ export default function AddCertificate() {
 				...certificateData,
 				fullName,
 			});
-			navigate('/my-certificates');
+			navigate('/');
 		} catch (err) {
 			console.log(err);
 		}
