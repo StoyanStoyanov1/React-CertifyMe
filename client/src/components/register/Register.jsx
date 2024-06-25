@@ -2,7 +2,6 @@ import Path from "../../paths.js";
 import {useContext} from "react";
 import authContext from "../../context/authContext.jsx";
 import useForm from "../../hooks/useForm.js";
-import * as profilService from '../../services/profilService.js'
 
 const registerFormKeys = {
 	Email: 'email',

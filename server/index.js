@@ -7,10 +7,15 @@ const cors = require('cors');
 const router = require('./router');
 
 app.use(express.static('public'));
-app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+	origin: 'http://localhost:5173', // Адресът на вашето React приложение
+	credentials: true
+}));
+
+app.use(express.json());
+
 
 mongoose.connect('mongodb://localhost:27017/certify-me');
 

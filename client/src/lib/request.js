@@ -21,6 +21,7 @@ const buildOptions = (data) => {
 export default async function request(method, url, data) {
 	const response = await  fetch(url, {
 		method,
+		credentials: 'include',
 		...buildOptions(data)
 	});
 

@@ -3,18 +3,17 @@ const jwt = require('jsonwebtoken');
 const { SECRET } = require('../config');
 
 exports.register = async (userData) => {
-	// Проверка дали съществува потребител с този email
 	const existingUser = await User.findOne({ email: userData.email });
 	if (existingUser) {
 		throw new Error('User already exists');
 	}
 
 	const createdUser = await User.create(userData);
-
 	const token = await generateToken(createdUser);
 
 	return { accessToken: token, user: createdUser };
 }
+
 
 async function generateToken(user) {
 	const payload = {
@@ -24,6 +23,5 @@ async function generateToken(user) {
 	};
 
 	const token = await jwt.sign(payload, SECRET, { expiresIn: '2h' });
-
 	return token;
 }
