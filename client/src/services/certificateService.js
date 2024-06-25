@@ -9,7 +9,8 @@ export const getAll = async () => {
 }
 
 export const create = async (data) => {
-	const result = await request('POST', baseUrl, data);
+	const result = await request('POST', baseUrl, {...data
+	});
 
 	return result;
 }

@@ -15,6 +15,8 @@ export default function AddCertificate() {
 	);
 
 	const profil = profiles.filter(profil => profil._ownerId === _id)[0];
+
+	console.log(profil)
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
 
