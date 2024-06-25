@@ -8,7 +8,7 @@ const registerFormKeys = {
 	Email: 'email',
 	Password: 'password',
 	ConfirmPassword: 'conf-pass',
-	AccName: 'accName',
+	Username: 'username',
 	ImgUrl: 'imgUrl',
 	FullName: 'fullName',
 	Description: 'description',
@@ -19,7 +19,7 @@ export default function Register() {
 		[registerFormKeys.Email]: '',
 		[registerFormKeys.Password]: '',
 		[registerFormKeys.ConfirmPassword]: '',
-		[registerFormKeys.AccName]: '',
+		[registerFormKeys.Username]: '',
 		[registerFormKeys.FullName]: '',
 		[registerFormKeys.ImgUrl]: '',
 		[registerFormKeys.Description]: '',
@@ -64,15 +64,15 @@ export default function Register() {
 						onChange={onChange}
 						value={values[registerFormKeys.ConfirmPassword]}
 					/>
-					<label htmlFor="accName" className="vhide">Account Name</label>
+					<label htmlFor="username" className="vhide">Username</label>
 					<input
-						id="accName"
-						className="accName"
-						name="accName"
+						id="username"
+						className="username"
+						name="username"
 						type="text"
-						placeholder="Account Name"
+						placeholder="Username"
 						onChange={onChange}
-						value={values[registerFormKeys.AccName]}
+						value={values[registerFormKeys.Username]}
 					/>
 
 					<label htmlFor="fullName" className="vhide">Account Name</label>
