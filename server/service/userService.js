@@ -1,23 +1,19 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const {SECRET} = require('../config');
-const bcrypt = require('bcrypt');
+const { SECRET } = require('../config');
 
 exports.register = async (userData) => {
-
-	const user = await User.findOne({email: userData.email});
-
-	if (user) {
+	// Проверка дали съществува потребител с този email
+	const existingUser = await User.findOne({ email: userData.email });
+	if (existingUser) {
 		throw new Error('User already exists');
 	}
 
-	const createUser = await User.create(userData);
+	const createdUser = await User.create(userData);
 
-	const token = await generateToken(createUser);
+	const token = await generateToken(createdUser);
 
-	return token;
-
-
+	return { accessToken: token, user: createdUser };
 }
 
 async function generateToken(user) {
@@ -27,8 +23,7 @@ async function generateToken(user) {
 		email: user.email,
 	};
 
-	const token = await jwt.sign(payload, SECRET, { expiresIn: '2h'});
+	const token = await jwt.sign(payload, SECRET, { expiresIn: '2h' });
 
-	return token
-
+	return token;
 }
