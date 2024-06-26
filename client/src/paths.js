@@ -12,7 +12,7 @@ const Path = {
 	AllProfiles: '/all-profiles',
 	Profil: '/profil',
 	EditProfile: '/editProfile',
-	MyProfil: 'my-profil',
+	MyProfil: '/my-profil',
 }
 
 export default Path

@@ -6,13 +6,14 @@ export default function ItemsProfile({
 											_id,
 											_ownerId,
 											fullName,
-											imgUrl,
+											imageUrl,
+											userId,
 										}) {
 
 
 	return (
 		<div className="card-box">
-			<img src={imgUrl || profilImg}
+			<img src={imageUrl || profilImg}
 				 alt='img`'/>
 
 			<div>
@@ -20,7 +21,7 @@ export default function ItemsProfile({
 					<p className="name">{fullName}</p>
 				</div>
 				<div className="btn-group">
-					<Link to={`${Path.Profil}/${_id}`} id="more">Learn more...</Link>
+					<Link to={`${Path.MyProfil}/${userId}`} id="more">Learn more...</Link>
 				</div>
 			</div>
 		</div>
