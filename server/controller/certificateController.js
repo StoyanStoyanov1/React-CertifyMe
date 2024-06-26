@@ -41,6 +41,19 @@ router.get('/:userId', async (req, res) => {
 	} catch (err) {
 		res.status(500).json({message: err});
 	}
+});
+
+router.get('/:certificateId/details', async (req, res) => {
+	try {
+		const certificateId = req.params.certificateId;
+		console.log(certificateId);
+		const certificate = await certificateServer.getOne(certificateId);
+
+		console.log(certificate)
+		res.status(200).json(certificate);
+	} catch (err) {
+		res.status(500).json({message: 'Certificate is not found!'});
+	}
 })
 
 module.exports = router;

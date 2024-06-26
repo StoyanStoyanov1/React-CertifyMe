@@ -13,3 +13,5 @@ exports.getAllByProfilId = async (profilId) => {
 exports.getAllByUserId = async (userId) => await Certificate.find({userId}).lean();
 
 exports.getAll = async () => await Certificate.find();
+
+exports.getOne = async (certificateId) => await Certificate.findById(certificateId).lean();

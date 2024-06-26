@@ -3,12 +3,14 @@ import {Link, useLocation, useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import * as CertificateServer from "../../services/certificateService.js"
 import authContext from "../../context/authContext.jsx";
-import noCertificate from "../../../public/images/noCertificate.jpg"
+import noCertificate from "../../../public/images/noCertificate.jpg";
+import * as profilService from "../../services/profilService.js";
 
 export default function CertificateDetails() {
 		const {_id} = useContext(authContext);
 		const [cer, setCer] = useState({});
 		const {certificateId} = useParams();
+		const [fullName, setFullName] = useState("");
 
 	useEffect(() => {
 		CertificateServer.getOne(certificateId)
@@ -20,7 +22,11 @@ export default function CertificateDetails() {
 
 	}, [certificateId]);
 
-
+	useEffect(() => {
+		profilService.getOne(_id)
+			.then(data => setFullName(data.fullName))
+			.catch(err => console.log(err));
+	}, []);
 	return (
 		<section id="detailsPage">
 			<div className="wrapper">
@@ -30,7 +36,7 @@ export default function CertificateDetails() {
 				<div className="certificateInfo">
 					<div className="certificateText">
 
-						<h1>{cer.fullName}</h1>
+						<h1>{fullName}</h1>
 						<h3>{cer.start} - {cer.end}</h3>
 						<h4>{cer.title}</h4>
 						<h4>University: {cer.university}</h4>

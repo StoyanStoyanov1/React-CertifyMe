@@ -21,7 +21,7 @@ export const create = async (data) => {
 }
 
 export const getOne = async (cerId) => {
-	const result = await request('GET', `${baseUrl}/${cerId}`);
+	const result = await request('GET', `${baseUrl}/${cerId}/details`);
 
 	return result
 }

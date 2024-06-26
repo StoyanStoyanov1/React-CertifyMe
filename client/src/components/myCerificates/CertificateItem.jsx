@@ -27,7 +27,7 @@ export default function CertificateItem({
 					<p className="university">University: {university}</p>
 				</div>
 				<div className="btn-group">
-					<Link to={`${paths.MyCertificates}/${_id}`} id="details">Detail</Link>
+					<Link to={`${paths.MyCertificates}/${_id}/details`} id="details">Detail</Link>
 				</div>
 			</div>
 		</div>

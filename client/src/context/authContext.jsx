@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 				values.imgUrl,
 				values.description,
 			);
-			console.log('Register result:', result); // Проверете резултата в конзолата
+
 			if (result.accessToken) {
 				setAuth(result.user);
 				localStorage.setItem('accessToken', result.accessToken);
