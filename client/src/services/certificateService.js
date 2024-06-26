@@ -33,3 +33,5 @@ export const edit = async (cerId, data) => {
 export const remove = async (cerId) => {
 	const result = await request('DELETE', `${baseUrl}/${cerId}`);
 }
+
+export const getAllUserId = async (userId) => await request('GET', `${baseUrl}/${userId}`);

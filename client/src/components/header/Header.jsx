@@ -18,7 +18,7 @@ export default function Header() {
 				<Link to={Path.AllCertificate}>All Certificate</Link>
 				<Link to={Path.AllProfiles}>All profiles</Link>
 				{isAuthenticated && (<ul>
-						<li><Link to={Path.MyCertificates}>Мy certificates</Link></li>
+						<li><Link to={`${Path.MyCertificates}/${_id}`}>Мy certificates</Link></li>
 						<li><Link to={Path.AddCertificate}>Add certificate</Link></li>
 						<li><Link to={Path.Logout}>Logout</Link></li>
 						<li><Link to={`${Path.MyProfil}/${_id}`}>{username}</Link></li>

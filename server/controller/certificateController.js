@@ -18,7 +18,6 @@ router.post('/add-certificate', async (req, res) => {
 	}
 });
 
-module.exports = router;
 
 router.get('/all-certificate', async (req, res) => {
 	try {
@@ -28,4 +27,20 @@ router.get('/all-certificate', async (req, res) => {
 	} catch (err) {
 		res.status(500).json({message: err});
 	}
+});
+
+router.get('/:userId', async (req, res) => {
+	try {
+		const userId = req.params.userId;
+		const profil = await profilService.getOneByUserId(userId);
+		const profilId = profil._id;
+
+		const certificates = await certificateServer.getAllByProfilId(profilId);
+
+		res.status(200).json(certificates);
+	} catch (err) {
+		res.status(500).json({message: err});
+	}
 })
+
+module.exports = router;

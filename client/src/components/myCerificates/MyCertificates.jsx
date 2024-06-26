@@ -8,18 +8,17 @@ export default function MyCertificates() {
 	const {_id} = useContext(AuthContext);
 
 	useEffect(() => {
-		certificateServer.getAll()
+		certificateServer.getAllUserId(_id)
 			.then(result => setCertificates(result))
 	}, []);
 
-	const myCertificates = certificates.filter(cer => cer._ownerId === _id);
 
 	return (
 		<section id="catalogPage">
 			<h1>My certificates</h1>
 
-			{myCertificates.length === 0 ? (
-				<p>No found certificates!</p>) : myCertificates.map(cer => (<CertificateItem key={cer._id} {...cer}/>
+			{certificates.length === 0 ? (
+				<p>No found certificates!</p>) : certificates.map(cer => (<CertificateItem key={cer._id} {...cer}/>
 			))}
 
 		</section>

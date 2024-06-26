@@ -34,11 +34,11 @@ function App() {
 						<Route path={Path.Home} element={<Home/>}/>
 						<Route path={Path.Login} element={<Login/>}/>
 						<Route path={Path.Register} element={<Register/>}/>
-						<Route path={Path.MyCertificates} element={<MyCertificates/>}/>
+						<Route path={`${Path.MyCertificates}/:userId`} element={<MyCertificates/>}/>
 						<Route path={Path.AllCertificate} element={<AllCertificate/>}/>
 						<Route path={Path.AllProfiles} element={<AllProfiles/>}/>
 						<Route path={`${Path.Profil}/:profilId`} element={<DetailProfil/>}/>
-						<Route path={`${Path.MyCertificates}/:certificateId`} element={<CertificateDetails/>}/>
+						<Route path={`${Path.MyCertificates}/:certificateId/details`} element={<CertificateDetails/>}/>
 
 						<Route element={<AuthGuard />}>
 							<Route path={`${Path.MyProfil}/:profilId`} element={<DetailProfil/>}/>
