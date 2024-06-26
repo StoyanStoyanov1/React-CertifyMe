@@ -28,14 +28,14 @@ export default function AddCertificate() {
 		e.preventDefault();
 
 		const fullName = profil.fullName
-
-		console.log(fullName)
+		const profilId = profil._id
 
 		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
 		try {
 			await certificateService.create({
 				...certificateData,
 				fullName,
+				profilId,
 			});
 			navigate('/');
 		} catch (err) {

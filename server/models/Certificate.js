@@ -17,7 +17,7 @@ const certificateSchema = mongoose.Schema({
 		type: String,
 		require: true,
 	},
-	imageUrl: {
+	imgUrl: {
 		type: String,
 		require: true,
 	},
@@ -25,6 +25,10 @@ const certificateSchema = mongoose.Schema({
 		type: String,
 		require: true,
 	},
+	profilId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Profil",
+	}
 })
 
 const Certificate = mongoose.model('Certificate', certificateSchema);

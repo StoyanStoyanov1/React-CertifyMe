@@ -10,11 +10,11 @@ export const getAll = async () => {
 
 export const create = async (data) => {
 	try {
-		const result = await request('POST', `${baseUrl}/add-certificate`, {
+		const certificate = await request('POST', `${baseUrl}/add-certificate`, {
 			...data
 		});
 
-		return result;
+		return certificate;
 	} catch (err) {
 		console.log(err);
 	}

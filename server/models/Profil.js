@@ -17,6 +17,10 @@ const profilSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
 	},
+	certificates: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Certificate",
+	}]
 });
 
 const Profil = mongoose.model('Profil', profilSchema);

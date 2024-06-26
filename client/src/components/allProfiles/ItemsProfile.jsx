@@ -6,13 +6,13 @@ export default function ItemsProfile({
 											_id,
 											_ownerId,
 											fullName,
-											imgUrl,
+											imageUrl,
 										}) {
 
 
 	return (
 		<div className="card-box">
-			<img src={imgUrl || profilImg}
+			<img src={imageUrl || profilImg}
 				 alt='img`'/>
 
 			<div>
