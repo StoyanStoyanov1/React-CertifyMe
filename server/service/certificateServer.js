@@ -1,5 +1,5 @@
 const Certificate = require('../models/Certificate');
-
+const Profil = require('../models/Profil');
 exports.create = async (data) => await Certificate.create(data);
 
 exports.getAllByProfilId = async (profilId) => {
@@ -16,4 +16,9 @@ exports.getAll = async () => await Certificate.find();
 
 exports.getOne = async (certificateId) => await Certificate.findById(certificateId).lean();
 
-exports.edit = async (certificateId, data) => await Certificate.findByIdAndUpdate(certificateId, data, {new: true})
+exports.edit = async (certificateId, data) => await Certificate.findByIdAndUpdate(certificateId, data, {new: true});
+
+exports.delete = async (certificateId, profilId) => {
+	await Certificate.findByIdAndDelete(certificateId);
+	await Profil.findByIdAndUpdate(profilId, {$pull: {certificates: certificateId}}, {new: true});
+};

@@ -6,7 +6,6 @@ router.post('/add-certificate', async (req, res) => {
 	try {
 		const data = req.body;
 		const profilId = data.profilId;
-		console.log(profilId)
 
 		const certificate = await certificateServer.create(data);
 
@@ -46,10 +45,8 @@ router.get('/:userId', async (req, res) => {
 router.get('/:certificateId/details', async (req, res) => {
 	try {
 		const certificateId = req.params.certificateId;
-		console.log(certificateId);
 		const certificate = await certificateServer.getOne(certificateId);
 
-		console.log(certificate)
 		res.status(200).json(certificate);
 	} catch (err) {
 		res.status(500).json({message: 'Certificate is not found!'});
@@ -69,6 +66,18 @@ router.put('/:certificateId', async (req, res) => {
 		res.status(500).json({message: 'Certificate is not found!'});
 	}
 
+});
+
+router.delete('/:certificateId', async (req, res) => {
+	try {
+		const certificateId = req.params.certificateId;
+		const certificate = await certificateServer.getOne(certificateId);
+		const profilId = certificate.profilId;
+		await certificateServer.delete(certificateId, profilId);
+	} catch (err) {
+		res.status(500).json({message: 'Certificate is not found!'})
+	}
 })
+
 
 module.exports = router;

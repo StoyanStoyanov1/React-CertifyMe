@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import * as certificateService from '../../services/certificateService.js'
 import {useContext, useEffect, useState} from "react";
 import authContext from "../../context/authContext.jsx";
-import * as profilService from '../../services/profilService.js'
+import * as profilService from '../../services/profilService.js';
+import Path from "../../paths.js";
 
 export default function AddCertificate() {
 	const navigate = useNavigate();
@@ -22,8 +23,6 @@ export default function AddCertificate() {
 		fetchData();
 	}, [_id]);
 
-	console.log(profil)
-
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
 
@@ -37,7 +36,7 @@ export default function AddCertificate() {
 				fullName,
 				profilId,
 			});
-			navigate('/');
+			navigate(`${Path.MyCertificates}/${_id}`);
 		} catch (err) {
 			console.log(err);
 		}
