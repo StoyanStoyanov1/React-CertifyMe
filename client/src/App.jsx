@@ -41,7 +41,7 @@ function App() {
 						<Route path={`${Path.MyCertificates}/:certificateId`} element={<CertificateDetails/>}/>
 
 						<Route element={<AuthGuard />}>
-							<Route path={Path.MyProfil} element={<MyProfil/>}/>
+							<Route path={`${Path.MyProfil}/:profilId`} element={<DetailProfil/>}/>
 							<Route path={`${Path.EditProfile}/:profilId`} element={<EditProfile/>}/>
 							<Route path={`${Path.Remove}/:certificateId`} element={<RemoveCertificate/>}/>
 							<Route path={`${Path.EditCertificate}/:certificateId`} element={<EditCertificate/>}/>

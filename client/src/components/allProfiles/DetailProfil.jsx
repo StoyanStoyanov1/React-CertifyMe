@@ -19,7 +19,7 @@ export default function DetailProfil() {
 		<section id="detailsPage">
 			<div className="wrapper">
 				<div className="certificateCover">
-					<img src={profil.imgUrl || profilImg} alt={profil.fullName}/>
+					<img src={profil.imageUrl || profilImg} alt={profil.fullName}/>
 				</div>
 				<div className="certificateInfo">
 					<div className="certificateText">
@@ -29,7 +29,7 @@ export default function DetailProfil() {
 					</div>
 
 					<div className="actionBtn">
-						{profil._ownerId === _id && <Link to={`${Path.EditProfile}/${profilId}`} className="edit">Edit</Link>}
+						{profil.userId === _id && <Link to={`${Path.EditProfile}/${profilId}`} className="edit">Edit</Link>}
 
 					</div>
 				</div>
