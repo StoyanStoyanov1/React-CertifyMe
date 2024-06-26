@@ -1,30 +1,45 @@
-import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import * as certificateService from "../../services/certificateService.js"
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import * as certificateService from "../../services/certificateService.js";
 import Path from "../../paths.js";
 
 const EditCertificateFormKeys = {
-	Title: 'title',
-	Start: 'start',
-	End: 'end',
-	University: 'university',
-	ImgUrl: 'imgUrl',
-	Description: 'description',
-}
+	Title: "title",
+	Start: "start",
+	End: "end",
+	University: "university",
+	ImgUrl: "imgUrl",
+	Description: "description",
+};
 
 export default function EditCertificate() {
 	const navigation = useNavigate();
+	const { certificateId } = useParams();
 
-	const {certificateId} = useParams();
-
-	const [certificateValues, setCertificateValues] = useState({});
+	const [certificateValues, setCertificateValues] = useState({
+		title: "",
+		start: "",
+		end: "",
+		university: "",
+		imgUrl: "",
+		description: "",
+	});
 
 	useEffect(() => {
-		certificateService.getOne(certificateId).then(result => setCertificateValues(result));
+		certificateService.getOne(certificateId).then((result) => {
+			setCertificateValues({
+				title: result.title || "",
+				start: result.start || "",
+				end: result.end || "",
+				university: result.university || "",
+				imgUrl: result.imgUrl || "",
+				description: result.description || "",
+			});
+		});
 	}, [certificateId]);
 
 	const onChange = (e) => {
-		setCertificateValues(state => ({
+		setCertificateValues((state) => ({
 			...state,
 			[e.target.name]: e.target.value,
 		}));
@@ -33,13 +48,12 @@ export default function EditCertificate() {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		try{
+		try {
 			await certificateService.edit(certificateId, certificateValues);
-			navigation(Path.MyCertificates)
+			navigation(`${Path.MyCertificates}/${certificateId}/details`);
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
-
 	};
 
 	return (
@@ -49,7 +63,9 @@ export default function EditCertificate() {
 					<legend>Edit Certificate</legend>
 
 					<div className="container">
-						<label htmlFor="title" className="vhide">Title</label>
+						<label htmlFor="title" className="vhide">
+							Title
+						</label>
 						<input
 							id="title"
 							name="title"
@@ -60,7 +76,9 @@ export default function EditCertificate() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="start" className="vhide">Start</label>
+						<label htmlFor="start" className="vhide">
+							Start
+						</label>
 						<input
 							id="start"
 							name="start"
@@ -71,7 +89,9 @@ export default function EditCertificate() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="end" className="vhide">End</label>
+						<label htmlFor="end" className="vhide">
+							End
+						</label>
 						<input
 							id="end"
 							name="end"
@@ -82,7 +102,9 @@ export default function EditCertificate() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="university" className="vhide">University</label>
+						<label htmlFor="university" className="vhide">
+							University
+						</label>
 						<input
 							id="university"
 							name="university"
@@ -93,7 +115,9 @@ export default function EditCertificate() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="imgUrl" className="vhide">Image Url</label>
+						<label htmlFor="imgUrl" className="vhide">
+							Image Url
+						</label>
 						<input
 							id="imgUrl"
 							name="imgUrl"
@@ -104,22 +128,23 @@ export default function EditCertificate() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="description" className="vhide">Description</label>
+						<label htmlFor="description" className="vhide">
+							Description
+						</label>
 						<textarea
 							name="description"
 							className="description"
-							placeholder='Description'
+							placeholder="Description"
 							value={certificateValues[EditCertificateFormKeys.Description]}
 							onChange={onChange}
-						>
+						></textarea>
 
-						</textarea>
-
-						<button className="edit-album" type="submit">Edit Certificate</button>
+						<button className="edit-album" type="submit">
+							Edit Certificate
+						</button>
 					</div>
 				</fieldset>
 			</form>
 		</section>
-
-	)
+	);
 }

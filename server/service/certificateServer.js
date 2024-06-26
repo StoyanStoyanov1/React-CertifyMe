@@ -15,3 +15,5 @@ exports.getAllByUserId = async (userId) => await Certificate.find({userId}).lean
 exports.getAll = async () => await Certificate.find();
 
 exports.getOne = async (certificateId) => await Certificate.findById(certificateId).lean();
+
+exports.edit = async (certificateId, data) => await Certificate.findByIdAndUpdate(certificateId, data, {new: true})

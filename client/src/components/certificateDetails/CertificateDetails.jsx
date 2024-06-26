@@ -10,7 +10,7 @@ export default function CertificateDetails() {
 		const {_id} = useContext(authContext);
 		const [cer, setCer] = useState({});
 		const {certificateId} = useParams();
-		const [fullName, setFullName] = useState("");
+		const [profil, setProfil] = useState({});
 
 	useEffect(() => {
 		CertificateServer.getOne(certificateId)
@@ -24,7 +24,7 @@ export default function CertificateDetails() {
 
 	useEffect(() => {
 		profilService.getOne(_id)
-			.then(data => setFullName(data.fullName))
+			.then(data => setProfil(data))
 			.catch(err => console.log(err));
 	}, []);
 	return (
@@ -36,14 +36,14 @@ export default function CertificateDetails() {
 				<div className="certificateInfo">
 					<div className="certificateText">
 
-						<h1>{fullName}</h1>
+						<h1>{profil.fullName}</h1>
 						<h3>{cer.start} - {cer.end}</h3>
 						<h4>{cer.title}</h4>
 						<h4>University: {cer.university}</h4>
 						<p>{cer.description}</p>
 					</div>
 
-					{cer._ownerId === _id &&
+					{profil.userId === _id &&
 					<div className="actionBtn">
 						<Link to={`${Path.EditCertificate}/${certificateId}`} className="edit">Edit</Link>
 						<Link to={`${Path.Remove}/${certificateId}`} className="remove">Delete</Link>
