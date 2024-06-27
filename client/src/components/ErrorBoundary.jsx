@@ -1,4 +1,5 @@
 import {Component} from "react";
+import errorImage from '../../public/images/404.jpg'
 
 export default class ErrorBoundary extends Component {
 	constructor() {
@@ -24,7 +25,9 @@ export default class ErrorBoundary extends Component {
 	render() {
 
 		if (this.state.hasError) {
-			return <h1>404</h1>
+			return <div className='404'>
+				<img src={errorImage} alt='404'/>
+			</div>
 		}
 
 		return (
