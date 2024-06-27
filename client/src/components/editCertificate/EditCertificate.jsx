@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as certificateService from "../../services/certificateService.js";
 import Path from "../../paths.js";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 
 const EditCertificateFormKeys = {
 	Title: "title",
@@ -56,6 +58,9 @@ export default function EditCertificate() {
 		}
 	};
 
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState(null)
+
 	return (
 		<section className="editPage">
 			<form onSubmit={onSubmit}>
@@ -79,27 +84,25 @@ export default function EditCertificate() {
 						<label htmlFor="start" className="vhide">
 							Start
 						</label>
-						<input
-							id="start"
-							name="start"
-							className="start"
-							type="text"
-							placeholder="Start"
+						<DatePicker
+							selected={startDate}
+							onChange={(date) => setStartDate(date)}
+							dateFormat="dd.MM.yyyy"
+							placeholderText="Start Date"
+							name='start'
 							value={certificateValues[EditCertificateFormKeys.Start]}
-							onChange={onChange}
 						/>
 
 						<label htmlFor="end" className="vhide">
 							End
 						</label>
-						<input
-							id="end"
-							name="end"
-							className="end"
-							type="text"
-							placeholder="End"
+						<DatePicker
+							selected={startDate}
+							onChange={(date) => setStartDate(date)}
+							dateFormat="dd.MM.yyyy"
+							placeholderText="Start Date"
+							name='end'
 							value={certificateValues[EditCertificateFormKeys.End]}
-							onChange={onChange}
 						/>
 
 						<label htmlFor="university" className="vhide">
@@ -139,7 +142,7 @@ export default function EditCertificate() {
 							onChange={onChange}
 						></textarea>
 
-						<button className="edit-album" type="submit">
+						<button className="edit-item" type="submit">
 							Edit Certificate
 						</button>
 					</div>
