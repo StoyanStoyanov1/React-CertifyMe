@@ -4,6 +4,8 @@ import {useContext, useEffect, useState} from "react";
 import authContext from "../../context/authContext.jsx";
 import * as profilService from '../../services/profilService.js';
 import Path from "../../paths.js";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default function AddCertificate() {
 	const navigate = useNavigate();
@@ -42,20 +44,41 @@ export default function AddCertificate() {
 		}
 	}
 
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState(null)
+
 	return (
 		<section className="createPage">
+
 			<form onSubmit={createCertificateSubmitHandler}>
+
 				<fieldset>
 					<div className="container">
 						<label htmlFor="title" className="vhide">Title</label>
-						<input id="title" name="title" className="title" type="text" placeholder="Title"/>
+						<input
+							id="title"
+							name="title"
+							className="title"
+							type="text"
+							placeholder="Title"
+						/>
 
 						<label htmlFor="start" className="vhide">Start</label>
-						<input id="start" name="start" className="start" type="text" placeholder="Start"/>
-
+						<DatePicker
+							selected={startDate}
+							onChange={(date) => setStartDate(date)}
+							dateFormat="dd.MM.yyyy"
+							placeholderText="Start Date"
+							name='start'
+						/>
 						<label htmlFor="end" className="vhide">End</label>
-						<input id="end" name="end" className="end" type="text" placeholder="End"/>
-
+						<DatePicker
+							selected={endDate}
+							onChange={(date) => setEndDate(date)}
+							dateFormat="dd.MM.yyyy"
+							placeholderText="End Date"
+							name='end'
+						/>
 						<label htmlFor="university" className="vhide">University</label>
 						<input id="university" name="university" className="university" type="text"
 							   placeholder="University"/>
