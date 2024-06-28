@@ -8,6 +8,12 @@ const profilSchema = mongoose.Schema({
 	imageUrl: {
 		type: String,
 		required: true,
+		validate: {
+			validator: (value) => {
+				return /^https?:\/\//.test(value)
+			},
+			message: 'Url must start with http:// or https://'
+		}
 	},
 	description: {
 		type: String,
