@@ -37,16 +37,13 @@ export default function AddCertificate() {
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
 
-		const fullName = profil.fullName
 		const profilId = profil._id
 
 		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
+		console.log(certificateData)
+
 		try {
-			await certificateService.create({
-				...certificateData,
-				fullName,
-				profilId,
-			});
+			await certificateService.create({...certificateData, profilId});
 			navigate(`${Path.MyCertificates}/${_id}`);
 		} catch (err) {
 			console.log(err);
