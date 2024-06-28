@@ -18,6 +18,9 @@ export default function EditCertificate() {
 	const navigation = useNavigate();
 	const { certificateId } = useParams();
 
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState( null)
+
 	const [certificateValues, setCertificateValues] = useState({
 		title: "",
 		start: "",
@@ -31,13 +34,16 @@ export default function EditCertificate() {
 		certificateService.getOne(certificateId).then((result) => {
 			setCertificateValues({
 				title: result.title || "",
-				start: result.start || "",
-				end: result.end || "",
+				start: result.start || null,
+				end: result.end || null,
 				university: result.university || "",
 				imgUrl: result.imgUrl || "",
 				description: result.description || "",
 			});
 		});
+
+		setStartDate(certificateValues.start);
+		setEndDate(certificateValues.end);
 	}, [certificateId]);
 
 	const onChange = (e) => {
@@ -49,17 +55,17 @@ export default function EditCertificate() {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
 
 		try {
-			await certificateService.edit(certificateId, certificateValues);
+			await certificateService.edit(certificateId, certificateData);
 			navigation(`${Path.MyCertificates}/${certificateId}/details`);
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
-	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState(null)
+
 
 	return (
 		<section className="editPage">
@@ -81,29 +87,37 @@ export default function EditCertificate() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="start" className="vhide">
-							Start
-						</label>
-						<DatePicker
-							selected={startDate}
-							onChange={(date) => setStartDate(date)}
-							dateFormat="dd.MM.yyyy"
-							placeholderText="Start Date"
-							name='start'
-							value={certificateValues[EditCertificateFormKeys.Start]}
-						/>
+						<div className="date-container">
+							<div className="input-container">
+								<label htmlFor="start" className="vhide">Start</label>
+								<DatePicker
+									selected={startDate}
+									onChange={(date) => setStartDate(date)}
+									dateFormat="dd.MM.yyyy"
+									placeholderText="Start Date"
+									name='start'
+									className="title input-field"
+									value={startDate || certificateValues.start}
+									onMouseEnter={() => handleMouseEnter('start')}
+									onMouseLeave={() => handleMouseLeave('start')}
+								/>
+							</div>
 
-						<label htmlFor="end" className="vhide">
-							End
-						</label>
-						<DatePicker
-							selected={startDate}
-							onChange={(date) => setStartDate(date)}
-							dateFormat="dd.MM.yyyy"
-							placeholderText="Start Date"
-							name='end'
-							value={certificateValues[EditCertificateFormKeys.End]}
-						/>
+							<div className="input-container">
+								<label htmlFor="end" className="vhide">End</label>
+								<DatePicker
+									selected={endDate}
+									onChange={(date) => setEndDate(date)}
+									dateFormat="dd.MM.yyyy"
+									placeholderText="End Date"
+									name='end'
+									className="title input-field"
+									value={endDate || certificateValues.end}
+									onMouseEnter={() => handleMouseEnter('end')}
+									onMouseLeave={() => handleMouseLeave('end')}
+								/>
+							</div>
+						</div>
 
 						<label htmlFor="university" className="vhide">
 							University
