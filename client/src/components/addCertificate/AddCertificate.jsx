@@ -53,7 +53,7 @@ export default function AddCertificate() {
 	const [startDate, setStartDate] = useState(null);
 	const [endDate, setEndDate] = useState(null);
 
-	const handleMouseEnter = (field) => {
+	const handleMouseEnter = (field, boolean) => {
 		setShowTooltip(prevState => ({ ...prevState, [field]: true }));
 	};
 
