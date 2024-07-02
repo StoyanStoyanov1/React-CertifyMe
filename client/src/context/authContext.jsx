@@ -12,26 +12,24 @@ export const AuthProvider = ({children}) => {
 	const [auth, setAuth] = usePersistedState('auth', {});
 
 	const registerSubmitHandler = async (values) => {
-		try {
-			const result = await authService.register(
-				values.email,
-				values.password,
-				values.username,
-				values.fullName,
-				values.imgUrl,
-				values.description,
-			);
 
-			if (result.accessToken) {
-				setAuth(result.user);
-				localStorage.setItem('accessToken', result.accessToken);
-				navigate(Path.Home);
-			} else {
-				console.error('No access token returned');
-			}
-		} catch (error) {
-			console.error('Error during registration:', error);
+		const result = await authService.register(
+			values.email,
+			values.password,
+			values.username,
+			values.fullName,
+			values.imgUrl,
+			values.description,
+		);
+
+		if (result.accessToken) {
+			setAuth(result.user);
+			localStorage.setItem('accessToken', result.accessToken);
+			navigate(Path.Home);
+		} else {
+			console.error('No access token returned');
 		}
+
 	};
 	const loginSubmitHandler = async (values) => {
 

@@ -15,8 +15,12 @@ router.post('/register', async (req, res) => {
 		const { accessToken, user } = await userService.register(userData);
 		res.cookie('auth', accessToken, options);
 		res.status(201).json({ accessToken, user });
-	} catch (err) {
-		res.status(500).json({ error: getErrorMessage(err) });
+	} catch (error) {
+		if (error.name === 'ValidationError') {
+			const errors = Object.values(error.errors).map(err => err.message);
+			return res.status(400).json({ message: errors.join(', ') });
+		}
+		res.status(500).json({ message: 'Server error' });
 	}
 });
 

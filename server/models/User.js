@@ -29,9 +29,9 @@ const userSchema = mongoose.Schema({
 		required: true,
 		validate: {
 			validator: (value) => {
-				return value.length > 3
+				return value.length > 6
 			},
-			message: 'Passwort must be least 3 characters!'
+			message: 'Passwort must be least 6 characters!'
 		}
 	},
 

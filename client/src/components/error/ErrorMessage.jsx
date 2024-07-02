@@ -3,8 +3,14 @@ import React from 'react';
 const ErrorMessage = ({ error }) => {
 	if (!error) return null;
 
+	const errorMessages = error.split(', ');
+
 	return (
-		<p style={{ color: 'red' }}>{error}</p>
+		<div style={{ color: 'red' }}>
+			{errorMessages.map((message, index) => (
+				<p key={index}>{message}</p>
+			))}
+		</div>
 	);
 };
 

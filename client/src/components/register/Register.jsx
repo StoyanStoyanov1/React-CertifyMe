@@ -1,7 +1,8 @@
 import Path from "../../paths.js";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import authContext from "../../context/authContext.jsx";
 import useForm from "../../hooks/useForm.js";
+import ErrorMessage from "../error/ErrorMessage.jsx";
 
 const registerFormKeys = {
 	Email: 'email',
@@ -13,8 +14,10 @@ const registerFormKeys = {
 	Description: 'description',
 }
 export default function Register() {
+	const [error, setError] = useState(null);
+
 	const {registerSubmitHandler} = useContext(authContext);
-	const {values, onChange, onSubmit} = useForm(registerSubmitHandler, {
+	const {values, onChange, onSubmit} = useForm(handleLoginSubmit, {
 		[registerFormKeys.Email]: '',
 		[registerFormKeys.Password]: '',
 		[registerFormKeys.ConfirmPassword]: '',
@@ -23,6 +26,16 @@ export default function Register() {
 		[registerFormKeys.ImgUrl]: '',
 		[registerFormKeys.Description]: '',
 	})
+
+	async function handleLoginSubmit(values) {
+		try {
+			setError(null)
+			await registerSubmitHandler(values);
+		} catch (error) {
+			console.log(error)
+			setError(error.message);
+		}
+	}
 
 
 	return (
@@ -109,6 +122,8 @@ export default function Register() {
 
 
 					<button type="submit" className="register">Register</button>
+
+					<ErrorMessage error={error} />
 
 					<p className="field">
 						<span>If you already have profile click <a href={Path.Login}>here</a></span>
