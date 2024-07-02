@@ -15,7 +15,18 @@ const registerFormKeys = {
 	Description: 'description',
 }
 export default function Register() {
+	const validatedObjects = {
+		email: false,
+		password: false,
+		confirmPassword: false,
+		username: false,
+		imgUrl: false,
+		fullName: false,
+		description: false,
+	};
+
 	const [error, setError] = useState(null);
+
 
 	const {registerSubmitHandler} = useContext(authContext);
 	const {values, onChange, onSubmit} = useForm(handleLoginSubmit, {
@@ -28,19 +39,43 @@ export default function Register() {
 		[registerFormKeys.Description]: '',
 	})
 
-	const [showTooltip, setShowTooltip] = useState({
-		email: false,
-		password: false,
-		confirmPassword: false,
-		username: false,
-		imgUrl: false,
-		fullName: false,
-		description: false,
-	});
+	const [validator, setValidator] = useState(validatedObjects);
+
+	const [showTooltip, setShowTooltip] = useState(validatedObjects);
 
 	async function handleLoginSubmit(values) {
+		setError(null);
+		setValidator(validatedObjects);
+
+		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values[registerFormKeys.Email])) {
+			return setValidator(prevState => ({...prevState, [registerFormKeys.Email]: true}));
+		}
+
+		if (values[registerFormKeys.Password].length <= 6) {
+			return setValidator(prevState => ({...prevState, [registerFormKeys.Password]: true}));
+		}
+
+		if (values[registerFormKeys.ConfirmPassword] !== values[registerFormKeys.Password]) {
+			return setValidator(prevState => ({...prevState, [registerFormKeys.ConfirmPassword]: true}));
+		}
+
+		if (values[registerFormKeys.Username].length > 6) {
+			return setValidator(prevState => ({...prevState, [registerFormKeys.Username]: true}));
+		}
+
+		if (values[registerFormKeys.Username] === '') {
+			return setValidator(prevState => ({...prevState, [registerFormKeys.Username]: true}));
+		}
+
+		if (values[registerFormKeys.FullName] === '') {
+			return setValidator(prevState => ({...prevState, [registerFormKeys.FullName]: true}));
+		}
+
+		if (!/^https?:\/\//.test(values[registerFormKeys.ImgUrl])) {
+			return setValidator(prevState => ({...prevState, [registerFormKeys.ImgUrl]: true}));
+		}
+
 		try {
-			setError(null)
 			await registerSubmitHandler(values);
 		} catch (error) {
 			console.log(error)
@@ -61,6 +96,8 @@ export default function Register() {
 					<div className='input-container'>
 
 						<label htmlFor="email" className="vhide">Email</label>
+						{validator[registerFormKeys.Email] && <p className='error-message'>Add a valid email!</p>}
+
 						<input
 							id="email"
 							className="email"
@@ -77,6 +114,7 @@ export default function Register() {
 					</div>
 					<div className='input-container'>
 						<label htmlFor="password" className="vhide">Password</label>
+						{validator[registerFormKeys.Password] && <p className='error-message'>Passwort must be least 6 characters!</p>}
 						<input
 							id="password"
 							className="password"
@@ -93,6 +131,7 @@ export default function Register() {
 					</div>
 					<div className='input-container'>
 						<label htmlFor="conf-pass" className="vhide">Confirm Password:</label>
+						{validator[registerFormKeys.ConfirmPassword] && <p className='error-message'>Passwords do not match!</p>}
 						<input
 							id="conf-pass"
 							className="confPass"
@@ -104,11 +143,13 @@ export default function Register() {
 							onMouseEnter={() => handleMouse(registerFormKeys.ConfirmPassword, true)}
 							onMouseLeave={() => handleMouse(registerFormKeys.ConfirmPassword, false)}
 						/>
-						{showTooltip[registerFormKeys.ConfirmPassword] && <div className="tooltip">Confirm your password!</div>}
+						{showTooltip[registerFormKeys.ConfirmPassword] &&
+							<div className="tooltip">Confirm your password!</div>}
 					</div>
 					<div className='input-container'>
 
 						<label htmlFor="username" className="vhide">Username</label>
+						{validator[registerFormKeys.Username] && <p className='error-message'>Add your Username!</p>}
 						<input
 							id="username"
 							className="username"
@@ -125,6 +166,7 @@ export default function Register() {
 					</div>
 					<div className='input-container'>
 						<label htmlFor="fullName" className="vhide">Account Name</label>
+						{validator[registerFormKeys.FullName] && <p className='error-message'>Add your Full Name!</p>}
 						<input
 							id="fullName"
 							className="fullName"
@@ -141,7 +183,9 @@ export default function Register() {
 					</div>
 					<div className='input-container'>
 
-						<label htmlFor="imgUrl" className="vhide">Account Name</label>
+						<label htmlFor="imgUrl" className="vhide">Image url</label>
+						{validator[registerFormKeys.ImgUrl] && <p className='error-message'>Url must start with http:// or https://</p>}
+
 						<input
 							id="imgUrl"
 							className="imgUrl"
@@ -170,7 +214,8 @@ export default function Register() {
 							onMouseEnter={() => handleMouse(registerFormKeys.Description, true)}
 							onMouseLeave={() => handleMouse(registerFormKeys.Description, false)}
 						/>
-						{showTooltip[registerFormKeys.Description] && <div className="tooltip">Enter your Description!</div>}
+						{showTooltip[registerFormKeys.Description] &&
+							<div className="tooltip">Enter your Description!</div>}
 
 					</div>
 
