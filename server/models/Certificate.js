@@ -43,9 +43,12 @@ const certificateSchema = mongoose.Schema({
 	},
 	imgUrl: {
 		type: String,
-		require: true,
 		validate: {
 			validator: (value) => {
+				if (value === '') {
+					return true;
+				}
+
 				return /^https?:\/\//.test(value)
 			},
 			message: 'Url must start with http:// or https://'
@@ -58,8 +61,11 @@ const certificateSchema = mongoose.Schema({
 	profilId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Profil",
-	}
-})
+	},
+
+}, {timestamps: true})
+
+
 
 const Certificate = mongoose.model('Certificate', certificateSchema);
 

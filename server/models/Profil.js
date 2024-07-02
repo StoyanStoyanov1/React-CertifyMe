@@ -27,7 +27,7 @@ const profilSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Certificate",
 	}]
-});
+}, {timestamps: true})
 
 const Profil = mongoose.model('Profil', profilSchema);
 

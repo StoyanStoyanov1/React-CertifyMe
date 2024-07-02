@@ -6,8 +6,8 @@ import useForm from "../../hooks/useForm.js";
 import ErrorMessage from "../../components/error/ErrorMessage.jsx";
 
 const loginForm = {
-	email: 'email',
-	password: 'password',
+	Email: 'email',
+	Password: 'password',
 };
 
 export default function Login() {
