@@ -19,14 +19,32 @@ export default function Login() {
 		[loginForm.Password]: '',
 	});
 
+	const [validator, setValidator] = useState({
+		[loginForm.Email]: false,
+		[loginForm.Password]: false,
+	})
+
 	const [showTooltip, setShowTooltip] = useState({
 		email: false,
 		password: false,
 	});
 
 	async function handleLoginSubmit(values) {
+		setError(null)
+		setValidator({
+			[loginForm.Email]: false,
+			[loginForm.Password]: false,
+		});
+
+		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+			return setValidator(prevState => ({...prevState, ['email']: true}));
+		}
+
+		if (values.password === '') {
+			return setValidator(prevState => ({...prevState, ['password']: true}));
+		}
+
 		try {
-			setError(null)
 			await loginSubmitHandler(values);
 		} catch (error) {
 			setError(error.error);
@@ -43,8 +61,11 @@ export default function Login() {
 			<form onSubmit={onSubmit}>
 				<fieldset>
 					<legend>Login</legend>
+
 					<div className='input-container'>
 						<label htmlFor="email" className="vhide">Email</label>
+						{validator.email && <p className='error-message'>Add a valid email!</p>}
+
 						<input
 							id="email"
 							className="email"
@@ -56,11 +77,14 @@ export default function Login() {
 							onMouseEnter={() => handleMouse('email', true)}
 							onMouseLeave={() => handleMouse('email', false)}
 						/>
+
 						{showTooltip.email && <div className="tooltip">Enter your email!</div>}
 					</div>
 					<div className='input-container'>
 					<label htmlFor="password" className="vhide">Password</label>
-					<input
+						{validator.password && <p className='error-message'>Add your password!</p>}
+
+						<input
 						id="password"
 						className="password"
 						name={loginForm.Password}
@@ -73,9 +97,9 @@ export default function Login() {
 					/>
 						{showTooltip.password && <div className='tooltip'>Enter your password!</div> }
 					</div>
-					<button type="submit" className="login">Login</button>
-
 					<ErrorMessage error={error}/>
+
+					<button type="submit" className="login">Login</button>
 
 					<p className="field">
 						<span>If you don't have a profile click <Link to={Path.Register}>here</Link></span>

@@ -6,7 +6,7 @@ const ErrorMessage = ({ error }) => {
 	const errorMessages = error.split(', ');
 
 	return (
-		<div style={{ color: 'red' }}>
+		<div className='error-message'>
 			{errorMessages.map((message, index) => (
 				<p key={index}>{message}</p>
 			))}

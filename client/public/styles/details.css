@@ -100,3 +100,8 @@
 .actionBtn > a:hover {
 	background-position: right;
 }
+
+.error-message {
+    padding-top: 0;
+    color: red;
+}
