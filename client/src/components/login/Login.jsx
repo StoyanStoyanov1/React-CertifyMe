@@ -1,21 +1,32 @@
 import Path from "../../paths.js";
-import {Link} from "react-router-dom";
-import {useContext} from "react";
+import { Link } from "react-router-dom";
+import {useContext, useState} from "react";
 import AuthContext from "../../context/authContext.jsx";
 import useForm from "../../hooks/useForm.js";
+import ErrorMessage from "../../components/error/ErrorMessage.jsx";
 
 const loginForm = {
 	Email: 'email',
 	Password: 'password',
-}
+};
+
 export default function Login() {
+	const [error, setError ] = useState(null)
 
-	const {loginSubmitHandler} = useContext(AuthContext);
-
-	const {values, onChange, onSubmit} = useForm(loginSubmitHandler, {
+	const { loginSubmitHandler } = useContext(AuthContext);
+	const { values, onChange, onSubmit} = useForm(handleLoginSubmit, {
 		[loginForm.Email]: '',
 		[loginForm.Password]: '',
-	})
+	});
+
+	async function handleLoginSubmit(values) {
+		try {
+			setError(null)
+			await loginSubmitHandler(values);
+		} catch (error) {
+			setError(error.error);
+		}
+	}
 
 	return (
 		<section id="loginPage">
@@ -47,11 +58,13 @@ export default function Login() {
 
 					<button type="submit" className="login">Login</button>
 
+					<ErrorMessage error={error} />
+
 					<p className="field">
-						<span>If you don't have profile click <Link to={Path.Register}>here</Link></span>
+						<span>If you don't have a profile click <Link to={Path.Register}>here</Link></span>
 					</p>
 				</fieldset>
 			</form>
 		</section>
-	)
+	);
 }
