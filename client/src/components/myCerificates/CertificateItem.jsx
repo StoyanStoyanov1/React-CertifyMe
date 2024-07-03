@@ -1,6 +1,7 @@
-import {Link} from "react-router-dom";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import paths from "../../paths.js";
-import noCertificate from '../../../public/images/noCertificate.jpg'
+import noCertificate from '../../../public/images/noCertificate.jpg';
 
 export default function CertificateItem({
 											_id,
@@ -11,14 +12,28 @@ export default function CertificateItem({
 											imgUrl,
 											fullName
 										}) {
+	const [imageLoaded, setImageLoaded] = useState(false);
 
+	const handleImageLoad = () => {
+		setImageLoaded(true);
+	};
+
+	const handleImageError = () => {
+		setImageLoaded(false);
+	};
 
 	return (
-
 		<div className="card-box">
-			<img src={imgUrl || noCertificate}
-				 alt='img`'/>
-
+			<img
+				src={imgUrl || noCertificate}
+				alt="Certificate"
+				style={{ display: imageLoaded ? 'block' : 'none' }}
+				onLoad={handleImageLoad}
+				onError={handleImageError}
+			/>
+			{!imageLoaded && (
+				<img src={noCertificate} alt="Placeholder" />
+			)}
 			<div>
 				<div className="text-center">
 					<p className="name">{fullName}</p>
@@ -31,6 +46,5 @@ export default function CertificateItem({
 				</div>
 			</div>
 		</div>
-
-	)
+	);
 }
