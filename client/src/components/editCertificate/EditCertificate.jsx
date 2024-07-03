@@ -4,6 +4,7 @@ import * as certificateService from "../../services/certificateService.js";
 import Path from "../../paths.js";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import validator from "../addCertificate/validator.js";
 
 const EditCertificateFormKeys = {
 	Title: "title",
@@ -39,6 +40,8 @@ export default function EditCertificate() {
 		description: "",
 	});
 
+	const [validated, setValidated] = useState(validateObjects);
+
 	useEffect(() => {
 		certificateService.getOne(certificateId).then((result) => {
 			setCertificateValues({
@@ -70,7 +73,15 @@ export default function EditCertificate() {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		setValidated(validateObjects);
+
 		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
+
+		const key = validator(certificateData);
+
+		if (key) {
+			return setValidated(prevState => ({...prevState, [key]: true}));
+		}
 
 		try {
 			await certificateService.edit(certificateId, certificateData);
@@ -92,6 +103,8 @@ export default function EditCertificate() {
 							<label htmlFor="title" className="vhide">
 								Title
 							</label>
+							{validated.title && <div className='error-message'>Title must be between 2 and 12 characters!</div>}
+
 							<input
 								id="title"
 								name="title"
@@ -109,6 +122,8 @@ export default function EditCertificate() {
 						<div className="date-container">
 							<div className="input-container">
 								<label htmlFor="start" className="vhide">Start</label>
+								{validated.start && <div className='error-message'>Date is not valid!</div>}
+
 								<DatePicker
 									selected={startDate}
 									onChange={(date) => setStartDate(date)}
@@ -126,6 +141,8 @@ export default function EditCertificate() {
 
 							<div className="input-container">
 								<label htmlFor="end" className="vhide">End</label>
+								{validated.end && <div className='error-message'>The end date cannot be earlier than the start date.</div>}
+
 								<DatePicker
 									selected={endDate}
 									onChange={(date) => setEndDate(date)}
@@ -145,7 +162,9 @@ export default function EditCertificate() {
 						<label htmlFor="university" className="vhide">
 							University
 						</label>
-						<input
+							{validated.university && <div className='error-message'>University muss be between 2 and 10 characters!</div>}
+
+							<input
 							id="university"
 							name="university"
 							className="university"
@@ -163,7 +182,9 @@ export default function EditCertificate() {
 						<label htmlFor="imgUrl" className="vhide">
 							Image Url
 						</label>
-						<input
+							{validated.imgUrl && <div className='error-message'>Url must start with http:// or https://</div>}
+
+							<input
 							id="imgUrl"
 							name="imgUrl"
 							className="imgUrl"
