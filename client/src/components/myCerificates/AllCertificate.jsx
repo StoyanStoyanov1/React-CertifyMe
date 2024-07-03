@@ -6,19 +6,17 @@ import Pagination from "./Pagination";
 export default function AllCertificate() {
 	const [certificates, setCertificates] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage] = useState(1);
+	const [itemsPerPage] = useState(8);
 
 	useEffect(() => {
 		certificateServer.getAll()
 			.then(result => setCertificates(result));
 	}, []);
 
-	// Get current certificates
 	const indexOfLastCertificate = currentPage * itemsPerPage;
 	const indexOfFirstCertificate = indexOfLastCertificate - itemsPerPage;
 	const currentCertificates = certificates.slice(indexOfFirstCertificate, indexOfLastCertificate);
 
-	// Change page
 	const paginate = pageNumber => setCurrentPage(pageNumber);
 
 	return (
