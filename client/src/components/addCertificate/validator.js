@@ -9,9 +9,7 @@ export default function validator(values) {
 	const start = dateParts(values.start);
 	const end = dateParts(values.end);
 
-	console.log('start', start, end);
-
-	if (end.year < start.year || end.month < start.month || end.day <=start.day) {
+	if (!dateIsValid(start, end)) {
 		return 'end';
 	}
 
@@ -35,4 +33,19 @@ function dateParts(date) {
 	const year = parseInt(parts[2]);
 
 	return {day,month,year};
+}
+
+function dateIsValid(startDate, endDate) {
+
+	if (startDate.year < endDate.year) return true;
+
+	if (startDate.year > endDate.year) return false;
+
+	if (startDate.month < endDate.month) return true;
+
+	if (startDate.month > endDate.month) return false;
+
+	if (startDate.day < endDate.day) return true;
+
+	if (startDate.day >= endDate.day) return false;
 }

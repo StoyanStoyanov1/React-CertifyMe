@@ -21,7 +21,7 @@ export default function ItemsProfile({
 					<p className="name">{fullName}</p>
 				</div>
 				<div className="btn-group">
-					<Link to={`${Path.MyProfil}/${userId}`} id="more">Learn more...</Link>
+					<Link to={`${Path.Profil}/${userId}`} id="more">Learn more...</Link>
 				</div>
 			</div>
 		</div>

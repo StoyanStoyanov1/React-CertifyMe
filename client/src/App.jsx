@@ -50,8 +50,6 @@ function App() {
 
 						</Route>
 					</Routes>
-
-					<Footer/>
 				</div>
 			</AuthProvider>
 		</ErrorBoundary>
