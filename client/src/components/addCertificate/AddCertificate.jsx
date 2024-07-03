@@ -7,19 +7,23 @@ import Path from "../../paths.js";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 import '../../../public/styles/create.css';
+import validator from "./validator.js";
 
 export default function AddCertificate() {
-	const navigate = useNavigate();
-	const { _id } = useContext(authContext);
-	const [profil, setProfiles] = useState(null);
-	const [showTooltip, setShowTooltip] = useState({
+	const validatedObjects = {
 		title: false,
 		start: false,
 		end: false,
 		university: false,
 		imgUrl: false,
 		description: false
-	});
+	};
+
+	const navigate = useNavigate();
+	const { _id } = useContext(authContext);
+	const [profil, setProfiles] = useState(null);
+	const [showTooltip, setShowTooltip] = useState(validatedObjects);
+	const [validated, setValidated] = useState(validatedObjects);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -36,11 +40,17 @@ export default function AddCertificate() {
 
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
-
+		setValidated(validatedObjects);
 		const profilId = profil._id
 
 		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
+		const validate = validator(certificateData);
 		console.log(certificateData)
+		console.log(validate)
+		if (validate) {
+			return setValidated(prevState => ({...prevState, [validate]: true}));
+		}
+
 
 		try {
 			await certificateService.create({...certificateData, profilId});
@@ -67,7 +77,9 @@ export default function AddCertificate() {
 				<fieldset>
 					<legend>Add Certificate</legend>
 					<div className="container">
+
 						<label htmlFor="title" className="vhide">Title</label>
+						{validated.title && <div className='error-message'>Title must be between 2 and 12 characters!</div>}
 						<div className="input-container">
 							<input
 								id="title"
@@ -84,6 +96,7 @@ export default function AddCertificate() {
 						<div className="date-container">
 							<div className="input-container">
 								<label htmlFor="start" className="vhide">Start</label>
+								{validated.start && <div className='error-message'>Date is not valid!</div>}
 								<DatePicker
 									selected={startDate}
 									onChange={(date) => setStartDate(date)}
@@ -99,6 +112,7 @@ export default function AddCertificate() {
 
 							<div className="input-container">
 								<label htmlFor="end" className="vhide">End</label>
+								{validated.end && <div className='error-message'>The end date cannot be earlier than the start date.</div>}
 								<DatePicker
 									selected={endDate}
 									onChange={(date) => setEndDate(date)}
@@ -115,6 +129,8 @@ export default function AddCertificate() {
 
 
 						<label htmlFor="university" className="vhide">University</label>
+						{validated.university && <div className='error-message'>University muss be between 2 and 10 characters!</div>}
+
 						<div className="input-container">
 							<input
 								id="university"
@@ -129,6 +145,8 @@ export default function AddCertificate() {
 						</div>
 
 						<label htmlFor="imgUrl" className="vhide">Image Url</label>
+						{validated.imgUrl && <div className='error-message'>Url must start with http:// or https://</div>}
+
 						<div className="input-container">
 							<input
 								id="imgUrl"
