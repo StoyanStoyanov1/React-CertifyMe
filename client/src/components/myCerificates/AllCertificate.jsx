@@ -21,7 +21,7 @@ export default function AllCertificate() {
 
 	return (
 		<section id="catalogPage">
-			<h1>All Certificates</h1>
+			<h1>Certificates</h1>
 
 			{currentCertificates.length === 0 ? (
 				<p>No found certificates!</p>

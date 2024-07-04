@@ -71,7 +71,7 @@ export default function Register() {
 			return setValidator(prevState => ({...prevState, [registerFormKeys.FullName]: true}));
 		}
 
-		if (!/^https?:\/\//.test(values[registerFormKeys.ImgUrl])) {
+		if (values[registerFormKeys.ImgUrl] !== '' && !/^https?:\/\//.test(values[registerFormKeys.ImgUrl])) {
 			return setValidator(prevState => ({...prevState, [registerFormKeys.ImgUrl]: true}));
 		}
 

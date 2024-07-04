@@ -12,9 +12,9 @@ export default function AllProfiles() {
 
 	return (
 		<section id='catalogPage'>
-			<h1>All Profiles</h1>
+			<h1>Users</h1>
 
-			{profiles.length === 0 ? <p>No found Profiles!</p>: profiles.map(profil => <ItemsProfile key={profil._id} {...profil}/>)}
+			{profiles.length === 0 ? <p>No found Users!</p>: profiles.map(profil => <ItemsProfile key={profil._id} {...profil}/>)}
 		</section>
 	)
 

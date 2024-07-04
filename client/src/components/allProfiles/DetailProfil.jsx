@@ -15,6 +15,7 @@ export default function DetailProfil() {
 			.then(result => setProfil(result));
 	}, [profilId]);
 
+	console.log(profil._id)
 	return (
 		<section id="detailsPage">
 			<div className="wrapper">
@@ -26,6 +27,8 @@ export default function DetailProfil() {
 
 						<h1>{profil.fullName}</h1>
 						<p>{profil.description}</p>
+						<Link className='my-certificates' to={`${Path.MyCertificates}/${profil.userId}`}>My Certificates</Link>
+
 					</div>
 
 					<div className="actionBtn">
