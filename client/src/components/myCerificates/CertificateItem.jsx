@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import paths from "../../paths.js";
 import noCertificate from '../../../public/images/noCertificate.jpg';
+import * as profilService from '../../services/profilService.js';
 
 export default function CertificateItem({
 											_id,
@@ -10,9 +11,10 @@ export default function CertificateItem({
 											end,
 											university,
 											imgUrl,
-											fullName
+											profilId,
 										}) {
 	const [imageLoaded, setImageLoaded] = useState(false);
+	const [fullName, setFullName] = useState('');
 
 	const handleImageLoad = () => {
 		setImageLoaded(true);
@@ -21,6 +23,12 @@ export default function CertificateItem({
 	const handleImageError = () => {
 		setImageLoaded(false);
 	};
+
+	useEffect(() => {
+		profilService.getOne(profilId)
+			.then(result => setFullName(result.fullName))
+			.catch(() => setFullName(''));
+	}, []);
 
 	return (
 		<div className="card-box">

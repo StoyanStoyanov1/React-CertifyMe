@@ -37,4 +37,18 @@ router.put('/:profilId', async (req, res) => {
 	}
 })
 
+router.get('/:profilId/profil', async (req, res) => {
+	const profilId = req.params.profilId;
+	try {
+		const profil = await profilService.getOne(profilId);
+		if (!profil) {
+			return res.status(404).json({ message: 'Profile not found!' });
+		}
+		res.status(200).json(profil);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ message: 'Error retrieving profile!' });
+	}
+});
+
 module.exports = router;

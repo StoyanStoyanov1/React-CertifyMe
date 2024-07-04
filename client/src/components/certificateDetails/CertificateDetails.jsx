@@ -23,7 +23,7 @@ export default function CertificateDetails() {
 	}, [certificateId]);
 
 	useEffect(() => {
-		profilService.getOne(_id)
+		profilService.getByUserId(_id)
 			.then(data => setProfil(data))
 			.catch(err => console.log(err));
 	}, []);

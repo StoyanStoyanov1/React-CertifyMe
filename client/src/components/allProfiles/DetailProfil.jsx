@@ -11,7 +11,7 @@ export default function DetailProfil() {
 	const {profilId} = useParams();
 
 	useEffect(() => {
-		profilService.getOne(profilId)
+		profilService.getByUserId(profilId)
 			.then(result => setProfil(result));
 	}, [profilId]);
 

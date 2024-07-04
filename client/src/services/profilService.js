@@ -11,7 +11,7 @@ export const getAll = async () => {
 }
 
 export const getOne = async (profilId) => {
-	return await request('GET', `${baseUrl}/${profilId}`);
+	return await request('GET', `${baseUrl}/${profilId}/profil`);
 }
 
 export const edit = async (profilId, data) => {
