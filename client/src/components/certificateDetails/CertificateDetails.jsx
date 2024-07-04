@@ -16,17 +16,13 @@ export default function CertificateDetails() {
 		CertificateServer.getOne(certificateId)
 			.then(data =>
 			{setCer(data)
+				profilService.getOne(data.profilId)
+					.then(data => setProfil(data))
 			})
 			.catch(error => console.log(error));
 
-
 	}, [certificateId]);
 
-	useEffect(() => {
-		profilService.getByUserId(_id)
-			.then(data => setProfil(data))
-			.catch(err => console.log(err));
-	}, []);
 	return (
 		<section id="detailsPage">
 			<div className="wrapper">
