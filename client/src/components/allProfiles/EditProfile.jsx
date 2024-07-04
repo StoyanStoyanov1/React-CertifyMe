@@ -1,20 +1,25 @@
-import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import * as profilService from "../../services/profilService.js";
 import Path from "../../paths.js";
 
 const editProfileFormKeys = {
 	AccountName: 'accName',
 	FullName: 'fullName',
-	ImageUrl: 'imgUrl',
+	ImageUrl: 'imageUrl',
 	Description: 'description',
-}
+};
+
 export default function EditProfile() {
 	const navigate = useNavigate();
-	const {profilId} = useParams();
+	const { profilId } = useParams();
 
-	const [profil, setProfil]	 = useState({});
-
+	const [profil, setProfil] = useState({
+		accName: '',
+		fullName: '',
+		imageUrl: '',
+		description: ''
+	});
 
 	useEffect(() => {
 		profilService.getOne(profilId)
@@ -22,24 +27,20 @@ export default function EditProfile() {
 			.catch(err => console.log(err));
 	}, [profilId]);
 
-
+	console.log(profil)
 	const onChange = (e) => {
 		setProfil(state => ({
 			...state,
 			[e.target.name]: e.target.value,
-		}))
-	}
+		}));
+	};
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-
-		try {
-			profilService.edit(profilId, profil)
-				.then(() => navigate(`${Path.Profil}/${profilId}`));
-		} catch (err) {
-			console.log(err);
-		}
-	}
+		profilService.edit(profil._id, profil)
+			.then(() => navigate(`${Path.Profil}/${profilId}`))
+			.catch(err => console.log(err));
+	};
 
 	return (
 		<section className="editPage">
@@ -70,7 +71,6 @@ export default function EditProfile() {
 							onChange={onChange}
 						/>
 
-
 						<label htmlFor="description" className="vhide">Description</label>
 						<textarea
 							name="description"
@@ -78,15 +78,12 @@ export default function EditProfile() {
 							placeholder='Description'
 							value={profil[editProfileFormKeys.Description]}
 							onChange={onChange}
-						>
+						/>
 
-						</textarea>
-
-						<button className="edit-album" type="submit">Edit Certificate</button>
+						<button className="edit-item" type="submit">Edit Certificate</button>
 					</div>
 				</fieldset>
 			</form>
 		</section>
-
-	)
+	);
 }
