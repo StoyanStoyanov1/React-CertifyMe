@@ -132,7 +132,7 @@
     border: 1px solid #007bff;
     border-radius: 5px;
     background-color: #007bff;
-    color: white;
+    color: #ef7373;
     cursor: pointer;
     text-decoration: none;
 }
@@ -142,7 +142,7 @@
 }
 
 .page-item.active .page-link {
-    background-color: #0056b3;
+    background-color: #e5ebf1;
     border-color: #0056b3;
 }
 

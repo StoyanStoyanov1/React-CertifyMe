@@ -103,7 +103,7 @@ export default function EditCertificate() {
 							<label htmlFor="title" className="vhide">
 								Title
 							</label>
-							{validated.title && <div className='error-message'>Title must be between 2 and 12 characters!</div>}
+							{validated.title && <div className='error-message'>Title must be between 2 and 20 characters!</div>}
 
 							<input
 								id="title"

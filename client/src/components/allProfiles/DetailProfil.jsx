@@ -15,7 +15,6 @@ export default function DetailProfil() {
 			.then(result => setProfil(result));
 	}, [profilId]);
 
-	console.log(profil._id)
 	return (
 		<section id="detailsPage">
 			<div className="wrapper">

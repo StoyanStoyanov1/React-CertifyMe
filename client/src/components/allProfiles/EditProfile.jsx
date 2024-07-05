@@ -22,12 +22,11 @@ export default function EditProfile() {
 	});
 
 	useEffect(() => {
-		profilService.getOne(profilId)
+		profilService.getByUserId(profilId)
 			.then(result => setProfil(result))
 			.catch(err => console.log(err));
 	}, [profilId]);
 
-	console.log(profil)
 	const onChange = (e) => {
 		setProfil(state => ({
 			...state,
@@ -60,11 +59,11 @@ export default function EditProfile() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="imgUrl" className="vhide">Start</label>
+						<label htmlFor="imgUrl" className="vhide">Img Url</label>
 						<input
-							id="imgUrl"
-							name="imgUrl"
-							className="imgUrl"
+							id="imageUrl"
+							name="imageUrl"
+							className="imageUrl"
 							type="text"
 							placeholder="Image Url"
 							value={profil[editProfileFormKeys.ImageUrl]}

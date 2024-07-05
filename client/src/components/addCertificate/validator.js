@@ -1,5 +1,5 @@
 export default function validator(values) {
-	if (values.title.length < 2 || values.title.length > 12) {
+	if (values.title.length < 2 || values.title.length > 20) {
 		return 'title';
 	}
 
