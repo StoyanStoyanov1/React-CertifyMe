@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {Route, Routes, useNavigate} from "react-router-dom";
 
 import {AuthProvider} from "./context/authContext.jsx";
@@ -12,14 +11,12 @@ import AddCertificate from "./components/addCertificate/AddCertificate.jsx";
 import MyCertificates from "./components/myCerificates/MyCertificates.jsx";
 import CertificateDetails from "./components/certificateDetails/CertificateDetails.jsx";
 import EditCertificate from "./components/editCertificate/EditCertificate.jsx";
-import Footer from "./components/footer/Footer.jsx";
 import Logout from "./components/logout/Logout.jsx";
 import RemoveCertificate from "./components/removeCertificate/RemoveCertificate.jsx";
 import AllCertificate from "./components/myCerificates/AllCertificate.jsx";
 import AllProfiles from "./components/allProfiles/AllProfiles.jsx";
 import DetailProfil from "./components/allProfiles/DetailProfil.jsx";
 import EditProfile from "./components/allProfiles/EditProfile.jsx";
-import MyProfil from "./components/allProfiles/MyProfil.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import AuthGuard from "./components/guards/AuthGuard.jsx";
 
