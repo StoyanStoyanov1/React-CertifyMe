@@ -39,6 +39,7 @@ export default function ItemsProfile({
 			<div>
 				<div className="text-center">
 					<p className="name">{fullName}</p>
+					<p>Likes: {countLikes}</p>
 				</div>
 				<div className="btn-group">
 					<Link to={`${Path.Profil}/${userId}`} id="more">Learn more...</Link>
