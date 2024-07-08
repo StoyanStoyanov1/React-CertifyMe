@@ -52,7 +52,7 @@ export default function DetailProfil() {
 					</div>
 
 					<div className="actionBtn">
-						{profil.userId !== _id && (!isLiked(_id, profil.userId, profil.likes)
+						{_id && profil.userId !== _id && (!isLiked(_id, profil.userId, profil.likes)
 							? <button className='like-button' onClick={() => handleLike(_id, 'like')}>Like</button>
 							: <button className='like-button'
 									  onClick={() => handleLike(_id, 'dislike')}>Unlike</button>)}
