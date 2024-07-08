@@ -6,9 +6,9 @@ const certificateSchema = mongoose.Schema({
 		require: true,
 		validator: {
 			validate: (value) => {
-				return value.length > 2 && value.length < 12;
+				return value.length > 2 && value.length < 20;
 			},
-			message: 'Title must be between 2 and 12 characters!'
+			message: 'Title must be between 2 and 20 characters!'
 		}
 	},
 	start: {

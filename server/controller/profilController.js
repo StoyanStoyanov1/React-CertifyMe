@@ -30,7 +30,6 @@ router.put('/:profilId', async (req, res) => {
 
 		const profil = await profilService.edit(profilId, data);
 
-
 		res.status(200).json(profil);
 	} catch (err) {
 		res.status(500).json({message: 'Profil is not found!'});

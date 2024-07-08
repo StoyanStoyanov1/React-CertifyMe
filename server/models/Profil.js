@@ -28,6 +28,10 @@ const profilSchema = mongoose.Schema({
 	certificates: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Certificate",
+	}],
+	likes: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
 	}]
 }, {timestamps: true})
 

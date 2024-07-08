@@ -4,7 +4,7 @@ export default function isLiked(authId, userId, likes) {
 	}
 
 	if (likes) {
-		const findUser = likes.find(user => user === userId);
+		const findUser = likes.find(user => user === authId);
 		if (findUser) {
 			return true;
 		}
