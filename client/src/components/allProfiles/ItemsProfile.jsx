@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import Path from "../../paths.js";
 import profilImg from "../../../public/images/profilImg.jpg";
+import * as profilService from "../../services/profilService.js"
 
 export default function ItemsProfile({
 										 _id,
@@ -9,8 +10,11 @@ export default function ItemsProfile({
 										 fullName,
 										 imageUrl,
 										 userId,
+										 likes,
 									 }) {
 	const [imageLoaded, setImageLoaded] = useState(false);
+
+	const countLikes = likes ? likes.length : 0;
 
 	const handleImageLoad = () => {
 		setImageLoaded(true);
