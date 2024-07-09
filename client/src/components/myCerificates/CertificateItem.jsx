@@ -35,7 +35,12 @@ export default function CertificateItem({
 			<img
 				src={imgUrl || noCertificate}
 				alt="Certificate"
-				style={{ display: imageLoaded ? 'block' : 'none' }}
+				style={{
+					width: '14em',
+					height: '19em',
+					objectFit: 'cover',
+					display: imageLoaded ? 'block' : 'none'
+				}}
 				onLoad={handleImageLoad}
 				onError={handleImageError}
 			/>

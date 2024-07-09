@@ -29,9 +29,14 @@ export default function ItemsProfile({
 			<img
 				src={imageUrl || profilImg}
 				alt='Profile'
-				style={{ display: imageLoaded ? 'block' : 'none' }}
 				onLoad={handleImageLoad}
 				onError={handleImageError}
+				style={{
+					width: '15em',
+					height: '22em',
+					objectFit: 'cover',
+					display: imageLoaded ? 'block' : 'none'
+				}}
 			/>
 			{!imageLoaded && (
 				<img src={profilImg} alt="Placeholder" />
