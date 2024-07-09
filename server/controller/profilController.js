@@ -50,4 +50,14 @@ router.get('/:profilId/profil', async (req, res) => {
 	}
 });
 
+router.get('/profiles/top-3', async (req, res) => {
+	try {
+		const profiles = await profilService.getTopThree();
+		res.status(200).json(profiles);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({message: 'No found profiles!!'});
+	}
+})
+
 module.exports = router;

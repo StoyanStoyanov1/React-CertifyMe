@@ -11,3 +11,16 @@ exports.pushCertificateInCertificatesList = async (userId, certificateId) => awa
 exports.edit = async (profilId, data) => await Profil.findByIdAndUpdate(profilId, data, {new: true});
 
 exports.getOne = async (profilId) => await Profil.findById(profilId).lean();
+
+exports.getTopThree = async () => await Profil.aggregate([
+	{
+		$addFields: {
+			likesCount: { $size: "$likes" }
+		}
+	},
+	{
+		$sort: { likesCount: -1 }
+	},
+	{
+		$limit: 3
+	}]);
