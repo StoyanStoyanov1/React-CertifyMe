@@ -64,10 +64,12 @@ nav a:hover {
 }
 
 #welcomePage {
-    color: #45a29e;
+    color: #ffffff;
     font-size: 24px;
     padding: 30px;
-    margin: 10px;
+    margin: 0 auto;
+    width: 50%; /* or any other width you prefer */
+    text-align: center; /* optional, to center text inside the element */
 }
 
 #welcomePage img {

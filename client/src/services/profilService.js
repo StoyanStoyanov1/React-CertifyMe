@@ -21,3 +21,7 @@ export const edit = async (profilId, data) => {
 export const getByUserId = async (userId) => {
 	return await request('GET', `${baseUrl}/${userId}`)
 }
+
+export const getTopThree = async () => {
+	return await request('GET', `${baseUrl}/profiles/top-3`);
+}
