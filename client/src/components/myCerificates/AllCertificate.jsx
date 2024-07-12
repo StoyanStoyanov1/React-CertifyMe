@@ -7,10 +7,14 @@ export default function AllCertificate() {
 	const [certificates, setCertificates] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [itemsPerPage] = useState(8);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		certificateServer.getAll()
-			.then(result => setCertificates(result));
+			.then(result => {
+				setCertificates(result);
+				setIsLoading(false);
+			});
 	}, []);
 
 	const indexOfLastCertificate = currentPage * itemsPerPage;
@@ -23,7 +27,9 @@ export default function AllCertificate() {
 		<section id="catalogPage">
 			<h1>Certificates</h1>
 
-			{currentCertificates.length === 0 ? (
+			{isLoading
+				? <p>Loading...</p>
+				:currentCertificates.length === 0 ? (
 				<p>No found certificates!</p>
 			) : (
 				currentCertificates.map(cer => (
