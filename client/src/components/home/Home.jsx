@@ -7,12 +7,15 @@ export default function Home() {
 	const {_id} = useContext(authContext);
 
 	const [profiles, setProfiles] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		profilService.getTopThree()
-			.then(result => setProfiles(result))
+			.then(result => {
+				setProfiles(result);
+				setIsLoading(false);
+			})
 			.catch(err => console.log('No found profiles!', err));
-
 
 	}, []);
 
@@ -22,7 +25,7 @@ export default function Home() {
 				<div id="welcome-message">
 					<h1>Welcome to CertifyMe,</h1>
 					<p>you can create a profile in which you can write information about yourself, upload your
-						certificates,
+						certificates,git a
 						and send them to friends and employers.</p>
 				</div>
 
@@ -31,7 +34,7 @@ export default function Home() {
 			<div className='top-profiles'>
 				<section id='catalogPage'>
 					<h1>These are the top 3 users with the most likes.</h1>
-					{profiles.length === 0 ? <p>No found Users!</p> : profiles.map(profil => <ItemsProfile
+					{isLoading? <p>Loading...</p> : profiles.length === 0 ? <p>No found Users!</p> : profiles.map(profil => <ItemsProfile
 						key={profil._id} {...profil}/>)}
 
 				</section>
