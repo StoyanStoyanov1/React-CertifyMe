@@ -58,6 +58,8 @@ export default function DetailProfil() {
 									  onClick={() => handleLike(_id, 'dislike')}>Unlike</button>)}
 						{profil.userId === _id &&
 							<Link to={`${Path.EditProfile}/${profilId}`} className="edit">Edit</Link>}
+						{_id && profil.userId !== _id &&
+							<Link to={`${Path.NewMessage}/${profil._id}`} className="edit">Message</Link>}
 					</div>
 				</div>
 			</div>

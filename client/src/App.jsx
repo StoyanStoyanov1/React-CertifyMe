@@ -19,6 +19,7 @@ import DetailProfil from "./components/allProfiles/DetailProfil.jsx";
 import EditProfile from "./components/allProfiles/EditProfile.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import AuthGuard from "./components/guards/AuthGuard.jsx";
+import CreateNewChat from "./components/messages/createNewChat.jsx"
 
 function App() {
 	return (
@@ -44,6 +45,7 @@ function App() {
 							<Route path={`${Path.EditCertificate}/:certificateId`} element={<EditCertificate/>}/>
 							<Route path={Path.AddCertificate} element={<AddCertificate/>}/>
 							<Route path={Path.Logout} element={<Logout/>}/>
+							<Route path={`${Path.NewMessage}/:profilId`} element={<CreateNewChat/>}/>
 
 						</Route>
 					</Routes>
