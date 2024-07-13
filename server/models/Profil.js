@@ -32,7 +32,16 @@ const profilSchema = mongoose.Schema({
 	likes: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
-	}]
+	}],
+	chats: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Message",
+	}],
+	createdChatsWith: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Profil",
+	}
+
 }, {timestamps: true})
 
 const Profil = mongoose.model('Profil', profilSchema);
