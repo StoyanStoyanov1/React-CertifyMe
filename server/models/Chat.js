@@ -12,15 +12,15 @@ const chatSchema = mongoose.Schema({
 		}
 	},
 	sender: {
-		type: Object.Types.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: "Profil",
 	},
 	receiver: {
-		type: Object.Types.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: "Profil",
 	},
 	messages: [{
-		type: Object.Types.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: "Message",
 	}]
 }, {timestamps: true});
