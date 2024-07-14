@@ -9,3 +9,12 @@ export const create = async (data) => {
 		console.log(err)
 	}
 }
+
+export const getBySenderAndReceiver = async (sender, receiver) => {
+	try {
+		const response = await request('GET', `${baseUrl}/find-chat?sender=${sender}&receiver=${receiver}`);
+		return response;
+	} catch (err) {
+		console.log(err);
+	}
+}

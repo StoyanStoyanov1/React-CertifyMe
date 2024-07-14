@@ -19,7 +19,9 @@ import DetailProfil from "./components/allProfiles/DetailProfil.jsx";
 import EditProfile from "./components/allProfiles/EditProfile.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 import AuthGuard from "./components/guards/AuthGuard.jsx";
-import CreateNewChat from "./components/messages/createNewChat.jsx"
+import CreateNewChat from "./components/messages/Chat.jsx"
+import Chat from "./components/messages/Chat.jsx";
+import FindChat from "./components/messages/FindChat.jsx";
 
 function App() {
 	return (
@@ -45,7 +47,9 @@ function App() {
 							<Route path={`${Path.EditCertificate}/:certificateId`} element={<EditCertificate/>}/>
 							<Route path={Path.AddCertificate} element={<AddCertificate/>}/>
 							<Route path={Path.Logout} element={<Logout/>}/>
-							<Route path={`${Path.NewMessage}/:profilId`} element={<CreateNewChat/>}/>
+							<Route path={`${Path.Chat}/:chatId`} element={<Chat/>}/>
+							<Route path={`${Path.Chat}/find-chat/:receiver`} element={<FindChat/>}/>
+
 
 						</Route>
 					</Routes>

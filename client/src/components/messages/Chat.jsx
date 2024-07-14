@@ -5,15 +5,18 @@ import * as profilService from '../../services/profilService.js';
 import * as chatService from '../../services/chatService.js';
 import * as messageService from '../../services/messageService.js'
 
-export default function CreateNewChat() {
+export default function Chat() {
 	const {_id} = useContext(authContext);
-	const {profilId} = useParams();
+	const {chatId} = useParams();
+	const [chat, setChat] = useState([]);
 
 	const [senderProfil, setSenderProfil] = useState([]);
 	const [receiverProfil, setReceiverProfil] = useState([])
 	const [message, setMessage] = useState('');
 
+	useEffect(() => {
 
+	}, []);
 	useEffect(() => {
 		profilService.getByUserId(_id)
 			.then(result => setSenderProfil(result))
@@ -37,10 +40,8 @@ export default function CreateNewChat() {
 		const receiverId = profilId;
 
 		try {
-			// const newChat = await chatService.create({sender: senderId, receiver: receiverId});
-
-
 			const newMessage = await messageService.create({message, sender: senderId, receiver: receiverId});
+
 		} catch (err) {
 			console.log(err);
 		}
@@ -50,7 +51,7 @@ export default function CreateNewChat() {
 		<section>
 			<form onSubmit={onSubmit}>
 				<fieldset>
-					<legend>New Message</legend>
+					<legend>Message Box</legend>
 
 					<div className='input-container'>
 
