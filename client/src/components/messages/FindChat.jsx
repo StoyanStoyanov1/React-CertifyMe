@@ -1,10 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import authContext from "../../context/authContext.jsx";
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import * as profilService from '../../services/profilService.js';
 import * as chatService from '../../services/chatService.js';
+import Path from '../../paths.js'
 
 export default function FindChat() {
+	const navigate = useNavigate();
+
 	const { _id } = useContext(authContext);
 	const { receiver } = useParams();
 
@@ -30,6 +33,8 @@ export default function FindChat() {
 			if (!chat) {
 				chat = await chatService.create({ sender: senderId, receiver: receiverId });
 			}
+
+			navigate(`${Path.Chat}/${chat._id}`);
 
 			setChat(chat);
 		} catch (err) {

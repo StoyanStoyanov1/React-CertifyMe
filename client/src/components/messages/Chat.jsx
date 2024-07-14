@@ -14,20 +14,32 @@ export default function Chat() {
 	const [receiverProfil, setReceiverProfil] = useState([])
 	const [message, setMessage] = useState('');
 
-	useEffect(() => {
+	const findProfiles = async (senderId, receiverId) => {
+		try {
+			const sender = await profilService.getOne(senderId);
+			const receiver = await profilService.getOne(receiverId);
 
-	}, []);
+			setSenderProfil(sender);
+			setReceiverProfil(receiver);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+
 	useEffect(() => {
-		profilService.getByUserId(_id)
-			.then(result => setSenderProfil(result))
+		chatService.getById(chatId)
+			.then(foundChat => {
+				setChat(foundChat);
+				findProfiles(foundChat.sender, foundChat.receiver);
+			})
 			.catch(err => console.log(err));
 	}, []);
 
-	useEffect(() => {
-		profilService.getOne(profilId)
-			.then(result => setReceiverProfil(result))
-			.catch(err => console.log(err));
-	})
+
+	console.log(senderProfil)
+	console.log(receiverProfil)
+	console.log(chat)
 
 	const onChange = async (e) => {
 		setMessage(e.target.value);

@@ -6,3 +6,5 @@ exports.getBySenderAndReceiver = async (sender, receiver) => await Chat.findOne(
 		{sender, receiver},
 		{sender: receiver, receiver: sender}
 	]})
+
+exports.getById = async (chatId) => await Chat.findById(chatId).lean();

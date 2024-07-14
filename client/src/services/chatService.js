@@ -18,3 +18,13 @@ export const getBySenderAndReceiver = async (sender, receiver) => {
 		console.log(err);
 	}
 }
+
+export const getById = async (chatId) => {
+	try {
+		const response = await request('GET', `${baseUrl}/get-chat/${chatId}`);
+		return response;
+
+	} catch (err) {
+		console.log(err)
+	}
+}
