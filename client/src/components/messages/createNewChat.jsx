@@ -3,6 +3,7 @@ import authContext from "../../context/authContext.jsx";
 import {useParams} from "react-router-dom";
 import * as profilService from '../../services/profilService.js';
 import * as chatService from '../../services/chatService.js';
+import * as messageService from '../../services/messageService.js'
 
 export default function CreateNewChat() {
 	const {_id} = useContext(authContext);
@@ -10,6 +11,7 @@ export default function CreateNewChat() {
 
 	const [senderProfil, setSenderProfil] = useState([]);
 	const [receiverProfil, setReceiverProfil] = useState([])
+	const [message, setMessage] = useState('');
 
 
 	useEffect(() => {
@@ -24,6 +26,10 @@ export default function CreateNewChat() {
 			.catch(err => console.log(err));
 	})
 
+	const onChange = async (e) => {
+		setMessage(e.target.value);
+	}
+
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
@@ -31,7 +37,10 @@ export default function CreateNewChat() {
 		const receiverId = profilId;
 
 		try {
-			const newChat = await chatService.create({sender: senderId, receiver: receiverId});
+			// const newChat = await chatService.create({sender: senderId, receiver: receiverId});
+
+
+			const newMessage = await messageService.create({message, sender: senderId, receiver: receiverId});
 		} catch (err) {
 			console.log(err);
 		}
@@ -44,23 +53,21 @@ export default function CreateNewChat() {
 					<legend>New Message</legend>
 
 					<div className='input-container'>
-						<label htmlFor='titel' className='vhide'>Message</label>
-						<input
-						id='title'
-						className='title'
-						placeholder='Titel'
-						/>
 
-						<label htmlFor='meesage' className='vhide'>Message</label>
+
+						<label htmlFor='message' className='vhide'>Message</label>
 						<textarea
 						id="message"
+						name="message"
 						className="message"
+						onChange={onChange}
+						value={message}
 						placeholder={`Write your message to ${receiverProfil.fullName}`}
 						/>
 					</div>
 
 					<div className="button-container">
-						<button className="new-message">Send</button>
+						<button className="new-message" type='submit'>Send</button>
 					</div>
 				</fieldset>
 			</form>
