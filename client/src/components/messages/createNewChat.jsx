@@ -1,7 +1,8 @@
 import {useContext, useEffect, useState} from "react";
 import authContext from "../../context/authContext.jsx";
 import {useParams} from "react-router-dom";
-import * as profilService from '../../services/profilService.js'
+import * as profilService from '../../services/profilService.js';
+import * as chatService from '../../services/chatService.js';
 
 export default function CreateNewChat() {
 	const {_id} = useContext(authContext);
@@ -23,12 +24,33 @@ export default function CreateNewChat() {
 			.catch(err => console.log(err));
 	})
 
+	const onSubmit = async (e) => {
+		e.preventDefault();
+
+		const senderId = _id;
+		const receiverId = profilId;
+
+		try {
+			const newChat = await chatService.create({sender: senderId, receiver: receiverId});
+		} catch (err) {
+			console.log(err);
+		}
+
+	}
 	return (
 		<section>
-			<form>
+			<form onSubmit={onSubmit}>
 				<fieldset>
 					<legend>New Message</legend>
+
 					<div className='input-container'>
+						<label htmlFor='titel' className='vhide'>Message</label>
+						<input
+						id='title'
+						className='title'
+						placeholder='Titel'
+						/>
+
 						<label htmlFor='meesage' className='vhide'>Message</label>
 						<textarea
 						id="message"

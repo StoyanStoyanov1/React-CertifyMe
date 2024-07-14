@@ -41,12 +41,11 @@ export default function AddCertificate() {
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
 		setValidated(validatedObjects);
-		const profilId = profil._id
+		const profilId = profil._id;
 
 		const certificateData = Object.fromEntries(new FormData(e.currentTarget));
 		const validate = validator(certificateData);
-		console.log(certificateData)
-		console.log(validate)
+
 		if (validate) {
 			return setValidated(prevState => ({...prevState, [validate]: true}));
 		}
