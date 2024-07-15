@@ -13,6 +13,8 @@ export default function Chat() {
 	const [senderProfil, setSenderProfil] = useState([]);
 	const [receiverProfil, setReceiverProfil] = useState([])
 	const [message, setMessage] = useState('');
+	const [classMessage, setClassMessage] = useState('isCorrect');
+	const [countMessage, setCountMessage] = useState(200);
 
 	const findProfiles = async (senderId, receiverId) => {
 		try {
@@ -36,13 +38,19 @@ export default function Chat() {
 			.catch(err => console.log(err));
 	}, []);
 
-
-	console.log(senderProfil)
-	console.log(receiverProfil)
-	console.log(chat)
-
 	const onChange = async (e) => {
+		const newMessage = e.target.value;
+
+		if (newMessage.length > 200) {
+			setClassMessage('isNotCorrect');
+			return;
+		}
+
 		setMessage(e.target.value);
+
+		setCountMessage(200 - newMessage.length);
+
+		setClassMessage('isCorrect');
 	}
 
 	const onSubmit = async (e) => {
@@ -70,15 +78,16 @@ export default function Chat() {
 
 						<label htmlFor='message' className='vhide'>Message</label>
 						<textarea
-						id="message"
-						name="message"
-						className="message"
-						onChange={onChange}
-						value={message}
-						placeholder={`Write your message to ${receiverProfil.fullName}`}
+							id="message"
+							name="message"
+							className="message"
+							onChange={onChange}
+							value={message}
+							placeholder={`Write your message to ${receiverProfil.fullName}`}
 						/>
-					</div>
+						<p className={classMessage}>Remaining characters: {countMessage}</p>
 
+					</div>
 					<div className="button-container">
 						<button className="new-message" type='submit'>Send</button>
 					</div>

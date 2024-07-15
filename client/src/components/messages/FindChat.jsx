@@ -13,6 +13,7 @@ export default function FindChat() {
 
 	const [sender, setSender] = useState({});
 	const [chat, setChat] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		profilService.getByUserId(_id)
@@ -37,21 +38,17 @@ export default function FindChat() {
 			navigate(`${Path.Chat}/${chat._id}`);
 
 			setChat(chat);
+			setIsLoading(true);
 		} catch (err) {
+			setIsLoading(true);
 			console.log(err);
 		}
 	}
 
 	return (
-		<section>
-			<div>
-				<h1>Chat</h1>
-				{chat ? (
-					<p>Chat ID: {chat._id}</p>
-				) : (
-					<p>Loading chat...</p>
-				)}
-			</div>
+		<section id='catalogPage'>
+			{isLoading ? <p>Please try again</p> : <p>Loading...</p>}
+
 		</section>
-	);
+	)
 }
