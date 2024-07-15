@@ -56,11 +56,12 @@ export default function Chat() {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		const senderId = _id;
-		const receiverId = profilId;
+		const senderId = senderProfil._id;
+		const receiverId = receiverProfil._id;
 
 		try {
 			const newMessage = await messageService.create({message, sender: senderId, receiver: receiverId});
+			setMessage('')
 
 		} catch (err) {
 			console.log(err);
