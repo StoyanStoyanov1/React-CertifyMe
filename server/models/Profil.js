@@ -35,12 +35,12 @@ const profilSchema = mongoose.Schema({
 	}],
 	chats: [{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "Message",
+		ref: "Chat",
 	}],
 	createdChatsWith: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Profil",
-	}
+	},
 
 }, {timestamps: true})
 

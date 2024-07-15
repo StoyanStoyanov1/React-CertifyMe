@@ -61,7 +61,8 @@ export default function Chat() {
 
 		try {
 			const newMessage = await messageService.create({message, sender: senderId, receiver: receiverId});
-			setMessage('')
+			setMessage('');
+			setCountMessage(200);
 
 		} catch (err) {
 			console.log(err);
