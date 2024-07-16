@@ -11,34 +11,31 @@ export default function FindChat() {
 	const { _id } = useContext(authContext);
 	const { receiver } = useParams();
 
-	const [sender, setSender] = useState({});
 	const [chat, setChat] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
+	const [senderIsLoading, setSenderIsLoading] = useState(false);
 
 	useEffect(() => {
-		profilService.getByUserId(_id)
-			.then(result => setSender(result))
-			.catch(err => console.log(err));
+		sendToChat();
 	}, [_id]);
 
-	useEffect(() => {
-		if (sender._id) {
-			sendToChat(sender._id, receiver);
-		}
-	}, [sender, receiver]);
 
-	async function sendToChat(senderId, receiverId) {
+	async function sendToChat() {
+
 		try {
-			let chat = await chatService.getBySenderAndReceiver(senderId, receiverId);
+			const sender = await profilService.getByUserId(_id);
+
+			let chat = await chatService.getBySenderAndReceiver(sender._id, receiver);
 
 			if (!chat) {
-				chat = await chatService.create({ sender: senderId, receiver: receiverId });
+				chat = await chatService.create({ sender: sender._id, receiver: receiver });
 			}
-
-			navigate(`${Path.Chat}/${chat._id}`);
 
 			setChat(chat);
 			setIsLoading(true);
+
+			navigate(`${Path.Chat}/${chat._id}`);
+
 		} catch (err) {
 			setIsLoading(true);
 			console.log(err);

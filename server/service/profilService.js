@@ -8,6 +8,8 @@ exports.getAll = async () => await Profil.find().lean();
 
 exports.pushCertificateInCertificatesList = async (userId, certificateId) => await Profil.findByIdAndUpdate(userId, {$push: {certificates: certificateId}});
 
+exports.pushChatIdInChatArr = async (profilId, chatId) => await Profil.findByIdAndUpdate(profilId, {$push: {chats: chatId}})
+
 exports.edit = async (profilId, data) => await Profil.findByIdAndUpdate(profilId, data, {new: true});
 
 exports.getOne = async (profilId) => await Profil.findById(profilId).lean();

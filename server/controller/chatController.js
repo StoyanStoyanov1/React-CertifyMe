@@ -1,11 +1,15 @@
 const router = require('express').Router();
 const chatService = require('../service/chatService')
+const profilService = require('../service/profilService')
 
 router.post('/create', async (req,res) => {
 	try {
 		const data = req.body;
 
 		const chat = await chatService.create(data);
+
+		await profilService.pushChatIdInChatArr(chat.sender, chat._id);
+		await profilService.pushChatIdInChatArr(chat.receiver, chat._id);
 
 		res.status(200).json(chat);
 
