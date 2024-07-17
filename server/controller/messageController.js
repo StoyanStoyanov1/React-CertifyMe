@@ -1,13 +1,16 @@
 const router = require('express').Router();
 
-const messageService = require('../service/messageService')
+const messageService = require('../service/messageService');
+const chatService = require('../service/chatService');
 
 router.post('/create', async (req,res) => {
 	try {
 		const data = req.body;
-		const chat = await messageService.create(data);
+		const message = await messageService.create(data);
 
-		res.status(200).json(chat);
+		await chatService.pushMessageIdInMessagesArray(message.chatId, message._id);
+
+		res.status(200).json(message);
 
 	} catch (err) {
 		res.status(500).json({message: err});

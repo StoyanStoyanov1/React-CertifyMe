@@ -60,7 +60,7 @@ export default function Chat() {
 		const receiverId = receiverProfil._id;
 
 		try {
-			const newMessage = await messageService.create({message, sender: senderId, receiver: receiverId});
+			const newMessage = await messageService.create({chatId: chatId, message, sender: senderId, receiver: receiverId});
 			setMessage('');
 			setCountMessage(200);
 
