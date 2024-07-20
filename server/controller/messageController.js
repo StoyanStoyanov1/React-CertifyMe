@@ -18,4 +18,16 @@ router.post('/create', async (req,res) => {
 
 })
 
+router.get('/get-message/:messageId', async (req,res) => {
+	try {
+		const messageId = req.params.messageId;
+		const message = await messageService.getOne(messageId);
+
+		res.status(200).json(message);
+
+	} catch (err) {
+		res.status(500).json({message: err});
+	}
+})
+
 module.exports = router;
