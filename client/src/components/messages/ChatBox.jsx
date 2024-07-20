@@ -1,7 +1,8 @@
 import {useContext, useEffect, useState} from "react";
 import authContext from "../../context/authContext.jsx";
-import * as profilService from "../../services/profilService.js"
-import * as chatService from "../../services/chatService.js"
+import * as profilService from "../../services/profilService.js";
+import * as chatService from "../../services/chatService.js";
+import * as messageService from "../../services/messageService.js";
 import {useNavigate} from "react-router-dom";
 import Path from "../../paths.js";
 
@@ -25,8 +26,11 @@ export default function ChatBox() {
 						try {
 							const chat = await chatService.getById(chatId);
 							const receiverId = chat.sender !== profil._id? chat.sender: chat.receiver;
-							const receiverProfil = await profilService.getOne(receiverId);
-							chat.receiverProfil = receiverProfil;
+							const receiveProfil = await profilService.getOne(receiverId);
+							const lastMessage = await messageService.getOne(chat.messages[chat.messages.length - 1]);
+							chat.lastMessage = lastMessage;
+							chat.receiverProfil = receiveProfil;
+
 							setChats((prevChat => [...prevChat, chat]));
 						} catch (err) {
 							console.log(err)
@@ -39,9 +43,11 @@ export default function ChatBox() {
 		[profil]
 	);
 
-	async function getReceiverProfil(profilId) {
-		const profil = await profilService.getOne(profilId);
-		return profil.fullName
+
+	function formatDate(dateString) {
+		const date = new Date(dateString);
+		const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+		return date.toLocaleDateString('de-DE', options);
 	}
 
 	return (
@@ -53,9 +59,9 @@ export default function ChatBox() {
 				{chats.map(chat => (<div onClick={() => navigate(`${Path.Chat}/${chat._id}`)} className="chat-item">
 					<div className="chat-info">
 						<h2>{chat.receiverProfil.fullName}</h2>
-						<p>Last message...</p>
+						<p>{chat.lastMessage.message.substring(0, 15)}{chat.lastMessage.message.length > 10 && ' ...'}</p>
 					</div>
-					<span className="chat-time">10:30 AM</span>
+					<span className="chat-time">{formatDate(chat.lastMessage.createdAt)}</span>
 				</div>))}
 
 			</div>
