@@ -1,0 +1,156 @@
+@media (max-width: 768px) {
+    .card-box {
+        margin-left: 0;
+        height: auto;
+        float: none;
+        width: 100%;
+    }
+
+    .top-profiles .ItemsProfile {
+        flex: 0 1 calc(50% - 20px);
+    }
+
+    .message-display-box {
+        width: 90%;
+    }
+
+    .chat-list-container {
+        width: 90%;
+    }
+
+    fieldset {
+        width: 90%;
+    }
+
+    .createPage, .editPage {
+        width: 100%;
+        padding: 1em 0 5em;
+    }
+
+    .add-item, .edit-item, .new-message {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .wrapper {
+        height: auto;
+        width: 90%;
+        margin: 30px auto;
+        border-radius: 7px;
+        box-shadow: 0px 0px 1.5px 3px #ffffff;
+        margin-bottom: 200px;
+        background: #d9d9d9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .certificateCover {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    .certificateCover img {
+        border-radius: 12px;
+        width: 100%;
+        height: auto;
+    }
+
+    .certificateText {
+        padding: 0;
+        text-align: center;
+    }
+
+    .certificateText h1 {
+        font-size: 24px;
+    }
+
+    .certificateText h3, .certificateText h4, .certificateText h5 {
+        font-size: 16px;
+    }
+
+    .certificateText > p {
+        font-size: 16px;
+    }
+
+    .actionBtn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .actionBtn > a, .like-button {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .pagination-nav {
+        flex-direction: column;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    body {
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    nav, footer {
+        flex-direction: column;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    nav a {
+        font-size: 18px;
+        margin: 10px;
+    }
+
+    nav ul {
+        margin: 10px 0 0 0;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 5px 0;
+    }
+
+    #welcomePage {
+        width: 80%;
+        font-size: 22px;
+    }
+
+    #welcomePage img {
+        width: 60%;
+    }
+    fieldset {
+        width: 20em;
+        padding: 1.5em;
+    }
+
+    fieldset legend {
+        font-size: 1.5em;
+    }
+
+    input[type=text], input[type=password] {
+        font-size: 1em;
+    }
+
+    .login, .register {
+        width: 120px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    #loginPage, #registerPage {
+        font-size: 14px;
+        padding: 1em 0 5em;
+    }
+}

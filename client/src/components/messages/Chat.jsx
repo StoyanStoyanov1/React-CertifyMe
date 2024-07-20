@@ -52,11 +52,9 @@ export default function Chat() {
 
 			chat.messages?.forEach(async (messageId) => {
 				const message = await messageService.getOne(messageId);
-				const sendMessage = {
-					message: message.message,
-					sender: message.sender === senderProfil._id ? senderProfil.fullName : receiverProfil.fullName,
-				}
-				setMessages((prevState) => [...prevState, sendMessage]);
+				message.senderName = message.sender === senderProfil._id ? senderProfil.fullName : receiverProfil.fullName;
+
+				setMessages((prevState) => [...prevState, message]);
 			});
 		}
 	}, [chat, senderProfil, receiverProfil]);
@@ -104,6 +102,12 @@ export default function Chat() {
 		}
 	}
 
+	function formatDate(dateString) {
+		const date = new Date(dateString);
+		const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+		return date.toLocaleDateString('de-DE', options);
+	}
+
 	return (
 		<section>
 			<form onSubmit={onSubmit}>
@@ -115,7 +119,10 @@ export default function Chat() {
 							<div className="message-container">
 								{messages.map((msg, index) => (
 									<div key={index} className="message-wrapper">
-										<p>{msg.sender}</p>
+										<div className="message-header">
+											<p className="sender-name">{msg.senderName}</p>
+											<p className="message-date">{formatDate(msg.createdAt)}</p>
+										</div>
 										<div className="message">{msg.message}</div>
 									</div>
 								))}

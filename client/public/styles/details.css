@@ -177,3 +177,25 @@
 .message-container p {
     color: greenyellow;
 }
+
+.message-wrapper {
+    margin-bottom: 10px;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.sender-name {
+    font-weight: bold;
+}
+
+.message-date {
+    font-size: 0.8em;
+    color: #888;
+}
+
+
