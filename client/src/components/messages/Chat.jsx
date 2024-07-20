@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import {useContext, useEffect, useState, useRef} from "react";
 import authContext from "../../context/authContext.jsx";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import * as profilService from '../../services/profilService.js';
 import * as chatService from '../../services/chatService.js';
 import * as messageService from '../../services/messageService.js';
 
 export default function Chat() {
-	const { _id } = useContext(authContext);
-	const { chatId } = useParams();
+	const {_id} = useContext(authContext);
+	const {chatId} = useParams();
 	const [chat, setChat] = useState([]);
 
 	const [senderProfil, setSenderProfil] = useState([]);
@@ -18,9 +18,10 @@ export default function Chat() {
 	const [messages, setMessages] = useState([]);
 
 	const messagesEndRef = useRef(null);
+	const [isLoaded, setIsLoaded] = useState(false)
 
 	const scrollToBottom = (behavior = "auto") => {
-		messagesEndRef.current?.scrollIntoView({ behavior });
+		messagesEndRef.current?.scrollIntoView({behavior});
 	};
 
 	const findProfiles = async (senderId, receiverId) => {
@@ -28,32 +29,13 @@ export default function Chat() {
 			const sender = await profilService.getOne(senderId);
 			const receiver = await profilService.getOne(receiverId);
 
-			setSenderProfil(sender);
-			setReceiverProfil(receiver);
+			setSenderProfil(sender.userId === _id ? sender: receiver);
+			setReceiverProfil(sender.userId !== _id? sender: receiver);
+			setIsLoaded(true)
 		} catch (err) {
 			console.log(err);
 		}
 	}
-
-	useEffect(() => {
-		const fetchMessages = () => {
-			const newMessages = [
-				'Hello, Galina!',
-				'This is another message.',
-				'You have a new notification.',
-				'More messages...',
-				'And more...',
-				'This is getting long!',
-				'Another one!',
-				'Yet another message!',
-				'Still more to come!',
-				'Final message!'
-			];
-			setMessages(newMessages);
-		};
-
-		fetchMessages();
-	}, []);
 
 	useEffect(() => {
 		chatService.getById(chatId)
@@ -62,8 +44,22 @@ export default function Chat() {
 				findProfiles(foundChat.sender, foundChat.receiver);
 			})
 			.catch(err => console.log(err));
-	}, []);
 
+	}, [chatId]);
+
+	useEffect(() => {
+		if (isLoaded) {
+
+			chat.messages?.forEach(async (messageId) => {
+				const message = await messageService.getOne(messageId);
+				const sendMessage = {
+					message: message.message,
+					sender: message.sender === senderProfil._id ? senderProfil.fullName : receiverProfil.fullName,
+				}
+				setMessages((prevState) => [...prevState, sendMessage]);
+			});
+		}
+	}, [chat, senderProfil, receiverProfil]);
 	useEffect(() => {
 		scrollToBottom("auto");
 	}, [messages]);
@@ -94,9 +90,15 @@ export default function Chat() {
 				sender: senderId,
 				receiver: receiverId
 			});
+			const sendMessage = {
+				message: message,
+				sender: senderProfil.fullName,
+			}
+
+			setMessages(prevMessages => [...prevMessages, sendMessage]);
+
 			setMessage('');
 			setCountMessage(200);
-			setMessages(prevMessages => [...prevMessages, newMessage.message]);
 		} catch (err) {
 			console.log(err);
 		}
@@ -111,10 +113,13 @@ export default function Chat() {
 						<div className="message-display-box">
 							<h2>{receiverProfil.fullName}</h2>
 							<div className="message-container">
-								{messages.map((message, index) => (
-									<div key={index} className="message">{message}</div>
+								{messages.map((msg, index) => (
+									<div key={index} className="message-wrapper">
+										<p>{msg.sender}</p>
+										<div className="message">{msg.message}</div>
+									</div>
 								))}
-								<div ref={messagesEndRef} />
+								<div ref={messagesEndRef}/>
 							</div>
 						</div>
 					</div>

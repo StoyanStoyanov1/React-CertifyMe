@@ -9,3 +9,12 @@ export const create = async (data) => {
 		console.log(err)
 	}
 }
+
+export const getOne = async (messageId) => {
+	try {
+		const message = await request('GET', `${baseUrl}/get-message/${messageId}`);
+		return message;
+	} catch (err) {
+		console.log(err);
+	}
+}

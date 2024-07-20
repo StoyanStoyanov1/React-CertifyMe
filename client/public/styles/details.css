@@ -173,3 +173,7 @@
 .isNotCorrect {
     color: red;
 }
+
+.message-container p {
+    color: greenyellow;
+}
