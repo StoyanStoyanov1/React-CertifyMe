@@ -43,7 +43,11 @@ export default function CertificateDetails() {
 					<div className="actionBtn">
 						<Link to={`${Path.EditCertificate}/${certificateId}`} className="edit">Edit</Link>
 						<Link to={`${Path.Remove}/${certificateId}`} className="remove">Delete</Link>
-					</div>
+					</div> ||
+						<div className='actionBtn'>
+							<Link to={`${Path.Profil}/${profil.userId}`} className="edit">Profil</Link>
+
+						</div>
 					}
 				</div>
 			</div>
