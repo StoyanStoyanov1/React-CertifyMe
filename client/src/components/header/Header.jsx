@@ -17,11 +17,12 @@ export default function Header() {
 				<Link to={Path.AllCertificate}>Certificates</Link>
 				<Link to={Path.AllProfiles}>Users</Link>
 				{isAuthenticated && (<ul>
+						<li><Link to={`${Path.ChatBox}/${_id}`}>Chat</Link></li>
 						<li><Link to={Path.AddCertificate}>Add certificate</Link></li>
 						<li><Link to={Path.Logout}>Logout</Link></li>
 						<li><Link to={`${Path.MyProfil}/${_id}`}>{username}</Link></li>
 					</ul>
-					)}
+				)}
 
 				{!isAuthenticated && (<ul>
 						<li><Link to={Path.Login}>Login</Link></li>

@@ -13,7 +13,8 @@ const Path = {
 	Profil: '/profil',
 	EditProfile: '/editProfile',
 	MyProfil: '/my-profil',
-	Chat: '/chat'
+	Chat: '/chat',
+	ChatBox: 'chatbox'
 }
 
 export default Path

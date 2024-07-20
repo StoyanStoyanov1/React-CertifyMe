@@ -22,6 +22,7 @@ import AuthGuard from "./components/guards/AuthGuard.jsx";
 import CreateNewChat from "./components/messages/Chat.jsx"
 import Chat from "./components/messages/Chat.jsx";
 import FindChat from "./components/messages/FindChat.jsx";
+import ChatBox from "./components/messages/ChatBox.jsx";
 
 function App() {
 	return (
@@ -49,6 +50,7 @@ function App() {
 							<Route path={Path.Logout} element={<Logout/>}/>
 							<Route path={`${Path.Chat}/:chatId`} element={<Chat/>}/>
 							<Route path={`${Path.Chat}/find-chat/:receiver`} element={<FindChat/>}/>
+							<Route path={`${Path.ChatBox}/:userId`} element={<ChatBox/>}/>
 
 
 						</Route>
