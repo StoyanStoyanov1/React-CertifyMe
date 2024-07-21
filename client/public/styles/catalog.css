@@ -259,3 +259,7 @@ input[type=text]:hover {
     color: #888;
     font-size: 0.8em;
 }
+
+.unread {
+    background: #bddef6;
+}

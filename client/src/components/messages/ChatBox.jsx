@@ -43,6 +43,13 @@ export default function ChatBox() {
 		[profil]
 	);
 
+	function classChatItem(chatId) {
+		if (profil.unreadChats.includes(chatId)) {
+			return 'chat-item unread';
+		}
+
+		return 'chat-item';
+	}
 
 	function formatDate(dateString) {
 		const date = new Date(dateString);
@@ -56,7 +63,7 @@ export default function ChatBox() {
 				<h1>Chats</h1>
 			</div>
 			<div className="chat-list">
-				{chats.map(chat => (<div onClick={() => navigate(`${Path.Chat}/${chat._id}`)} className="chat-item">
+				{chats.map(chat => (<div onClick={() => navigate(`${Path.Chat}/${chat._id}`)} className={classChatItem(chat._id)}>
 					<div className="chat-info">
 						<h2>{chat.receiverProfil.fullName}</h2>
 						<p>{chat.lastMessage.message.substring(0, 15)}{chat.lastMessage.message.length > 10 && ' ...'}</p>
