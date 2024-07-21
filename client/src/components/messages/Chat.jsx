@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import * as profilService from '../../services/profilService.js';
 import * as chatService from '../../services/chatService.js';
 import * as messageService from '../../services/messageService.js';
+import {unread} from "../../services/chatService.js";
 
 export default function Chat() {
 	const {_id} = useContext(authContext);
@@ -91,12 +92,14 @@ export default function Chat() {
 
 			newMessage.senderName = senderProfil.fullName;
 
-
-
 			setMessages(prevMessages => [...prevMessages, newMessage]);
 
 			setMessage('');
 			setCountMessage(200);
+
+			if (!receiverProfil.unreadChats.includes(chatId)) {
+				await chatService.unread(receiverId, chatId, 'unread');
+			}
 		} catch (err) {
 			console.log(err);
 		}
