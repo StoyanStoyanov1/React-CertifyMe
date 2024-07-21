@@ -75,3 +75,7 @@ nav a:hover {
 #welcomePage img {
     width: 40%
 }
+
+.nav-link.active {
+    color: #25a44c;
+}
