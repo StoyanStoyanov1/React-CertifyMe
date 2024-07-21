@@ -41,6 +41,10 @@ const profilSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Profil",
 	},
+	unreadChats: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "chat"
+	}],
 
 }, {timestamps: true})
 

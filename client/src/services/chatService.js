@@ -28,3 +28,12 @@ export const getById = async (chatId) => {
 		console.log(err)
 	}
 }
+
+export const unread = async (profilId, chatId, command) => {
+	try {
+		const response = await request('PUT', `${baseUrl}/unread?profilId=${profilId}&chatId=${chatId}&command=${command}`);
+		return response
+	} catch (err) {
+		console.log(err);
+	}
+}

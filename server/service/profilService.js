@@ -14,6 +14,10 @@ exports.edit = async (profilId, data) => await Profil.findByIdAndUpdate(profilId
 
 exports.getOne = async (profilId) => await Profil.findById(profilId).lean();
 
+exports.pushChatToUnreadChats = async (profilId, chatId) => await Profil.findByIdAndUpdate(profilId, {$push: {unreadChats: chatId}});
+
+exports.removeChatFromUnreadChats = async (profilId, chatId) => await Profil.findByIdAndUpdate(profilId, {$pull: {unreadChats: chatId}});
+
 exports.getTopThree = async () => await Profil.aggregate([
 	{
 		$addFields: {

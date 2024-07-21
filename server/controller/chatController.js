@@ -50,6 +50,17 @@ router.get('/get-chat/:chatId', async (req, res) => {
 	}
 });
 
+router.put('/unread', async (req, res) => {
+	const {profilId, chatId, command} = req.query;
+
+	try {
+		const profil = command === "unread" ? await profilService.pushChatToUnreadChats(profilId, chatId) : await profilService.removeChatFromUnreadChats(profilId, chatId);
+
+		res.status(200).json(profil);
+	} catch (err) {
+		res.status(500).json({message: err.message});
+	}
+})
 
 
 module.exports = router;

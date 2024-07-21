@@ -88,12 +88,12 @@ export default function Chat() {
 				sender: senderId,
 				receiver: receiverId
 			});
-			const sendMessage = {
-				message: message,
-				sender: senderProfil.fullName,
-			}
 
-			setMessages(prevMessages => [...prevMessages, sendMessage]);
+			newMessage.senderName = senderProfil.fullName;
+
+
+
+			setMessages(prevMessages => [...prevMessages, newMessage]);
 
 			setMessage('');
 			setCountMessage(200);
