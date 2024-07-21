@@ -1,0 +1,180 @@
+@media (max-width: 480px) {
+    .card-box {
+        margin-left: 0;
+        height: auto;
+        float: none;
+        width: 100%;
+    }
+
+    .top-profiles .ItemsProfile {
+        flex: 0 1 100%;
+    }
+
+    .btn-group > a {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .message-display-box {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .chat-list-container {
+        width: 100%;
+    }
+
+    .search {
+        width: 90%;
+    }
+
+    fieldset {
+        width: 100%;
+        padding: 1em;
+    }
+
+    .createPage, .editPage {
+        width: 100%;
+        padding: 1em 0 2em;
+    }
+
+    .add-item, .edit-item, .new-message {
+        width: 100%;
+        font-size: 16px;
+        height: 40px;
+    }
+
+    input, input + label > i, textarea {
+        font-size: 1em;
+        padding: 0.2em 0.3em;
+    }
+
+    input[type=text], input[type=number], textarea {
+        margin: 0 0 1em 0;
+    }
+
+    legend {
+        font-size: 1.5em;
+    }
+
+    .input-container {
+        margin-bottom: 0.5em;
+    }
+
+    .message {
+        height: 80px;
+        font-size: 14px;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .wrapper {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .certificateCover {
+        margin-bottom: 15px;
+    }
+
+    .certificateText h1 {
+        font-size: 20px;
+    }
+
+    .certificateText h3, .certificateText h4, .certificateText h5 {
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    .certificateText > p {
+        font-size: 14px;
+    }
+
+    .actionBtn {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .actionBtn > a, .like-button {
+        width: 100%;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .pagination-nav {
+        margin-top: 10px;
+    }
+
+    .page-link {
+        padding: 8px 12px;
+        margin: 0 3px;
+        font-size: 14px;
+    }
+
+    .my-certificates {
+        padding: 8px 16px;
+        margin: 15px auto;
+        font-size: 14px;
+    }
+
+    body {
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    nav, footer {
+        flex-direction: column;
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    nav a {
+        font-size: 16px;
+        margin: 5px;
+    }
+
+    nav ul {
+        margin: 5px 0 0 0;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 2px 0;
+    }
+
+    #welcomePage {
+        width: 95%;
+        font-size: 20px;
+    }
+
+    #welcomePage img {
+        width: 80%;
+    }
+
+    fieldset {
+        width: 15em;
+        padding: 1em;
+    }
+
+    fieldset legend {
+        font-size: 1.2em;
+    }
+
+    input[type=text], input[type=password] {
+        font-size: 0.9em;
+    }
+
+    .login, .register {
+        width: 100px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    #loginPage, #registerPage {
+        font-size: 12px;
+        padding: 1em 0 3em;
+    }
+}

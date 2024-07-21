@@ -1,0 +1,81 @@
+body {
+    background-image: url('../images/back.jpg');
+    background-size: cover;
+    background-image: fixed;
+}
+
+nav,
+footer {
+    width: 100%;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 0;
+    padding: 0 5px 0 3px;
+    margin: 0%;
+    color: white;
+}
+
+nav a {
+    text-decoration: none;
+    color: #8f8f8f;
+    font-size: 20px;
+    font-weight: bolder;
+    position: relative;
+    margin: 20px;
+}
+
+nav ul {
+    margin: 0 0 0 auto;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 2px;
+}
+
+li::before {
+    display: inline;
+}
+
+nav a {
+    text-decoration: none;
+    border-radius: 50%;
+    padding: 0.5em;
+    color: white;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 15px;
+    text-align: center;
+    color: #c5c6c7;
+    font-weight: bold;
+}
+
+nav a:hover {
+    cursor: pointer;
+    color: #cfeeb0;
+    font-weight: bolder;
+}
+
+#welcomePage {
+    color: #ffffff;
+    font-size: 24px;
+    padding: 30px;
+    margin: 0 auto;
+    width: 50%; /* or any other width you prefer */
+    text-align: center; /* optional, to center text inside the element */
+}
+
+#welcomePage img {
+    width: 40%
+}
+
+.nav-link.active {
+    color: #25a44c;
+}
