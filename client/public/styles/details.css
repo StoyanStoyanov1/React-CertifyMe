@@ -194,6 +194,11 @@
 }
 
 .message-date {
-    font-size: 0.8em;
+    font-size: 1em;
     color: #888;
+}
+
+.unread-messages-count {
+    color: red;
+    font-size: 0.8em;
 }

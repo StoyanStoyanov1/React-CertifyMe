@@ -50,6 +50,9 @@ export default function Chat() {
 
 	useEffect(() => {
 		if (isLoaded) {
+			if (senderProfil.unreadChats.includes(chatId)) {
+				chatService.unread(senderProfil._id, chatId, 'read');
+			}
 
 			chat.messages?.forEach(async (messageId) => {
 				const message = await messageService.getOne(messageId);
