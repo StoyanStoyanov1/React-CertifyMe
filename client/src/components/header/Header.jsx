@@ -19,6 +19,10 @@ export default function Header() {
 			.catch(err => console.log(err));
 	}, [_id, location.pathname]);
 	const getNavLinkClass = (path) => {
+		if (path === Path.ChatBox) {
+			return location.pathname.includes(Path.ChatBox) ? 'nav-link active' : 'nav-link';
+		}
+
 		return location.pathname === path ? 'nav-link active' : 'nav-link';
 	};
 
@@ -29,7 +33,7 @@ export default function Header() {
 				<Link className={getNavLinkClass(Path.AllCertificate)} to={Path.AllCertificate}>Certificates</Link>
 				<Link className={getNavLinkClass(Path.AllProfiles)} to={Path.AllProfiles}>Users</Link>
 				{isAuthenticated && (<ul>
-						<li><Link className={getNavLinkClass(`${Path.ChatBox}/${_id}`)} to={`${Path.ChatBox}/${_id}`}>Chat {profil.unreadChats && profil.unreadChats.length > 0 && <span className='unread-messages-count'>{profil.unreadChats.length}</span>}</Link></li>
+						<li><Link className={getNavLinkClass(Path.ChatBox)} to={`${Path.ChatBox}/${_id}`}>Chat {profil.unreadChats && profil.unreadChats.length > 0 && <span className='unread-messages-count'>{profil.unreadChats.length}</span>}</Link></li>
 						<li><Link className={getNavLinkClass(Path.AddCertificate)} to={Path.AddCertificate}>Add certificate</Link></li>
 						<li><Link to={Path.Logout}>Logout</Link></li>
 						<li><Link className={getNavLinkClass(`${Path.MyProfil}/${_id}`)} to={`${Path.MyProfil}/${_id}`}>{username}</Link></li>
