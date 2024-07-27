@@ -1,8 +1,8 @@
-// usePersistedState.js
-
 import { useState, useEffect } from 'react';
 
+// Custom hook to manage state with persistence in localStorage
 function usePersistedState(key, initialState) {
+	// Initialize state with value from localStorage or initial state
 	const [state, setState] = useState(() => {
 		try {
 			const persistedState = localStorage.getItem(key);
@@ -13,6 +13,7 @@ function usePersistedState(key, initialState) {
 		}
 	});
 
+	// Update localStorage whenever the state changes
 	useEffect(() => {
 		try {
 			localStorage.setItem(key, JSON.stringify(state));
