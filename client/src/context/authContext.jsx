@@ -4,15 +4,17 @@ import * as authService from "../services/authService.js";
 import Path from "../paths.js";
 import usePersistedState from "../hooks/usePersistedState.js";
 
+// Create the AuthContext
 const AuthContext = createContext();
 AuthContext.displayName = 'AuthContext';
 
+// AuthProvider component to provide authentication state and handlers
 export const AuthProvider = ({children}) => {
 	const navigate = useNavigate();
 	const [auth, setAuth] = usePersistedState('auth', {});
 
+	// Handler for user registration
 	const registerSubmitHandler = async (values) => {
-
 		const result = await authService.register(
 			values.email,
 			values.password,
@@ -22,6 +24,7 @@ export const AuthProvider = ({children}) => {
 			values.description,
 		);
 
+		// Check if accessToken is returned and update auth state
 		if (result.accessToken) {
 			setAuth(result.user);
 			localStorage.setItem('accessToken', result.accessToken);
@@ -29,23 +32,24 @@ export const AuthProvider = ({children}) => {
 		} else {
 			console.error('No access token returned');
 		}
-
 	};
-	const loginSubmitHandler = async (values) => {
 
+	// Handler for user login
+	const loginSubmitHandler = async (values) => {
 		const result = await authService.login(values.email, values.password);
 		setAuth(result.user);
 		localStorage.setItem('accessToken', result.accessToken);
 		navigate(Path.Home);
-
 	};
 
+	// Handler for user logout
 	const logoutHandler = () => {
 		setAuth({});
 		localStorage.removeItem('accessToken');
 		navigate(Path.Home);
 	};
 
+	// Values to be provided by AuthContext
 	const values = {
 		registerSubmitHandler,
 		loginSubmitHandler,
