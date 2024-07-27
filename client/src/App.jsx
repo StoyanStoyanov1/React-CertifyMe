@@ -32,6 +32,7 @@ function App() {
 					<Header/>
 
 					<Routes>
+						{/* Public routes */}
 						<Route path={Path.Home} element={<Home/>}/>
 						<Route path={Path.Login} element={<Login/>}/>
 						<Route path={Path.Register} element={<Register/>}/>
@@ -41,6 +42,7 @@ function App() {
 						<Route path={`${Path.Profil}/:profilId`} element={<DetailProfil/>}/>
 						<Route path={`${Path.MyCertificates}/:certificateId/details`} element={<CertificateDetails/>}/>
 
+						{/* Routes protected by AuthGuard */}
 						<Route element={<AuthGuard />}>
 							<Route path={`${Path.MyProfil}/:profilId`} element={<DetailProfil/>}/>
 							<Route path={`${Path.EditProfile}/:profilId`} element={<EditProfile/>}/>
@@ -51,8 +53,6 @@ function App() {
 							<Route path={`${Path.Chat}/:chatId`} element={<Chat/>}/>
 							<Route path={`${Path.Chat}/find-chat/:receiver`} element={<FindChat/>}/>
 							<Route path={`${Path.ChatBox}/:userId`} element={<ChatBox/>}/>
-
-
 						</Route>
 					</Routes>
 				</div>
