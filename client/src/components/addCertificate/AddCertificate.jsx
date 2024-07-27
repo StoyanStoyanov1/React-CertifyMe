@@ -1,15 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import * as certificateService from '../../services/certificateService.js'
+import * as certificateService from '../../services/certificateService.js';
 import { useContext, useEffect, useState } from "react";
 import authContext from "../../context/authContext.jsx";
 import * as profilService from '../../services/profilService.js';
 import Path from "../../paths.js";
 import DatePicker from "react-datepicker";
-import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css';
 import '../../../public/styles/create.css';
 import validator from "./validator.js";
 
 export default function AddCertificate() {
+	// Initial validation states for form fields
 	const validatedObjects = {
 		title: false,
 		start: false,
@@ -25,6 +26,7 @@ export default function AddCertificate() {
 	const [showTooltip, setShowTooltip] = useState(validatedObjects);
 	const [validated, setValidated] = useState(validatedObjects);
 
+	// Fetch user profile data on component mount
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -38,6 +40,7 @@ export default function AddCertificate() {
 		fetchData();
 	}, [_id]);
 
+	// Handle form submission for creating a certificate
 	const createCertificateSubmitHandler = async (e) => {
 		e.preventDefault();
 		setValidated(validatedObjects);
@@ -50,7 +53,6 @@ export default function AddCertificate() {
 			return setValidated(prevState => ({...prevState, [validate]: true}));
 		}
 
-
 		try {
 			await certificateService.create({...certificateData, profilId});
 			navigate(`${Path.MyCertificates}/${_id}`);
@@ -59,13 +61,16 @@ export default function AddCertificate() {
 		}
 	}
 
+	// State management for start and end dates
 	const [startDate, setStartDate] = useState(null);
 	const [endDate, setEndDate] = useState(null);
 
+	// Show tooltip on mouse enter
 	const handleMouseEnter = (field, boolean) => {
 		setShowTooltip(prevState => ({ ...prevState, [field]: true }));
 	};
 
+	// Hide tooltip on mouse leave
 	const handleMouseLeave = (field) => {
 		setShowTooltip(prevState => ({ ...prevState, [field]: false }));
 	};
@@ -126,10 +131,8 @@ export default function AddCertificate() {
 							</div>
 						</div>
 
-
 						<label htmlFor="university" className="vhide">University</label>
-						{validated.university && <div className='error-message'>University muss be between 2 and 10 characters!</div>}
-
+						{validated.university && <div className='error-message'>University must be between 2 and 10 characters!</div>}
 						<div className="input-container">
 							<input
 								id="university"
@@ -144,8 +147,7 @@ export default function AddCertificate() {
 						</div>
 
 						<label htmlFor="imgUrl" className="vhide">Image Url</label>
-						{validated.imgUrl && <div className='error-message'>Url must start with http:// or https://</div>}
-
+						{validated.imgUrl && <div className='error-message'>URL must start with http:// or https://</div>}
 						<div className="input-container">
 							<input
 								id="imgUrl"
@@ -161,15 +163,14 @@ export default function AddCertificate() {
 
 						<label htmlFor="description" className="vhide">Description</label>
 						<div className="input-container">
-							<textarea
+                            <textarea
 								name="description"
 								placeholder="Description"
 								className="description"
 								onMouseEnter={() => handleMouseEnter('description')}
 								onMouseLeave={() => handleMouseLeave('description')}
 							></textarea>
-							{showTooltip.description &&
-								<div className="tooltip">Enter the description of the certificate</div>}
+							{showTooltip.description && <div className="tooltip">Enter the description of the certificate</div>}
 						</div>
 
 						<button className="add-item" type="submit">Add Certificate</button>
@@ -177,5 +178,5 @@ export default function AddCertificate() {
 				</fieldset>
 			</form>
 		</section>
-	)
+	);
 }

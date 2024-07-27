@@ -7,10 +7,9 @@ import * as messageService from '../../services/messageService.js';
 import {unread} from "../../services/chatService.js";
 
 export default function Chat() {
-	const {_id} = useContext(authContext);
-	const {chatId} = useParams();
+	const {_id} = useContext(authContext); // Get the current user ID from the context
+	const {chatId} = useParams(); // Get the chat ID from the URL parameters
 	const [chat, setChat] = useState([]);
-
 	const [senderProfil, setSenderProfil] = useState([]);
 	const [receiverProfil, setReceiverProfil] = useState([]);
 	const [message, setMessage] = useState('');
@@ -18,26 +17,29 @@ export default function Chat() {
 	const [countMessage, setCountMessage] = useState(200);
 	const [messages, setMessages] = useState([]);
 
-	const messagesEndRef = useRef(null);
-	const [isLoaded, setIsLoaded] = useState(false)
+	const messagesEndRef = useRef(null); // Reference to the end of the messages for auto-scroll
+	const [isLoaded, setIsLoaded] = useState(false);
 
+	// Function to scroll to the bottom of the messages
 	const scrollToBottom = (behavior = "auto") => {
 		messagesEndRef.current?.scrollIntoView({behavior});
 	};
 
+	// Function to find the sender and receiver profiles
 	const findProfiles = async (senderId, receiverId) => {
 		try {
 			const sender = await profilService.getOne(senderId);
 			const receiver = await profilService.getOne(receiverId);
 
-			setSenderProfil(sender.userId === _id ? sender: receiver);
-			setReceiverProfil(sender.userId !== _id? sender: receiver);
-			setIsLoaded(true)
+			setSenderProfil(sender.userId === _id ? sender : receiver);
+			setReceiverProfil(sender.userId !== _id ? sender : receiver);
+			setIsLoaded(true);
 		} catch (err) {
 			console.log(err);
 		}
-	}
+	};
 
+	// Fetch chat data and find profiles when component mounts or chatId changes
 	useEffect(() => {
 		chatService.getById(chatId)
 			.then(foundChat => {
@@ -45,9 +47,9 @@ export default function Chat() {
 				findProfiles(foundChat.sender, foundChat.receiver);
 			})
 			.catch(err => console.log(err));
-
 	}, [chatId]);
 
+	// Fetch messages and mark as read if needed
 	useEffect(() => {
 		if (isLoaded) {
 			if (senderProfil.unreadChats.includes(chatId)) {
@@ -62,10 +64,13 @@ export default function Chat() {
 			});
 		}
 	}, [chat, senderProfil, receiverProfil]);
+
+	// Auto-scroll to the bottom of the messages when messages change
 	useEffect(() => {
 		scrollToBottom("auto");
 	}, [messages]);
 
+	// Handle message input change
 	const onChange = async (e) => {
 		const newMessage = e.target.value;
 
@@ -77,8 +82,9 @@ export default function Chat() {
 		setMessage(e.target.value);
 		setCountMessage(200 - newMessage.length);
 		setClassMessage('isCorrect');
-	}
+	};
 
+	// Handle form submission to send a new message
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
@@ -106,8 +112,9 @@ export default function Chat() {
 		} catch (err) {
 			console.log(err);
 		}
-	}
+	};
 
+	// Function to format the date
 	function formatDate(dateString) {
 		const date = new Date(dateString);
 		const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };

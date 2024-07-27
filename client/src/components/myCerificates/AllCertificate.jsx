@@ -4,23 +4,26 @@ import CertificateItem from "./CertificateItem.jsx";
 import Pagination from "./Pagination";
 
 export default function AllCertificate() {
-	const [certificates, setCertificates] = useState([]);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage] = useState(8);
-	const [isLoading, setIsLoading] = useState(true);
+	const [certificates, setCertificates] = useState([]); // State to hold the list of certificates
+	const [currentPage, setCurrentPage] = useState(1); // State to manage the current page for pagination
+	const [itemsPerPage] = useState(8); // Number of items per page
+	const [isLoading, setIsLoading] = useState(true); // State to manage loading status
 
+	// Fetch all certificates when the component mounts
 	useEffect(() => {
 		certificateServer.getAll()
 			.then(result => {
 				setCertificates(result);
-				setIsLoading(false);
+				setIsLoading(false); // Set loading to false after data is fetched
 			});
 	}, []);
 
+	// Calculate the index of the first and last certificate for the current page
 	const indexOfLastCertificate = currentPage * itemsPerPage;
 	const indexOfFirstCertificate = indexOfLastCertificate - itemsPerPage;
-	const currentCertificates = certificates.slice(indexOfFirstCertificate, indexOfLastCertificate);
+	const currentCertificates = certificates.slice(indexOfFirstCertificate, indexOfLastCertificate); // Get the certificates for the current page
 
+	// Function to handle page change for pagination
 	const paginate = pageNumber => setCurrentPage(pageNumber);
 
 	return (
@@ -28,14 +31,14 @@ export default function AllCertificate() {
 			<h1>Certificates</h1>
 
 			{isLoading
-				? <p>Loading...</p>
-				:currentCertificates.length === 0 ? (
-				<p>No found certificates!</p>
-			) : (
-				currentCertificates.map(cer => (
-					<CertificateItem key={cer._id} {...cer} />
-				))
-			)}
+				? <p>Loading...</p> // Show loading message while data is being fetched
+				: currentCertificates.length === 0 ? (
+					<p>No found certificates!</p> // Show message if no certificates are found
+				) : (
+					currentCertificates.map(cer => (
+						<CertificateItem key={cer._id} {...cer} /> // Render each certificate item
+					))
+				)}
 
 			<Pagination
 				itemsPerPage={itemsPerPage}

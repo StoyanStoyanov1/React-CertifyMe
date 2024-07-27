@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import * as profilService from "../../services/profilService.js";
 import Path from "../../paths.js";
 
+// Keys for form fields to match profile object keys
 const editProfileFormKeys = {
 	AccountName: 'accName',
 	FullName: 'fullName',
@@ -12,8 +13,9 @@ const editProfileFormKeys = {
 
 export default function EditProfile() {
 	const navigate = useNavigate();
-	const { profilId } = useParams();
+	const { profilId } = useParams(); // Get the profile ID from URL parameters
 
+	// State to hold profile data
 	const [profil, setProfil] = useState({
 		accName: '',
 		fullName: '',
@@ -21,12 +23,14 @@ export default function EditProfile() {
 		description: ''
 	});
 
+	// Fetch profile data on component mount and when profilId changes
 	useEffect(() => {
 		profilService.getByUserId(profilId)
 			.then(result => setProfil(result))
 			.catch(err => console.log(err));
 	}, [profilId]);
 
+	// Handle input changes and update profile state
 	const onChange = (e) => {
 		setProfil(state => ({
 			...state,
@@ -34,10 +38,11 @@ export default function EditProfile() {
 		}));
 	};
 
+	// Handle form submission and update profile data
 	const onSubmit = (e) => {
 		e.preventDefault();
 		profilService.edit(profil._id, profil)
-			.then(() => navigate(`${Path.Profil}/${profilId}`))
+			.then(() => navigate(`${Path.Profil}/${profilId}`)) // Navigate to profile detail page after successful update
 			.catch(err => console.log(err));
 	};
 
@@ -45,7 +50,7 @@ export default function EditProfile() {
 		<section className="editPage">
 			<form onSubmit={onSubmit}>
 				<fieldset>
-					<legend>Edit Profil</legend>
+					<legend>Edit Profile</legend>
 
 					<div className="container">
 						<label htmlFor="fullName" className="vhide">Full Name</label>
@@ -59,7 +64,7 @@ export default function EditProfile() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="imgUrl" className="vhide">Img Url</label>
+						<label htmlFor="imgUrl" className="vhide">Image Url</label>
 						<input
 							id="imageUrl"
 							name="imageUrl"
@@ -79,7 +84,7 @@ export default function EditProfile() {
 							onChange={onChange}
 						/>
 
-						<button className="edit-item" type="submit">Edit Certificate</button>
+						<button className="edit-item" type="submit">Edit Profile</button>
 					</div>
 				</fieldset>
 			</form>

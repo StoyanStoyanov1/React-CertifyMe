@@ -1,8 +1,10 @@
 import React from 'react';
 
+// Pagination component to handle page navigation
 const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
 	const pageNumbers = [];
 
+	// Calculate the total number of pages and create an array of page numbers
 	for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
 		pageNumbers.push(i);
 	}

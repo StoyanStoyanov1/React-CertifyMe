@@ -12,14 +12,18 @@ export default function ItemsProfile({
 										 userId,
 										 likes,
 									 }) {
+	// State to handle image loading status
 	const [imageLoaded, setImageLoaded] = useState(false);
 
+	// Count the number of likes for the profile
 	const countLikes = likes ? likes.length : 0;
 
+	// Handle image load success
 	const handleImageLoad = () => {
 		setImageLoaded(true);
 	};
 
+	// Handle image load error
 	const handleImageError = () => {
 		setImageLoaded(false);
 	};

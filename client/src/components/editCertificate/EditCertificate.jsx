@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import validator from "../addCertificate/validator.js";
 
+// Keys for form fields to match certificate object keys
 const EditCertificateFormKeys = {
 	Title: "title",
 	Start: "start",
@@ -17,8 +18,9 @@ const EditCertificateFormKeys = {
 
 export default function EditCertificate() {
 	const navigation = useNavigate();
-	const {certificateId} = useParams();
+	const {certificateId} = useParams(); // Get the certificate ID from URL parameters
 
+	// Initial validation states for form fields
 	const validateObjects = {
 		title: false,
 		start: false,
@@ -26,11 +28,13 @@ export default function EditCertificate() {
 		university: false,
 		imgUrl: false,
 		description: false,
-	}
+	};
 
+	// State to manage start and end dates
 	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState(null)
+	const [endDate, setEndDate] = useState(null);
 
+	// State to hold certificate values
 	const [certificateValues, setCertificateValues] = useState({
 		title: "",
 		start: "",
@@ -40,8 +44,10 @@ export default function EditCertificate() {
 		description: "",
 	});
 
+	// State to manage validation errors
 	const [validated, setValidated] = useState(validateObjects);
 
+	// Fetch certificate data when the component mounts or certificateId changes
 	useEffect(() => {
 		certificateService.getOne(certificateId).then((result) => {
 			setCertificateValues({
@@ -58,8 +64,10 @@ export default function EditCertificate() {
 		setEndDate(certificateValues.end);
 	}, [certificateId]);
 
+	// State to manage tooltips visibility
 	const [showTooltip, setShowTooltip] = useState(validateObjects);
 
+	// Handle input changes and update certificate values
 	const onChange = (e) => {
 		setCertificateValues((state) => ({
 			...state,
@@ -67,10 +75,12 @@ export default function EditCertificate() {
 		}));
 	};
 
+	// Handle mouse enter and leave events to show/hide tooltips
 	const handleMouse = (key, boolean) => {
 		setShowTooltip(prevState => ({...prevState, [key]: boolean}));
-	}
+	};
 
+	// Handle form submission and update certificate data
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		setValidated(validateObjects);
@@ -91,7 +101,6 @@ export default function EditCertificate() {
 		}
 	};
 
-
 	return (
 		<section className="editPage">
 			<form onSubmit={onSubmit}>
@@ -100,11 +109,8 @@ export default function EditCertificate() {
 
 					<div className="container">
 						<div className='input-container'>
-							<label htmlFor="title" className="vhide">
-								Title
-							</label>
+							<label htmlFor="title" className="vhide">Title</label>
 							{validated.title && <div className='error-message'>Title must be between 2 and 20 characters!</div>}
-
 							<input
 								id="title"
 								name="title"
@@ -116,14 +122,13 @@ export default function EditCertificate() {
 								onMouseEnter={() => handleMouse('title', true)}
 								onMouseLeave={() => handleMouse('title', false)}
 							/>
-
 							{showTooltip.title && <div className='tooltip'>Add your Title</div>}
 						</div>
+
 						<div className="date-container">
 							<div className="input-container">
 								<label htmlFor="start" className="vhide">Start</label>
 								{validated.start && <div className='error-message'>Date is not valid!</div>}
-
 								<DatePicker
 									selected={startDate}
 									onChange={(date) => setStartDate(date)}
@@ -132,17 +137,15 @@ export default function EditCertificate() {
 									name='start'
 									className="title input-field"
 									value={startDate || certificateValues.start}
-									onMouseEnter={() => handleMouseEnter('start')}
-									onMouseLeave={() => handleMouseLeave('start')}
+									onMouseEnter={() => handleMouse('start', true)}
+									onMouseLeave={() => handleMouse('start', false)}
 								/>
 								{showTooltip.start && <div className='tooltip'>Enter the start date of the course</div>}
-
 							</div>
 
 							<div className="input-container">
 								<label htmlFor="end" className="vhide">End</label>
 								{validated.end && <div className='error-message'>The end date cannot be earlier than the start date.</div>}
-
 								<DatePicker
 									selected={endDate}
 									onChange={(date) => setEndDate(date)}
@@ -151,72 +154,62 @@ export default function EditCertificate() {
 									name='end'
 									className="title input-field"
 									value={endDate || certificateValues.end}
-									onMouseEnter={() => handleMouseEnter('end')}
-									onMouseLeave={() => handleMouseLeave('end')}
+									onMouseEnter={() => handleMouse('end', true)}
+									onMouseLeave={() => handleMouse('end', false)}
 								/>
 								{showTooltip.end && <div className='tooltip'>Enter the end date of the course</div>}
-
 							</div>
 						</div>
-						<div className='input-container'>
-						<label htmlFor="university" className="vhide">
-							University
-						</label>
-							{validated.university && <div className='error-message'>University muss be between 2 and 10 characters!</div>}
 
+						<div className='input-container'>
+							<label htmlFor="university" className="vhide">University</label>
+							{validated.university && <div className='error-message'>University must be between 2 and 10 characters!</div>}
 							<input
-							id="university"
-							name="university"
-							className="university"
-							type="text"
-							placeholder="University"
-							value={certificateValues[EditCertificateFormKeys.University]}
-							onChange={onChange}
-							onMouseEnter={() => handleMouse('university', true)}
-							onMouseLeave={() => handleMouse('university', false)}
-						/>
+								id="university"
+								name="university"
+								className="university"
+								type="text"
+								placeholder="University"
+								value={certificateValues[EditCertificateFormKeys.University]}
+								onChange={onChange}
+								onMouseEnter={() => handleMouse('university', true)}
+								onMouseLeave={() => handleMouse('university', false)}
+							/>
 							{showTooltip.university && <div className='tooltip'>Add your University!</div>}
-
 						</div>
+
 						<div className='input-container'>
-						<label htmlFor="imgUrl" className="vhide">
-							Image Url
-						</label>
+							<label htmlFor="imgUrl" className="vhide">Image Url</label>
 							{validated.imgUrl && <div className='error-message'>Url must start with http:// or https://</div>}
-
 							<input
-							id="imgUrl"
-							name="imgUrl"
-							className="imgUrl"
-							type="text"
-							placeholder="Image Url"
-							value={certificateValues[EditCertificateFormKeys.ImgUrl]}
-							onChange={onChange}
-							onMouseEnter={() => handleMouse('imgUrl', true)}
-							onMouseLeave={() => handleMouse('imgUrl', false)}
-						/>
-						{showTooltip.imgUrl && <div className='tooltip'>Add your ImgUrl!</div>}
+								id="imgUrl"
+								name="imgUrl"
+								className="imgUrl"
+								type="text"
+								placeholder="Image Url"
+								value={certificateValues[EditCertificateFormKeys.ImgUrl]}
+								onChange={onChange}
+								onMouseEnter={() => handleMouse('imgUrl', true)}
+								onMouseLeave={() => handleMouse('imgUrl', false)}
+							/>
+							{showTooltip.imgUrl && <div className='tooltip'>Add your ImgUrl!</div>}
 						</div>
 
 						<div className='input-container'>
-						<label htmlFor="description" className="vhide">
-							Description
-						</label>
-						<textarea
-							name="description"
-							className="description"
-							placeholder="Description"
-							value={certificateValues[EditCertificateFormKeys.Description]}
-							onChange={onChange}
-							onMouseEnter={() => handleMouse('description', true)}
-							onMouseLeave={() => handleMouse('description', false)}
-						></textarea>
+							<label htmlFor="description" className="vhide">Description</label>
+							<textarea
+								name="description"
+								className="description"
+								placeholder="Description"
+								value={certificateValues[EditCertificateFormKeys.Description]}
+								onChange={onChange}
+								onMouseEnter={() => handleMouse('description', true)}
+								onMouseLeave={() => handleMouse('description', false)}
+							></textarea>
 							{showTooltip.description && <div className='tooltip'>Add your Description!</div>}
-
 						</div>
-						<button className="edit-item" type="submit">
-							Edit Certificate
-						</button>
+
+						<button className="edit-item" type="submit">Edit Certificate</button>
 					</div>
 				</fieldset>
 			</form>

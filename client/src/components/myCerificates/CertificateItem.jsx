@@ -13,22 +13,25 @@ export default function CertificateItem({
 											imgUrl,
 											profilId,
 										}) {
-	const [imageLoaded, setImageLoaded] = useState(false);
-	const [fullName, setFullName] = useState('');
+	const [imageLoaded, setImageLoaded] = useState(false); // State to manage image loading status
+	const [fullName, setFullName] = useState(''); // State to hold the profile's full name
 
+	// Handle image load success
 	const handleImageLoad = () => {
 		setImageLoaded(true);
 	};
 
+	// Handle image load error
 	const handleImageError = () => {
 		setImageLoaded(false);
 	};
 
+	// Fetch profile data when the component mounts or profilId changes
 	useEffect(() => {
 		profilService.getOne(profilId)
 			.then(result => setFullName(result.fullName))
 			.catch(() => setFullName(''));
-	}, []);
+	}, [profilId]);
 
 	return (
 		<div className="card-box">
