@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const User = require('./models/User');
 const cors = require('cors');
 const router = require('./router');
+const PORT = process.env.PORT || 3030;
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
@@ -25,4 +26,4 @@ mongoose.connection.on('error', (err) => console.log(err))
 
 app.use(router);
 
-app.listen(3030, () => console.log('Server started in port 3030'));
+app.listen(PORT, () => console.log(`Server started in port ${PORT}`));
