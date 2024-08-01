@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Build and Test
 
 on:
   push:
@@ -7,30 +7,67 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  build-and-test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Node.js ${{ matrix.node-version }}
+    - name: Checkout the repository
+      uses: actions/checkout@v4
+      
+    - name: Use Node.js 20.x
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        node-version: 20.x
+        cache: npm
 
-    - name: Install dependencies for server
-      run: npm ci --prefix server
+    - name: Install backend dependencies
+      run: npm install
+      working-directory: server
 
-    - name: Install dependencies for client
-      run: npm ci --prefix client
+    - name: Install frontend dependencies
+      run: npm install
+      working-directory: client
+   
+    - name: Start the backend
+      run: npm run start
+      working-directory: server &
 
-    - name: Build client
-      run: npm run build --prefix client
+    - name: Start the frontend
+      run: npm run start
+      working-directory: client &
 
+  deploy-backend:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: build-and-test
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+      
+    - name: Deploy backend
+      uses: JorgeLNJunior/render-deploy@v1.4.4
+      with:
+        service_id: ${{ secrets.BACKEND_API_KEY }}
+        api_key: ${{ secrets.RENDER_KEY }}
+        clear_cache: true
+        wait_deploy: true
+        github_token: ${{ secrets.TOKEN_GH }}
+      working-directory: server
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: deploy-backend
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v4
+      
+    - name: Deploy frontend
+      uses: JorgeLNJunior/render-deploy@v1.4.4
+      with:
+        service_id: ${{ secrets.FRONTEND_SECRET_KEY }}
+        api_key: ${{ secrets.RENDER_KEY }}
+        clear_cache: true
+        wait_deploy: true
+        github_token: ${{ secrets.TOKEN_GH }}
+      working-directory: client
