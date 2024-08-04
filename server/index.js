@@ -16,11 +16,10 @@ app.use(cors({
 app.use(express.json());
 
 // MongoDB connection
-const dbURI = process.env.MONGODB_URI || 'mongodb+srv://blackangel9304:kC2Ob9WACFGd1dxb@cluster0.zsiluvc.mongodb.net/?retryWrites=true&w=majority&ssl=true&tlsAllowInvalidCertificates=true';
-mongoose.connect(uri, {
+const dbURI = process.env.MONGODB_URI || 'mongodb+srv://blackangel9304:kC2Ob9WACFGd1dxb@cluster0.zsiluvc.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(dbURI, {
 	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	ssl: true,
+	useUnifiedTopology: true
 });
 
 mongoose.connection.on('connected', () => console.log('DB is connected'));
@@ -29,6 +28,12 @@ mongoose.connection.on('error', (err) => console.log('DB connection error:', err
 
 // Routes
 app.use(router);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).send('Something broke!');
+});
 
 // Server setup
 const port = process.env.PORT || 3030;
