@@ -25,6 +25,3 @@ jobs:
         run: npm ci
         working-directory: ./client
 
-      - name: Start client
-        run: npm run dev
-        working-directory: ./client
