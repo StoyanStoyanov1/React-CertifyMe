@@ -10,7 +10,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
-	origin: 'https://certifyme-be.onrender.com',
+	origin: 'https://certify-me-3pfh.onrender.com',
 	credentials: true
 }));
 app.use(express.json());
