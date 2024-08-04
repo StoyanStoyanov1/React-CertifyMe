@@ -17,7 +17,11 @@ app.use(express.json());
 
 // MongoDB connection
 const dbURI = process.env.MONGODB_URI || 'mongodb+srv://blackangel9304:kC2Ob9WACFGd1dxb@cluster0.zsiluvc.mongodb.net/?retryWrites=true&w=majority&ssl=true&tlsAllowInvalidCertificates=true';
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(uri, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	ssl: true,
+});
 
 mongoose.connection.on('connected', () => console.log('DB is connected'));
 mongoose.connection.on('disconnected', () => console.log('DB is disconnected'));
