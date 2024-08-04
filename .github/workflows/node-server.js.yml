@@ -30,3 +30,6 @@ jobs:
       - name: Start the server
         run: npx nodemon index.js
         working-directory: ./server
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          PORT: 3030
