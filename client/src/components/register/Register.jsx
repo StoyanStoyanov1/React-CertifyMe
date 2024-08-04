@@ -63,11 +63,6 @@ export default function Register() {
 			return setValidator(prevState => ({...prevState, [registerFormKeys.ConfirmPassword]: true}));
 		}
 
-		// Validate username length
-		if (values[registerFormKeys.Username].length > 6) {
-			return setValidator(prevState => ({...prevState, [registerFormKeys.Username]: true}));
-		}
-
 		// Validate username presence
 		if (values[registerFormKeys.Username] === '') {
 			return setValidator(prevState => ({...prevState, [registerFormKeys.Username]: true}));
