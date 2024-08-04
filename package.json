@@ -5,6 +5,8 @@
   "scripts": {
     "postinstall": "npm install --prefix client && npm install --prefix server",
     "build": "npm run build --prefix client",
-    "start": "node server/src/index.js"
+    "start": "npm run start:server & npm run start:client",
+    "start:server": "node server/src/index.js",
+    "start:client": "npm start --prefix client"
   }
 }
