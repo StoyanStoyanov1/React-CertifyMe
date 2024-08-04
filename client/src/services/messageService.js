@@ -1,6 +1,6 @@
 import request from '../lib/request.js'
 
-const baseUrl = 'http://localhost:3030/message';
+const baseUrl = 'https://certifyme-be.onrender.com/message';
 
 // Function to create a new message
 export const create = async (data) => {

@@ -1,6 +1,6 @@
 import request from "../lib/request.js";
 
-const baseUrl = 'http://localhost:3030/profiles';
+const baseUrl = 'https://certifyme-be.onrender.com/profiles';
 
 // Function to create a new profile
 export const create = async (data) => {

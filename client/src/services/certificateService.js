@@ -1,6 +1,6 @@
 import request from "../lib/request.js";
 
-const baseUrl = 'http://localhost:3030/certificates';
+const baseUrl = 'https://certifyme-be.onrender.com/certificates';
 
 // Function to get all certificates
 export const getAll = async () => {

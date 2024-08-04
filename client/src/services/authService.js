@@ -1,6 +1,6 @@
 import request from "../lib/request.js";
 
-const baseUrl = 'http://localhost:3030/users';
+const baseUrl = 'https://certifyme-be.onrender.com/users';
 
 // Function to handle user login
 export const login = async (email, password) => {
