@@ -2,6 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import * as profilService from '../../services/profilService.js';
 import ItemsProfile from "./ItemsProfile.jsx";
 import Pagination from "../myCerificates/Pagination.jsx";
+import useLoadingText from "../useLoadingText.jsx";
 
 export default function AllProfiles() {
 	// State to hold the list of profiles
@@ -12,6 +13,8 @@ export default function AllProfiles() {
 	const [itemsPerPage, setItemsPerPage] = useState(8);
 	// State to manage the loading state
 	const [isLoading, setIsLoading] = useState(true);
+
+	const loadingText = useLoadingText(isLoading);
 
 	// Fetch all profiles on component mount
 	useEffect(() => {
@@ -30,11 +33,17 @@ export default function AllProfiles() {
 	// Function to handle page change for pagination
 	const paginate = pageNumber => setCurrentPage(pageNumber);
 
+	const [counter, setCounter] = useState(1);
+
+	setInterval(() => {
+
+	})
+
 	return (
 		<section id='catalogPage'>
 			<h1>Users</h1>
 			{isLoading ?
-				<p>Loading...</p>
+				<p>{loadingText}</p>
 				:
 				profiles.length === 0 ?
 					<p>No found Users!</p>

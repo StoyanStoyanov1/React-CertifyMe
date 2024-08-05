@@ -5,6 +5,8 @@ import * as profilService from '../../services/profilService.js';
 import profilImg from '../../../public/images/profilImg.jpg';
 import authContext from "../../context/authContext.jsx";
 import isLiked from "./isLiked.js";
+import useLoadingText from "../useLoadingText.jsx";
+
 
 export default function DetailProfil() {
 	const navigate = useNavigate();
@@ -13,6 +15,8 @@ export default function DetailProfil() {
 	const {profilId} = useParams(); // Get the profile ID from the URL parameters
 	const [countLikes, setCountLikes] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
+
+	const loadingText = useLoadingText(isLoading);
 
 	// Fetch the profile data when the component mounts or when the profile ID changes
 	useEffect(() => {
@@ -45,7 +49,7 @@ export default function DetailProfil() {
 
 	return (
 		<section id="detailsPage">
-			{isLoading ? <p>Loading...</p> : <div className="wrapper">
+			{isLoading ? <p>{loadingText}</p> : <div className="wrapper">
 
 				<div className="certificateCover">
 					<img src={profil.imageUrl || profilImg} alt={profil.fullName}/>
