@@ -72,8 +72,9 @@ export default function ChatBox() {
 			<div className="chat-list-header">
 				<h1>Chats</h1>
 			</div>
+			{isLoading && <p>{textLoading}</p>}
 			<div className="chat-list">
-				{isLoading ? <p>{textLoading}</p> : error ? <p>{error}</p> : chats.map(chat => (
+				{!isLoading &&  error ? <p>{error}</p> : chats.map(chat => (
 					<div key={chat._id} onClick={() => navigate(`${Path.Chat}/${chat._id}`)} className={classChatItem(chat._id)}>
 						<div className="chat-info">
 							<h2>{chat.receiverProfil.fullName}</h2>
