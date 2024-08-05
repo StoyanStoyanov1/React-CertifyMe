@@ -12,10 +12,10 @@ export default function RemoveCertificate() {
 	useEffect(async () => {
 		try {
 			await CertificateServer.remove(certificateId);
-			navigate(`${Path.MyCertificates}/${_id}`);
+			navigate(Path.AllCertificate);
 		} catch(err) {
 			console.log(err);
-			navigate(`${Path.MyCertificates}/${_id}`);
+			navigate(Path.AllCertificate);
 		}
 	}, []);
 

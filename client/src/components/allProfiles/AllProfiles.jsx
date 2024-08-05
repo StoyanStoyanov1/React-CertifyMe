@@ -13,8 +13,11 @@ export default function AllProfiles() {
 	const [itemsPerPage, setItemsPerPage] = useState(8);
 	// State to manage the loading state
 	const [isLoading, setIsLoading] = useState(true);
+	// State to manage the error state
+	const [error, setError] = useState(null);
 
 	const loadingText = useLoadingText(isLoading);
+
 
 	// Fetch all profiles on component mount
 	useEffect(() => {
@@ -22,7 +25,14 @@ export default function AllProfiles() {
 			.then(result => {
 				setProfiles(result);
 				setIsLoading(false);
-			});
+			})
+			.catch(err => {
+				console.log(err);
+				setIsLoading(false)
+				setError('Something went wrong! Please try again.');
+			})
+
+		;
 	}, []);
 
 	// Calculate the indexes for slicing the profiles array for pagination
@@ -33,8 +43,6 @@ export default function AllProfiles() {
 	// Function to handle page change for pagination
 	const paginate = pageNumber => setCurrentPage(pageNumber);
 
-	const [counter, setCounter] = useState(1);
-
 	setInterval(() => {
 
 	})
@@ -44,7 +52,7 @@ export default function AllProfiles() {
 			<h1>Users</h1>
 			{isLoading ?
 				<p>{loadingText}</p>
-				:
+				: error ? <p>{error}</p> :
 				profiles.length === 0 ?
 					<p>No found Users!</p>
 					:

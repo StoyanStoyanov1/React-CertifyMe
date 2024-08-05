@@ -5,6 +5,7 @@ import * as chatService from "../../services/chatService.js";
 import * as messageService from "../../services/messageService.js";
 import {useNavigate} from "react-router-dom";
 import Path from "../../paths.js";
+import useLoadingText from "../useLoadingText.jsx";
 
 export default function ChatBox() {
 	const {_id} = useContext(authContext); // Get the current user ID from the context
@@ -13,11 +14,22 @@ export default function ChatBox() {
 	const [profil, setProfil] = useState(null); // State to hold the user profile
 	const [chats, setChats] = useState([]); // State to hold the list of chats
 
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState(null);
+
+	const textLoading = useLoadingText(isLoading);
 	// Fetch user profile data when the component mounts or the user ID changes
 	useEffect(() => {
 		profilService.getByUserId(_id)
-			.then(result => setProfil(result))
-			.catch(err => console.log(err));
+			.then(result => {
+				setProfil(result);
+				setIsLoading(false);
+			})
+			.catch(err => {
+				console.log(err);
+				setIsLoading(false);
+				setError('Something went wrong! Please try again.');
+			});
 	}, [_id]);
 
 	// Fetch chat data and associated profiles and messages when the user profile is available
@@ -61,7 +73,7 @@ export default function ChatBox() {
 				<h1>Chats</h1>
 			</div>
 			<div className="chat-list">
-				{chats.map(chat => (
+				{isLoading ? <p>{textLoading}</p> : error ? <p>{error}</p> : chats.map(chat => (
 					<div key={chat._id} onClick={() => navigate(`${Path.Chat}/${chat._id}`)} className={classChatItem(chat._id)}>
 						<div className="chat-info">
 							<h2>{chat.receiverProfil.fullName}</h2>

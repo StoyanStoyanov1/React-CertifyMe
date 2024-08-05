@@ -33,7 +33,6 @@ export default function AllCertificate() {
 		<section id="catalogPage">
 			<h1>Certificates</h1>
 
-
 			{isLoading
 				? <p>{loadingText}</p> // Show loading message while data is being fetched
 				: currentCertificates.length === 0 ? (
