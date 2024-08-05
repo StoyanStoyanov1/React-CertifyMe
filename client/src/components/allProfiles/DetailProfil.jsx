@@ -17,7 +17,10 @@ export default function DetailProfil() {
 	// Fetch the profile data when the component mounts or when the profile ID changes
 	useEffect(() => {
 		profilService.getByUserId(profilId)
-			.then(result => setProfil(result));
+			.then(result => {
+				setProfil(result);
+				setIsLoading(false);
+			});
 	}, [profilId]);
 
 	// Handle the like/unlike action
@@ -39,9 +42,6 @@ export default function DetailProfil() {
 		setCountLikes(profil.likes ? profil.likes.length : 0);
 	}, [profil]);
 
-	useEffect(() => {
-		setIsLoading(false);
-	})
 
 	return (
 		<section id="detailsPage">
