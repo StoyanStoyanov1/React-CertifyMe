@@ -12,6 +12,7 @@ export default function DetailProfil() {
 	const [profil, setProfil] = useState({});
 	const {profilId} = useParams(); // Get the profile ID from the URL parameters
 	const [countLikes, setCountLikes] = useState(0);
+	const [isLoading, setIsLoading] = useState(true);
 
 	// Fetch the profile data when the component mounts or when the profile ID changes
 	useEffect(() => {
@@ -38,9 +39,14 @@ export default function DetailProfil() {
 		setCountLikes(profil.likes ? profil.likes.length : 0);
 	}, [profil]);
 
+	useEffect(() => {
+		setIsLoading(false);
+	})
+
 	return (
 		<section id="detailsPage">
-			<div className="wrapper">
+			{isLoading ? <p>Loading...</p> : <div className="wrapper">
+
 				<div className="certificateCover">
 					<img src={profil.imageUrl || profilImg} alt={profil.fullName}/>
 				</div>
@@ -58,7 +64,8 @@ export default function DetailProfil() {
 						{_id && profil.userId !== _id && (
 							!isLiked(_id, profil.userId, profil.likes)
 								? <button className='like-button' onClick={() => handleLike(_id, 'like')}>Like</button>
-								: <button className='like-button' onClick={() => handleLike(_id, 'dislike')}>Unlike</button>
+								: <button className='like-button'
+										  onClick={() => handleLike(_id, 'dislike')}>Unlike</button>
 						)}
 						{profil.userId === _id && (
 							<Link to={`${Path.EditProfile}/${profilId}`} className="edit">Edit</Link>
@@ -68,7 +75,8 @@ export default function DetailProfil() {
 						)}
 					</div>
 				</div>
-			</div>
+			</div>}
+
 		</section>
 	);
 }
