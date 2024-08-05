@@ -32,8 +32,6 @@ export default function AllCertificate() {
 	return (
 		<section id="catalogPage">
 			<h1>Certificates</h1>
-			const loadingText = useLoadingText(isLoading);
-
 
 			{isLoading
 				? <p>{loadingText}</p> // Show loading message while data is being fetched

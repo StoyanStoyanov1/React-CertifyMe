@@ -10,7 +10,7 @@ function useLoadingText(isLoading) {
 
 		const intervalId = setInterval(() => {
 			setCount(prevCount => (prevCount >= 3 ? 0 : prevCount + 1));
-		}, 600);
+		}, 500);
 
 		return () => clearInterval(intervalId);
 	}, [isLoading]);
