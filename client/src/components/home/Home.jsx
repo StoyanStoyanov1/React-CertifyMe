@@ -2,12 +2,16 @@ import {useContext, useEffect, useState} from "react";
 import authContext from "../../context/authContext.jsx";
 import * as profilService from "../../services/profilService.js";
 import ItemsProfile from "../allProfiles/ItemsProfile.jsx";
+import useLoadingText from "../useLoadingText.jsx";
+
 
 export default function Home() {
 	const {_id} = useContext(authContext); // Get the current user ID from the context
 
 	const [profiles, setProfiles] = useState([]); // State to hold the top profiles
 	const [isLoading, setIsLoading] = useState(true); // State to manage loading status
+
+	const loadingText = useLoadingText(isLoading);
 
 	// Fetch the top three profiles when the component mounts
 	useEffect(() => {
@@ -32,7 +36,7 @@ export default function Home() {
 			<div className='top-profiles'>
 				<section id='catalogPage'>
 					<h1>These are the top 3 users with the most likes.</h1>
-					{isLoading ? <p>Loading...</p> : profiles.length === 0 ? <p>No found Users!</p> : profiles.map(profil => <ItemsProfile
+					{isLoading ? <p>{loadingText}</p> : profiles.length === 0 ? <p>No found Users!</p> : profiles.map(profil => <ItemsProfile
 						key={profil._id} {...profil}/>)}
 				</section>
 			</div>
