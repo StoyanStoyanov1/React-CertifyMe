@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import * as profilService from '../../services/profilService.js';
 import * as chatService from '../../services/chatService.js';
 import Path from '../../paths.js';
+import useLoadingText from "../useLoadingText.jsx";
 
 export default function FindChat() {
 	const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function FindChat() {
 	const [chat, setChat] = useState(null); // State to hold the chat object
 	const [isLoading, setIsLoading] = useState(false); // State to manage loading status
 
+	const loadingText = useLoadingText(isLoading);
 	// useEffect to handle finding or creating a chat when component mounts or _id changes
 	useEffect(() => {
 		sendToChat();
@@ -42,7 +44,7 @@ export default function FindChat() {
 
 	return (
 		<section id='catalogPage'>
-			{isLoading ? <p>Please try again</p> : <p>Loading...</p>} {/* Display loading or error message */}
+			{isLoading ? <p>Please try again</p> : <p>{loadingText}</p>} {/* Display loading or error message */}
 		</section>
 	);
 }

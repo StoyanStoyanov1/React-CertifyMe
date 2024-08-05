@@ -16,6 +16,9 @@ export default function DetailProfil() {
 	const [countLikes, setCountLikes] = useState(0);
 	const [isLoading, setIsLoading] = useState(true);
 
+	// State to manage the error state
+	const [error, setError] = useState(null);
+
 	const loadingText = useLoadingText(isLoading);
 
 	// Fetch the profile data when the component mounts or when the profile ID changes
@@ -24,6 +27,11 @@ export default function DetailProfil() {
 			.then(result => {
 				setProfil(result);
 				setIsLoading(false);
+			})
+			.catch(err => {
+				console.log(err);
+				setIsLoading(false)
+				setError('Something went wrong! Please try again.');
 			});
 	}, [profilId]);
 
