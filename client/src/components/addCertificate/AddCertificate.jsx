@@ -25,6 +25,7 @@ export default function AddCertificate() {
 	const [profil, setProfiles] = useState(null);
 	const [showTooltip, setShowTooltip] = useState(validatedObjects);
 	const [validated, setValidated] = useState(validatedObjects);
+	const [isClicked, setIsClicked] = useState(false);
 
 	// Fetch user profile data on component mount
 	useEffect(() => {
@@ -53,10 +54,16 @@ export default function AddCertificate() {
 			return setValidated(prevState => ({...prevState, [validate]: true}));
 		}
 
+		if (isClicked) {
+			return ;
+		}
+
+		setIsClicked(true);
 		try {
 			await certificateService.create({...certificateData, profilId});
 			navigate(`${Path.MyCertificates}/${_id}`);
 		} catch (err) {
+			setIsClicked(false);
 			console.log(err);
 		}
 	}
