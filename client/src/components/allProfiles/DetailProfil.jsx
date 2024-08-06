@@ -40,8 +40,11 @@ export default function DetailProfil() {
 		profil.likes = profil.likes || [];
 		if (command === 'like') {
 			profil.likes.push(userId); // Add the user ID to the likes array
+			setCountLikes(countLikes + 1);
 		} else {
 			profil.likes = profil.likes.filter(user => user !== userId); // Remove the user ID from the likes array
+			setCountLikes(countLikes - 1);
+
 		}
 
 		profilService.edit(profil._id, profil)
@@ -57,7 +60,7 @@ export default function DetailProfil() {
 
 	return (
 		<section id="detailsPage">
-			{isLoading ? <p>{loadingText}</p> : <div className="wrapper">
+			{isLoading ? <p>{loadingText}</p> : error ? <p>{error}</p> : <div className="wrapper">
 
 				<div className="certificateCover">
 					<img src={profil.imageUrl || profilImg} alt={profil.fullName}/>
