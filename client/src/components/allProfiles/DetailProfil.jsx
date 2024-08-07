@@ -69,9 +69,15 @@ export default function DetailProfil() {
 					<div className="certificateText">
 						<h1>{profil.fullName}</h1>
 						<p>{profil.description}</p>
-						<Link className='my-certificates' to={`${Path.MyCertificates}/${profil.userId}`}>
+						<ul  className='profilUrls'>
+						<li><Link className='my-certificates' to={`${Path.MyCertificates}/${profil.userId}`}>
 							My Certificates
 						</Link>
+						</li>
+							{profil.gitHub && <li><a href={profil.gitHub}><i className="fab fa-github"></i></a></li>}
+							{profil.facebook && <li><a href={profil.facebook}><i className="fab fa-facebook"></i></a></li>}
+							{profil.linkedin && <li><a href={profil.linkedin}><i className="fab fa-linkedin"></i></a></li>}
+						</ul>
 						<p>Likes: {countLikes}</p>
 					</div>
 
