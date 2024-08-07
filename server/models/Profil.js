@@ -9,7 +9,7 @@ const profilSchema = mongoose.Schema({
 		type: String,
 		validate: {
 			validator: (value) => {
-				if (value === '') {
+				if (value.trim() === '') {
 					return true;
 				}
 				return /^https?:\/\//.test(value)
@@ -45,6 +45,42 @@ const profilSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "chat"
 	}],
+	gitHub: {
+		type: String,
+		validate: {
+			validator: (value) => {
+				if (value.trim() === '') {
+					return true;
+				}
+				return /^https?:\/\//.test(value)
+			},
+			message: 'Url must start with http:// or https://'
+		}
+	},
+	facebook: {
+		type: String,
+		validate: {
+			validator: (value) => {
+				if (value.trim() === '') {
+					return true;
+				}
+				return /^https?:\/\//.test(value)
+			},
+			message: 'Url must start with http:// or https://'
+		}
+	},
+	linkedin: {
+		type: String,
+		validate: {
+			validator: (value) => {
+				if (value.trim() === '') {
+					return true;
+				}
+				return /^https?:\/\//.test(value)
+			},
+			message: 'Url must start with http:// or https://'
+		}
+	},
 
 }, {timestamps: true})
 
