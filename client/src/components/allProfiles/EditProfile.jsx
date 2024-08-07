@@ -104,11 +104,21 @@ export default function EditProfile() {
 						/>
 
 						<label htmlFor="linkedin" className="vhide">Linkedin</label>
-						<textarea
+						<input
+							id='linkedin'
 							name="linkedin"
 							className="linkedin"
+							type="text"
 							placeholder='linkedin Url'
 							value={profil[editProfileFormKeys.Linkedin]}
+							onChange={onChange}
+						/>
+						<label htmlFor="description" className="vhide">Description</label>
+						<textarea
+							name="description"
+							className="description"
+							placeholder='Description...'
+							value={profil[editProfileFormKeys.Description]}
 							onChange={onChange}
 						/>
 
