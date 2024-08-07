@@ -9,14 +9,19 @@ export default function RemoveCertificate() {
 	const {certificateId} = useParams();
 	const {_id} = useContext(authContext);
 
-	useEffect(async () => {
-		try {
-			await CertificateServer.remove(certificateId);
-			navigate(Path.AllCertificate);
-		} catch(err) {
-			console.log(err);
-			navigate(Path.AllCertificate);
-		}
-	}, []);
+	useEffect(() => {
+		const removeCertificate = async () => {
+			try {
+				await CertificateServer.remove(certificateId);
+				navigate(Path.AllCertificate);
+			} catch (err) {
+				console.log(err);
+				navigate(Path.AllCertificate);
+			}
+		};
 
+		removeCertificate();
+	}, [certificateId, navigate]);
+
+	return null;
 }
