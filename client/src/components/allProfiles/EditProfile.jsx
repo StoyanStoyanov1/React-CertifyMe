@@ -9,6 +9,9 @@ const editProfileFormKeys = {
 	FullName: 'fullName',
 	ImageUrl: 'imageUrl',
 	Description: 'description',
+	GitHub: 'gitHub',
+	Facebook: 'facebook',
+	Linkedin: 'linkedin',
 };
 
 export default function EditProfile() {
@@ -20,7 +23,10 @@ export default function EditProfile() {
 		accName: '',
 		fullName: '',
 		imageUrl: '',
-		description: ''
+		description: '',
+		gitHub: '',
+		facebook: '',
+		linkedin: '',
 	});
 
 	// Fetch profile data on component mount and when profilId changes
@@ -75,12 +81,34 @@ export default function EditProfile() {
 							onChange={onChange}
 						/>
 
-						<label htmlFor="description" className="vhide">Description</label>
+						<label htmlFor="gitHub" className="vhide">GitHub</label>
+						<input
+							id="gitHub"
+							name="gitHub"
+							className="gitHub"
+							type="text"
+							placeholder="GitHub Url"
+							value={profil[editProfileFormKeys.GitHub]}
+							onChange={onChange}
+						/>
+
+						<label htmlFor="facebook" className="vhide">Facebook</label>
+						<input
+							id="facebook"
+							name="facebook"
+							className="facebook"
+							type="text"
+							placeholder="Facebook Url"
+							value={profil[editProfileFormKeys.Facebook]}
+							onChange={onChange}
+						/>
+
+						<label htmlFor="linkedin" className="vhide">Linkedin</label>
 						<textarea
-							name="description"
-							className="description"
-							placeholder='Description'
-							value={profil[editProfileFormKeys.Description]}
+							name="linkedin"
+							className="linkedin"
+							placeholder='linkedin Url'
+							value={profil[editProfileFormKeys.Linkedin]}
 							onChange={onChange}
 						/>
 
