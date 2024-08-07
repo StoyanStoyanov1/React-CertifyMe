@@ -209,12 +209,16 @@
     padding: 0;
     display: flex;
     justify-content: flex-start;
-    gap: 10px;
 }
 
 .profilUrls li {
     display: flex;
     align-items: center;
+    margin-right: 10px;
+}
+
+.profilUrls li:last-child {
+    margin-right: 0;
 }
 
 .profilUrls li a {
