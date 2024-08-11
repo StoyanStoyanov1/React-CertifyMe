@@ -203,29 +203,3 @@
     font-size: 0.8em;
 }
 
-.profilUrls {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-start;
-}
-
-.profilUrls li {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-}
-
-.profilUrls li:last-child {
-    margin-right: 0;
-}
-
-.profilUrls li a {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    font-size: 1.2rem;
-}
-
