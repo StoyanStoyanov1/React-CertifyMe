@@ -91,6 +91,10 @@ export default function Chat() {
 		const senderId = senderProfil._id;
 		const receiverId = receiverProfil._id;
 
+		if (message === '') {
+			return;
+		}
+
 		try {
 			const newMessage = await messageService.create({
 				chatId: chatId,
